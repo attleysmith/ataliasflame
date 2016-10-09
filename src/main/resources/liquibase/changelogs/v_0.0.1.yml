@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/changelogs/v_0.0.1/attribute_inserts.yml
+  - include:
+      file: liquibase/changelogs/v_0.0.1/god_inserts.yml
+  # caste must be after god
+  - include:
+      file: liquibase/changelogs/v_0.0.1/caste_inserts.yml
+  # race must be after attribute, god and caste
+  - include:
+      file: liquibase/changelogs/v_0.0.1/race_inserts.yml
+  # gender must be after god, caste and race
+  - include:
+      file: liquibase/changelogs/v_0.0.1/gender_inserts.yml
+  - include:
+      file: liquibase/changelogs/v_0.0.1/skill_inserts.yml
+  - include:
+      file: liquibase/changelogs/v_0.0.1/level_inserts.yml

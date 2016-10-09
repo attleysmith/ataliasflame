@@ -1,0 +1,1543 @@
+databaseChangeLog:
+- changeSet:
+    id: INSERT_CASTES
+    author: AMiklo (generated)
+    comment: Initial insertion of castes
+    changes:
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: ROGUE
+        - column:
+            name: NAME
+            value: csavargó
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: WIZARD
+        - column:
+            name: NAME
+            value: varázsló
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: MAGE
+        - column:
+            name: NAME
+            value: mágus
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: WITCHMASTER
+        - column:
+            name: NAME
+            value: boszorkánymester
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: AVATAR
+        - column:
+            name: NAME
+            value: avatár
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: FIGHTER
+        - column:
+            name: NAME
+            value: harcos
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: PALADIN
+        - column:
+            name: NAME
+            value: lovag
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: GRANDMASTER
+        - column:
+            name: NAME
+            value: nagymester
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: TITAN
+        - column:
+            name: NAME
+            value: titán
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: TRACKER
+        - column:
+            name: NAME
+            value: nyomkereső
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: RANGER
+        - column:
+            name: NAME
+            value: kósza
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: PILGRIM
+        - column:
+            name: NAME
+            value: zarándok
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: FREE_SOUL
+        - column:
+            name: NAME
+            value: szabad lélek
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: HERMIT
+        - column:
+            name: NAME
+            value: remete
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: DRUID
+        - column:
+            name: NAME
+            value: druida
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: ARCHDRUID
+        - column:
+            name: NAME
+            value: fődruida
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: ATALIAS_PRIEST
+        - column:
+            name: NAME
+            value: Atalia papja
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: MONK
+        - column:
+            name: NAME
+            value: szerzetes
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: PRIEST
+        - column:
+            name: NAME
+            value: pap
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: HIERARCH
+        - column:
+            name: NAME
+            value: főpap
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: ARCHANGEL
+        - column:
+            name: NAME
+            value: arkangyal
+        - column:
+            name: DESCRIPTION
+        tableName: CASTE
+- changeSet:
+    id: INSERT_CASTE_NEXT_CASTE_MAPPING
+    author: AMiklo (generated)
+    comment: Initial insertion of caste mapping to next castes
+    changes:
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'WIZARD')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'FIGHTER')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'TRACKER')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'HERMIT')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'MONK')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WIZARD')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'MAGE')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MAGE')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'WITCHMASTER')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WITCHMASTER')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'AVATAR')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FIGHTER')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'PALADIN')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PALADIN')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'GRANDMASTER')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'GRANDMASTER')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'TITAN')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TRACKER')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'RANGER')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'RANGER')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'PILGRIM')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PILGRIM')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'FREE_SOUL')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HERMIT')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'DRUID')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'DRUID')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHDRUID')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHDRUID')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'ATALIAS_PRIEST')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MONK')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'PRIEST')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PRIEST')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'HIERARCH')
+        tableName: CASTE_NEXT_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HIERARCH')
+        - column:
+            name: NEXT_CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHANGEL')
+        tableName: CASTE_NEXT_CASTE_MAP
+- changeSet:
+    id: INSERT_CASTE_ENABLED_GOD_MAPPING
+    author: AMiklo (generated)
+    comment: Initial insertion of caste mapping to enabled gods
+    changes:
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WIZARD')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WIZARD')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WIZARD')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WIZARD')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WIZARD')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MAGE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MAGE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MAGE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MAGE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MAGE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WITCHMASTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WITCHMASTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WITCHMASTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WITCHMASTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WITCHMASTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'AVATAR')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'AVATAR')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'AVATAR')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'AVATAR')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'AVATAR')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FIGHTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FIGHTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FIGHTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FIGHTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FIGHTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FIGHTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PALADIN')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PALADIN')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PALADIN')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PALADIN')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PALADIN')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PALADIN')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'GRANDMASTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'GRANDMASTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'GRANDMASTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'GRANDMASTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'GRANDMASTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'GRANDMASTER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TITAN')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TITAN')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TITAN')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TITAN')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TITAN')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TITAN')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TRACKER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TRACKER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TRACKER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TRACKER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TRACKER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TRACKER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'RANGER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'RANGER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'RANGER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'RANGER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'RANGER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'RANGER')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PILGRIM')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PILGRIM')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PILGRIM')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PILGRIM')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PILGRIM')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PILGRIM')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FREE_SOUL')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FREE_SOUL')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FREE_SOUL')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FREE_SOUL')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FREE_SOUL')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FREE_SOUL')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HERMIT')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HERMIT')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HERMIT')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HERMIT')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HERMIT')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HERMIT')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'DRUID')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'DRUID')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'DRUID')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'DRUID')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'DRUID')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'DRUID')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHDRUID')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHDRUID')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHDRUID')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHDRUID')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHDRUID')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHDRUID')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ATALIAS_PRIEST')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ATALIA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MONK')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MONK')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MONK')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MONK')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MONK')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MONK')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PRIEST')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PRIEST')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PRIEST')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PRIEST')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PRIEST')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PRIEST')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HIERARCH')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HIERARCH')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HIERARCH')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HIERARCH')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HIERARCH')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HIERARCH')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHANGEL')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHANGEL')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHANGEL')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHANGEL')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHANGEL')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: CASTE_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHANGEL')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: CASTE_ENABLED_GOD_MAP

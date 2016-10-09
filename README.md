@@ -1,2 +1,1 @@
-af-server
-===============
+Server application for Atalia's Flame.
