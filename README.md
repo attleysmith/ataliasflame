@@ -1,1 +1,2 @@
-Server application for Atalia's Flame.
+# ataliasflame
+Atalia's Flame: experimental role playing game
