@@ -1,3 +1,0 @@
-databaseChangeLog:
-  - include:
-      file: liquibase/changelogs/v_0.0.1.yml

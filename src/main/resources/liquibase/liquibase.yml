@@ -1,4 +1,4 @@
-changeLogFile: liquibase/changelogs.yml
+changeLogFile: liquibase/changelogs.groovy
 driver: org.h2.Driver
 url: jdbc:h2:file:~/ataliasflame_h2.db
 username: sa
