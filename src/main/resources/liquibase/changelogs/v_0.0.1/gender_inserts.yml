@@ -1,0 +1,715 @@
+databaseChangeLog:
+- changeSet:
+    id: INSERT_GENDERS
+    author: AMiklo (generated)
+    comment: Initial insertion of genders
+    changes:
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: MALE
+        - column:
+            name: NAME
+            value: férfi
+        - column:
+            name: DESCRIPTION
+        tableName: GENDER
+    - insert:
+        columns:
+        - column:
+            name: ID
+            valueComputed: base_id_generator_seq.nextval
+        - column:
+            name: CODE
+            value: FEMALE
+        - column:
+            name: NAME
+            value: nő
+        - column:
+            name: DESCRIPTION
+        tableName: GENDER
+- changeSet:
+    id: INSERT_GENDER_ENABLED_CASTE_MAPPING
+    author: AMiklo (generated)
+    comment: Initial insertion of gender mapping to enabled castes
+    changes:
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WIZARD')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MAGE')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WITCHMASTER')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'AVATAR')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FIGHTER')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PALADIN')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'GRANDMASTER')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TITAN')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TRACKER')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'RANGER')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PILGRIM')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FREE_SOUL')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HERMIT')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'DRUID')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHDRUID')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ATALIAS_PRIEST')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MONK')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PRIEST')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HIERARCH')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHANGEL')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ROGUE')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WIZARD')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MAGE')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'WITCHMASTER')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'AVATAR')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FIGHTER')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PALADIN')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'GRANDMASTER')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TITAN')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'TRACKER')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'RANGER')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PILGRIM')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'FREE_SOUL')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HERMIT')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'DRUID')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHDRUID')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ATALIAS_PRIEST')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'MONK')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'PRIEST')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'HIERARCH')
+        tableName: GENDER_ENABLED_CASTE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: CASTE_ID
+            valueComputed: (select id from caste where code = 'ARCHANGEL')
+        tableName: GENDER_ENABLED_CASTE_MAP
+- changeSet:
+    id: INSERT_GENDER_ENABLED_RACE_MAPPING
+    author: AMiklo (generated)
+    comment: Initial insertion of gender mapping to enabled races
+    changes:
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'HUMAN')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'ELF')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'HALF_ELF')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'NIGHT_ELF')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'DWARF')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'ORC')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'MINOTAUR')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'ARIMASPO')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'HALFLING')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'HUMAN')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'ELF')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'HALF_ELF')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'NIGHT_ELF')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'DWARF')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'ORC')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'ARIMASPO')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'NYMPH')
+        tableName: GENDER_ENABLED_RACE_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: RACE_ID
+            valueComputed: (select id from race where code = 'HALFLING')
+        tableName: GENDER_ENABLED_RACE_MAP
+- changeSet:
+    id: INSERT_GENDER_ENABLED_GOD_MAPPING
+    author: AMiklo (generated)
+    comment: Initial insertion of gender mapping to enabled gods
+    changes:
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'MALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ATALIA')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'HORA')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'SIFER')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GETON')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'RUNID')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ALATE')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'GINDON')
+        tableName: GENDER_ENABLED_GOD_MAP
+    - insert:
+        columns:
+        - column:
+            name: GENDER_ID
+            valueComputed: (select id from gender where code = 'FEMALE')
+        - column:
+            name: GOD_ID
+            valueComputed: (select id from god where code = 'ATALIA')
+        tableName: GENDER_ENABLED_GOD_MAP

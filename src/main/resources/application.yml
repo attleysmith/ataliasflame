@@ -1,0 +1,265 @@
+spring:
+  # PROFILES
+#  profiles:
+#    active: # Comma-separated list of active profiles.
+#    include: # Unconditionally activate the specified comma separated profiles.
+  # IDENTITY (ContextIdApplicationContextInitializer)
+  application:
+    index: af_server # Application index.
+    name: Atalia's Flame Server # Application name.
+  # PROJECT INFORMATION (ProjectInfoProperties)
+#  info:
+#    build:
+#      location: classpath:META-INF/build-info.properties # Location of the generated build-info.properties file.
+#    git:
+#      location: classpath:git.properties # Location of the generated git.properties file.
+  # Email (MailProperties)
+#    mail:
+#      default-encoding: UTF-8 # Default MimeMessage encoding.
+#      host: # SMTP server host. For instance `smtp.example.com`
+#      jndi-name: # Session JNDI name. When set, takes precedence to others mail settings.
+#      password: # Login password of the SMTP server.
+#      port: # SMTP server port.
+#      properties:
+#        *: # Additional JavaMail session properties.
+#      protocol: smtp # Protocol used by the SMTP server.
+#      test-connection: false # Test that the mail server is available on startup.
+#      username: # Login user of the SMTP server.
+  # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+  datasource:
+#    continue-on-error: false # Do not stop if an error occurs while initializing the database.
+#    data: # Data (DML) script resource reference.
+#    data-username: # User of the database to execute DML scripts (if different).
+#    data-password: # Password of the database to execute DML scripts (if different).
+#    dbcp:
+#      *: # Commons DBCP specific settings
+#    dbcp2:
+#      *: # Commons DBCP2 specific settings
+#    driver-class-name: # Fully qualified name of the JDBC driver. Auto-detected based on the URL by default.
+#    hikari:
+#      *: # Hikari specific settings
+#    initialize: true # Populate the database using 'data.sql'.
+#    jmx-enabled: false # Enable JMX support (if provided by the underlying pool).
+#    jndi-name: # JNDI location of the datasource. Class, url, username & password are ignored when set.
+#    name: testdb # Name of the datasource.
+    password: # Login password of the database.
+#    platform: all # Platform to use in the schema resource (schema-${platform}.sql).
+#    schema: # Schema (DDL) script resource reference.
+#    schema-username: # User of the database to execute DDL scripts (if different).
+#    schema-password: # Password of the database to execute DDL scripts (if different).
+#    separator: ; # Statement separator in SQL initialization scripts.
+#    sql-script-encoding: # SQL scripts encoding.
+#    tomcat:
+#      *: # Tomcat datasource specific settings
+#    type: # Fully qualified name of the connection pool implementation to use. By default, it is auto-detected from the classpath.
+#    url: jdbc:h2:file:~/ataliasflame_h2.db # JDBC url of the database.
+    username: sa
+  # H2 Web Console (H2ConsoleProperties)
+  h2:
+    console:
+      enabled: true # Enable the console.
+      path: /h2-console # Path at which the console will be available.
+#      settings:
+#        trace:  false # Enable trace output.
+#        web-allow-others: false # Enable remote access.
+  # JPA (JpaBaseConfiguration, HibernateJpaAutoConfiguration)
+#  data:
+#    jpa:
+#      repositories:
+#        enabled: true # Enable JPA repositories.
+  jpa:
+#    database: # Target database to operate on, auto-detected by default. Can be alternatively set using the "databasePlatform" property.
+#    database-platform: # Name of the target database to operate on, auto-detected by default. Can be alternatively set using the "Database" enum.
+    generate-ddl: true # Initialize the schema on startup.
+    hibernate:
+      ddl-auto: create-drop # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.
+#      naming:
+#        implicit-strategy: # Hibernate 5 implicit naming strategy fully qualified name.
+#        physical-strategy: # Hibernate 5 physical naming strategy fully qualified name.
+#        strategy: # Hibernate 4 naming strategy fully qualified name. Not supported with Hibernate 5.
+#      use-new-id-generator-mappings: # Use Hibernate's newer IdentifierGenerator for AUTO, TABLE and SEQUENCE.
+#    open-in-view: true # Register OpenEntityManagerInViewInterceptor. Binds a JPA EntityManager to the thread for the entire processing of the request.
+#    properties:
+#      *: # Additional native properties to set on the JPA provider.
+#    show-sql: false # Enable logging of SQL statements.
+  # DEVTOOLS (DevToolsProperties)
+#  devtools:
+#    livereload:
+#      enabled: true # Enable a livereload.com compatible server.
+#      port: 35729 # Server port.
+#    restart:
+#      additional-exclude: # Additional patterns that should be excluded from triggering a full restart.
+#      additional-paths: # Additional paths to watch for changes.
+#      enabled: true # Enable automatic restart.
+#      exclude: META-INF/maven/**,META-INF/resources/**,resources/**,static/**,public/**,templates/**,**/*Test.class,**/*Tests.class,git.properties # Patterns that should be excluded from triggering a full restart.
+#      poll-interval: 1000 # Amount of time (in milliseconds) to wait between polling for classpath changes.
+#      quiet-period: 400 # Amount of quiet time (in milliseconds) required without any classpath changes before a restart is triggered.
+#      trigger-file: # Name of a specific file that when changed will trigger the restart check. If not specified any classpath file change will trigger the restart.
+#    # REMOTE DEVTOOLS (RemoteDevToolsProperties)
+#    remote:
+#      context-path: /.~~spring-boot!~ # Context path used to handle the remote connection.
+#      debug:
+#        enabled: true # Enable remote debug support.
+#        local-port: 8000 # Local remote debug server port.
+#      proxy:
+#        host: # The host of the proxy to use to connect to the remote application.
+#        port: # The port of the proxy to use to connect to the remote application.
+#      restart:
+#        enabled: true # Enable remote restart.
+#      secret: # A shared secret required to establish a connection (required to enable remote support).
+#      secret-header-name: X-AUTH-TOKEN # HTTP header used to transfer the shared secret.
+
+
+# EMBEDDED SERVER CONFIGURATION (ServerProperties)
+server:
+#  address: # Network address to which the server should bind to.
+#  compression:
+#    enabled: false # If response compression is enabled.
+#    excluded-user-agents: # List of user-agents to exclude from compression.
+#    mime-types: # Comma-separated list of MIME types that should be compressed. For instance `text/html,text/css,application/json`
+#    min-response-size: # Minimum response size that is required for compression to be performed. For instance 2048
+#  connection-timeout: # Time in milliseconds that connectors will wait for another HTTP request before closing the connection. When not set, the connector's container-specific default will be used. Use a value of -1 to indicate no (i.e. infinite) timeout.
+#  context-parameters
+#    *: # Servlet context init parameters. For instance `server.context-parameters.a=alpha`
+#  context-path: # Context path of the application.
+#  display-name: application # Display name of the application.
+#  max-http-header-size: 0 # Maximum size in bytes of the HTTP message header.
+#  max-http-post-size: 0 # Maximum size in bytes of the HTTP post content.
+#  error:
+#    include-stacktrace: never # When to include a "stacktrace" attribute.
+#    path: /error # Path of the error controller.
+#    whitelabel:
+#      enabled: true # Enable the default error page displayed in browsers in case of a server error.
+#  jetty:
+#    acceptors: # Number of acceptor threads to use.
+#    selectors: # Number of selector threads to use.
+#  jsp-servlet:
+#    class-name: org.apache.jasper.servlet.JspServlet # The class name of the JSP servlet.
+#    init-parameters:
+#      *: # Init parameters used to configure the JSP servlet
+#    registered: true # Whether or not the JSP servlet is registered
+  port: 3080 # Server HTTP port.
+#  server-header: # Value to use for the Server response header (no header is sent if empty)
+#  servlet-path: / # Path of the main dispatcher servlet.
+#  use-forward-headers: # If X-Forwarded-* headers should be applied to the HttpRequest.
+#  session:
+#    cookie:
+#      comment: # Comment for the session cookie.
+#      domain: # Domain for the session cookie.
+#      http-only: # "HttpOnly" flag for the session cookie.
+#      max-age: # Maximum age of the session cookie in seconds.
+#      name: # Session cookie name.
+#      path: # Path of the session cookie.
+#      secure: # "Secure" flag for the session cookie.
+#    persistent: false # Persist session data between restarts.
+#    store-dir: # Directory used to store session data.
+#    timeout: # Session timeout in seconds.
+#    tracking-modes: # Session tracking modes (one or more of the following: "cookie", "url", "ssl").
+#  ssl:
+#    ciphers: # Supported SSL ciphers.
+#    client-auth: # Whether client authentication is wanted ("want") or needed ("need"). Requires a trust store.
+#    enabled: # Enable SSL support.
+#    enabled-protocols: # Enabled SSL protocols.
+#    key-alias: # Alias that identifies the key in the key store.
+#    key-password: # Password used to access the key in the key store.
+#    key-store: # Path to the key store that holds the SSL certificate (typically a jks file).
+#    key-store-password: # Password used to access the key store.
+#    key-store-provider: # Provider for the key store.
+#    key-store-type: # Type of the key store.
+#    protocol: TLS # SSL protocol to use.
+#    trust-store: # Trust store that holds SSL certificates.
+#    trust-store-password: # Password used to access the trust store.
+#    trust-store-provider: # Provider for the trust store.
+#    trust-store-type: # Type of the trust store.
+#  tomcat:
+#    accesslog:
+#      directory: logs # Directory in which log files are created. Can be relative to the tomcat base dir or absolute.
+#      enabled: false # Enable access log.
+#      pattern: common # Format pattern for access logs.
+#      prefix: access_log # Log file name prefix.
+#      rename-on-rotate: false # Defer inclusion of the date stamp in the file name until rotate time.
+#      suffix: .log # Log file name suffix.
+#    background-processor-delay: 30 # Delay in seconds between the invocation of backgroundProcess methods.
+#    basedir: # Tomcat base directory. If not specified a temporary directory will be used.
+#    internal-proxies: 10\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}|\\
+#       192\\.168\\.\\d{1,3}\\.\\d{1,3}|\\
+#       169\\.254\\.\\d{1,3}\\.\\d{1,3}|\\
+#       127\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}|\\
+#       172\\.1[6-9]{1}\\.\\d{1,3}\\.\\d{1,3}|\\
+#       172\\.2[0-9]{1}\\.\\d{1,3}\\.\\d{1,3}|\\
+#       172\\.3[0-1]{1}\\.\\d{1,3}\\.\\d{1,3} # regular expression matching trusted IP addresses.
+#    max-threads: 0 # Maximum amount of worker threads.
+#    min-spare-threads: 0 # Minimum amount of worker threads.
+#    port-header: X-Forwarded-Port # Name of the HTTP header used to override the original port value.
+#    protocol-header: # Header that holds the incoming protocol, usually named "X-Forwarded-Proto".
+#    protocol-header-https-value: https # Value of the protocol header that indicates that the incoming request uses SSL.
+#    redirect-context-root: # Whether requests to the context root should be redirected by appending a / to the path.
+#    remote-ip-header: # Name of the http header from which the remote ip is extracted. For instance `X-FORWARDED-FOR`
+#    uri-encoding: UTF-8 # Character encoding to use to decode the URI.
+#  undertow:
+#    accesslog:
+#      dir: # Undertow access log directory.
+#      enabled: false # Enable access log.
+#      pattern: common # Format pattern for access logs.
+#    buffer-size: # Size of each buffer in bytes.
+#    buffers-per-region: # Number of buffer per region.
+#    direct-buffers: # Allocate buffers outside the Java heap.
+#    io-threads: # Number of I/O threads to create for the worker.
+#    worker-threads: # Number of worker threads.
+
+
+# SECURITY (SecurityProperties)
+security:
+#  basic:
+#    authorize-mode: role # Security authorize mode to apply.
+#    enabled: true # Enable basic authentication.
+#    path: /** # Comma-separated list of paths to secure.
+#    realm: Spring # HTTP basic realm name.
+#  enable-csrf: false # Enable Cross Site Request Forgery support.
+#  filter-order: 0 # Security filter chain order.
+#  filter-dispatcher-types: ASYNC, FORWARD, INCLUDE, REQUEST # Security filter chain dispatcher types.
+#  headers:
+#    cache: true # Enable cache control HTTP headers.
+#    content-type: true # Enable "X-Content-Type-Options" header.
+#    frame: true # Enable "X-Frame-Options" header.
+#    hsts: # HTTP Strict Transport Security (HSTS) mode (none, domain, all).
+#    xss: true # Enable cross site scripting (XSS) protection.
+#  ignored: # Comma-separated list of paths to exclude from the default secured paths.
+#  require-ssl: false # Enable secure channel for all requests.
+#  sessions: stateless # Session creation policy (always, never, if_required, stateless).
+  user:
+#    name: user # Default user name.
+    password: pw # Password for the default user name. A random password is logged on startup by default.
+#    role: USER # Granted roles for the default user name.
+
+
+# LIQUIBASE (LiquibaseProperties)
+liquibase:
+  change-log: classpath:liquibase/changelogs.yml # Change log configuration path.
+#  check-change-log-location: true # Check the change log location exists.
+#  contexts: # Comma-separated list of runtime contexts to use.
+#  default-schema: # Default database schema.
+#  drop-first: false # Drop the database schema first.
+  enabled: false # Enable liquibase support.
+#  labels: # Comma-separated list of runtime labels to use.
+#  parameters:
+#    *: # Change log parameters.
+#  password: # Login password of the database to migrate.
+#  rollback-file: # File to which rollback SQL will be written when an update is performed.
+#  url: # JDBC url of the database to migrate. If not set, the primary configured data source is used.
+#  user: # Login user of the database to migrate.
+
+
+# LOGGING
+logging:
+#  config: # Location of the logging configuration file. For instance `classpath:logback.xml` for Logback
+#  exception-conversion-word: %wEx # Conversion word used when logging exceptions.
+  file: af_server.log # Log file name. For instance `myapp.log`
+#  level:
+#    *: # Log levels severity mapping. For instance `logging.level.org.springframework=DEBUG`
+#  path: # Location of the log file. For instance `/var/log`
+#  pattern:
+#    console: # Appender pattern for output to the console. Only supported with the default logback setup.
+#    file: # Appender pattern for output to the file. Only supported with the default logback setup.
+#    level: # Appender pattern for log level (default %5p). Only supported with the default logback setup.
+#  register-shutdown-hook: false # Register a shutdown hook for the logging system when it is initialized.
