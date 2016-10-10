@@ -2,7 +2,7 @@ package liquibase.changelogs
 
 databaseChangeLog() {
 
-  include(file: 'v_001/attribute_inserts.yml', relativeToChangelogFile: true)
+  include(file: 'v_001/attribute_inserts.groovy', relativeToChangelogFile: true)
   include(file: 'v_001/god_inserts.yml', relativeToChangelogFile: true)
   // caste must be after god
   include(file: 'v_001/caste_inserts.yml', relativeToChangelogFile: true)
