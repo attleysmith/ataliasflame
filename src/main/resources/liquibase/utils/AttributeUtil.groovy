@@ -2,8 +2,7 @@ package liquibase.utils
 
 import org.liquibase.groovy.delegate.ChangeSetDelegate
 
-import static liquibase.utils.FieldValueUtil.intValue
-import static liquibase.utils.FieldValueUtil.stringValue
+import static liquibase.utils.FieldValueUtil.*
 
 /**
  * @author AMiklo on 2016.10.10.
@@ -12,7 +11,7 @@ class AttributeUtil {
 
   static insertAttribute(ChangeSetDelegate delegate, Map<String, Object> map) {
     delegate.insert(tableName: 'ATTRIBUTE') {
-      column(name: 'ID', valueComputed: 'base_id_generator_seq.nextval')
+      column(name: 'ID', valueComputed: nextSeq())
       column(name: 'CODE', valueComputed: stringValue(map.CODE))
       column(name: 'NAME', valueComputed: stringValue(map.NAME))
       column(name: 'ATTACK_MULTIPLIER', valueComputed: intValue(map.ATTACK_MULTIPLIER, 0))

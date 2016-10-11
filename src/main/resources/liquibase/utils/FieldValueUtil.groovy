@@ -5,20 +5,42 @@ package liquibase.utils
  */
 class FieldValueUtil {
 
-  static stringValue(String value) {
+  private static final DEFAULT_SEQ = 'base_id_generator_seq'
+
+  static String nextSeq() {
+    nextSeq(DEFAULT_SEQ);
+  }
+
+  static String nextSeq(String sequenceName) {
+    sequenceName + ".nextval"
+  }
+
+  static String currSeq() {
+    currSeq(DEFAULT_SEQ);
+  }
+
+  static String currSeq(String sequenceName) {
+    sequenceName + ".currval"
+  }
+
+  static String stringValue(String value) {
     value ? "'" + value + "'" : "NULL"
   }
 
-  static intValue(Integer value) {
+  static String intValue(Integer value) {
     intValue(value, "NULL")
   }
 
-  static intValue(Integer value, Integer defaultValue) {
+  static String intValue(Integer value, Integer defaultValue) {
     intValue(value, defaultValue.toString())
   }
 
-  static intValue(Integer value, String defaultValue) {
+  static String intValue(Integer value, String defaultValue) {
     value != null ? value : defaultValue
+  }
+
+  static String findIdByCode(String table, String code) {
+    "select id from $table where code = ${stringValue(code)}"
   }
 
 }
