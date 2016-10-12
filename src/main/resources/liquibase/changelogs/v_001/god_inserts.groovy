@@ -1,6 +1,6 @@
 package liquibase.changelogs.v_001
 
-import static liquibase.utils.GodUtil.insertGod
+import static liquibase.utils.v_001.GodUtil.insertGod
 
 /**
  * @author AMiklo on 2016.10.10.

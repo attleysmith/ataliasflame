@@ -1,9 +1,9 @@
-package liquibase.utils
+package liquibase.utils.v_001
 
 import org.liquibase.groovy.delegate.ChangeSetDelegate
 
-import static liquibase.utils.FieldValueUtil.nextSeq
-import static liquibase.utils.FieldValueUtil.stringValue
+import static liquibase.utils.v_001.FieldValueUtil.nextSeq
+import static liquibase.utils.v_001.FieldValueUtil.stringValue
 
 /**
  * @author AMiklo on 2016.10.10.

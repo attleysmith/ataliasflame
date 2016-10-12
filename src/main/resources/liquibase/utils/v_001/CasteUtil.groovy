@@ -1,8 +1,8 @@
-package liquibase.utils
+package liquibase.utils.v_001
 
 import org.liquibase.groovy.delegate.ChangeSetDelegate
 
-import static liquibase.utils.FieldValueUtil.*
+import static liquibase.utils.v_001.FieldValueUtil.*
 
 /**
  * @author AMiklo on 2016.10.10.

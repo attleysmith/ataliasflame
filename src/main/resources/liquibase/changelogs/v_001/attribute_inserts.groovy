@@ -1,6 +1,6 @@
 package liquibase.changelogs.v_001
 
-import static liquibase.utils.AttributeUtil.insertAttribute
+import static liquibase.utils.v_001.AttributeUtil.insertAttribute
 
 /**
  * @author AMiklo on 2016.10.10.

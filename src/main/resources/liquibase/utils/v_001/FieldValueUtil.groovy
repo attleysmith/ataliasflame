@@ -1,4 +1,4 @@
-package liquibase.utils
+package liquibase.utils.v_001
 
 /**
  * @author AMiklo on 2016.10.10.
