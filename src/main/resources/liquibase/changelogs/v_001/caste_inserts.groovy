@@ -32,6 +32,7 @@ databaseChangeLog() {
     insertCaste(delegate, [CODE: 'WIZARD', NAME: 'varázsló', NEXT_CASTE: ['MAGE'], GODS: ['HORA', 'SIFER', 'GETON', 'RUNID', 'GINDON']])
     insertCaste(delegate, [CODE: 'ROGUE', NAME: 'csavargó', NEXT_CASTE: ['WIZARD', 'FIGHTER', 'TRACKER', 'HERMIT', 'MONK'],
                            GODS: ['HORA', 'SIFER', 'GETON', 'RUNID', 'ALATE', 'GINDON']])
+
   }
 
 }

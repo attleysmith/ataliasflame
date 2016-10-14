@@ -17,6 +17,7 @@ databaseChangeLog() {
     insertGod(delegate, [CODE: 'ALATE', NAME: 'Alate', INFLUENCE: 'A harc istennője.'])
     insertGod(delegate, [CODE: 'GINDON', NAME: 'Gindon', INFLUENCE: 'A megújulás istene.'])
     insertGod(delegate, [CODE: 'ATALIA', NAME: 'Atalia', INFLUENCE: 'Teremtő isten, a mindenség anyja.'])
+
   }
 
 }

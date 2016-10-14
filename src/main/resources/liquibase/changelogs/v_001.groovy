@@ -9,8 +9,8 @@ databaseChangeLog() {
   // race must be after attribute, god and caste
   include(file: 'v_001/race_inserts.groovy', relativeToChangelogFile: true)
   // gender must be after god, caste and race
-  include(file: 'v_001/gender_inserts.yml', relativeToChangelogFile: true)
-  include(file: 'v_001/skill_inserts.yml', relativeToChangelogFile: true)
-  include(file: 'v_001/level_inserts.yml', relativeToChangelogFile: true)
+  include(file: 'v_001/gender_inserts.groovy', relativeToChangelogFile: true)
+  include(file: 'v_001/skill_inserts.groovy', relativeToChangelogFile: true)
+  include(file: 'v_001/level_inserts.groovy', relativeToChangelogFile: true)
 
 }

@@ -39,8 +39,24 @@ class FieldValueUtil {
     value != null ? value : defaultValue
   }
 
+  static String longValue(Long value) {
+    longValue(value, "NULL")
+  }
+
+  static String longValue(Long value, Long defaultValue) {
+    longValue(value, defaultValue.toString())
+  }
+
+  static String longValue(Long value, String defaultValue) {
+    value != null ? value : defaultValue
+  }
+
   static String findIdByCode(String table, String code) {
     "select id from $table where code = ${stringValue(code)}"
+  }
+
+  static String findIdByIntField(String table, String field, Integer value) {
+    "select id from $table where $field = ${intValue(value)}"
   }
 
 }

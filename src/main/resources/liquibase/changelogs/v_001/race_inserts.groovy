@@ -49,6 +49,7 @@ databaseChangeLog() {
                           CASTES               : ['ROGUE', 'FIGHTER', 'PALADIN', 'GRANDMASTER', 'TITAN', 'TRACKER', 'RANGER', 'PILGRIM', 'FREE_SOUL', 'HERMIT', 'DRUID', 'ARCHDRUID', 'ATALIAS_PRIEST', 'MONK', 'PRIEST', 'HIERARCH', 'ARCHANGEL'],
                           GODS                 : ['HORA', 'SIFER', 'GETON', 'RUNID', 'ALATE', 'GINDON', 'ATALIA'],
                           ATTRIBUTE_MULTIPLIERS: [STRENGTH: -30, DEXTERITY: 50, CONSTITUTION: -10, AGILITY: -5]])
+
   }
 
 }

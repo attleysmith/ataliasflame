@@ -9,7 +9,7 @@ import static liquibase.utils.v_001.FieldValueUtil.*
  */
 class AttributeUtil {
 
-  static insertAttribute(ChangeSetDelegate delegate, Map<String, Object> map) {
+  static void insertAttribute(ChangeSetDelegate delegate, Map<String, Object> map) {
     delegate.insert(tableName: 'ATTRIBUTE') {
       column(name: 'ID', valueComputed: nextSeq())
       column(name: 'CODE', valueComputed: stringValue(map.CODE))

@@ -9,7 +9,7 @@ import static liquibase.utils.v_001.FieldValueUtil.*
  */
 class CasteUtil {
 
-  static insertCaste(ChangeSetDelegate delegate, Map<String, Object> map) {
+  static void insertCaste(ChangeSetDelegate delegate, Map<String, Object> map) {
     delegate.insert(tableName: 'CASTE') {
       column(name: 'ID', valueComputed: nextSeq())
       column(name: 'CODE', valueComputed: stringValue(map.CODE))

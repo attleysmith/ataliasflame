@@ -52,7 +52,7 @@ spring:
 #    tomcat:
 #      *: # Tomcat datasource specific settings
 #    type: # Fully qualified name of the connection pool implementation to use. By default, it is auto-detected from the classpath.
-#    url: jdbc:h2:file:~/ataliasflame_h2.db # JDBC url of the database.
+#    url: jdbc:h2:file:~/ataliasflame_h2.db # JDBC url of the database. (jdbc:h2:mem:testdb)
     username: sa
   # H2 Web Console (H2ConsoleProperties)
   h2:

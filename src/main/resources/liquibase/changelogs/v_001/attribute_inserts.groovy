@@ -18,6 +18,7 @@ databaseChangeLog() {
     insertAttribute(delegate, [CODE: 'LORE', NAME: 'tudás', MAGIC_MODIFIER: 2])
     insertAttribute(delegate, [CODE: 'MENTAL_POWER', NAME: 'szellemi erő', MAGIC_MODIFIER: 10])
     insertAttribute(delegate, [CODE: 'SPIRITUAL_POWER', NAME: 'lelki erő', MAGIC_MODIFIER: 1])
+
   }
 
 }

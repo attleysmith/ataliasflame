@@ -9,7 +9,7 @@ import static liquibase.utils.v_001.FieldValueUtil.*
  */
 class RaceUtil {
 
-  static insertRace(ChangeSetDelegate delegate, Map<String, Object> map) {
+  static void insertRace(ChangeSetDelegate delegate, Map<String, Object> map) {
     delegate.insert(tableName: 'RACE') {
       column(name: 'ID', valueComputed: nextSeq())
       column(name: 'CODE', valueComputed: stringValue(map.CODE))
