@@ -41,7 +41,7 @@ spring:
 #    initialize: true # Populate the database using 'data.sql'.
 #    jmx-enabled: false # Enable JMX support (if provided by the underlying pool).
 #    jndi-name: # JNDI location of the datasource. Class, url, username & password are ignored when set.
-#    name: testdb # Name of the datasource.
+    name: testdb # Name of the datasource.
     password: # Login password of the database.
 #    platform: all # Platform to use in the schema resource (schema-${platform}.sql).
 #    schema: # Schema (DDL) script resource reference.
@@ -52,7 +52,7 @@ spring:
 #    tomcat:
 #      *: # Tomcat datasource specific settings
 #    type: # Fully qualified name of the connection pool implementation to use. By default, it is auto-detected from the classpath.
-#    url: jdbc:h2:file:~/ataliasflame_h2.db # JDBC url of the database.
+#    url: jdbc:h2:file:~/ataliasflame_h2.db # JDBC url of the database. (jdbc:h2:mem:testdb)
     username: sa
   # H2 Web Console (H2ConsoleProperties)
   h2:
@@ -228,14 +228,14 @@ security:
 #  require-ssl: false # Enable secure channel for all requests.
 #  sessions: stateless # Session creation policy (always, never, if_required, stateless).
   user:
-#    name: user # Default user name.
+    name: user # Default user name.
     password: pw # Password for the default user name. A random password is logged on startup by default.
 #    role: USER # Granted roles for the default user name.
 
 
 # LIQUIBASE (LiquibaseProperties)
 liquibase:
-  change-log: classpath:liquibase/changelogs.yml # Change log configuration path.
+  change-log: classpath:liquibase/changelogs.groovy # Change log configuration path.
 #  check-change-log-location: true # Check the change log location exists.
 #  contexts: # Comma-separated list of runtime contexts to use.
 #  default-schema: # Default database schema.

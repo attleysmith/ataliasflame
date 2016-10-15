@@ -46,12 +46,25 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.192</version>
         </dependency>
+
+        <!-- Liquibase -->
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>3.5.1</version>
+            <version>3.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-groovy-dsl</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <!-- Spock -->
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <version>1.1-groovy-2.4-rc-2</version>
         </dependency>
 
         <!-- TEST scope -->
@@ -71,15 +84,30 @@
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.4.2</version>
                 <configuration>
                     <propertyFile>src/main/resources/liquibase/liquibase.yml</propertyFile>
                 </configuration>
                 <dependencies>
                     <dependency>
+                        <groupId>org.liquibase</groupId>
+                        <artifactId>liquibase-groovy-dsl</artifactId>
+                        <version>1.2.1</version>
+                    </dependency>
+                    <dependency>
                         <groupId>org.yaml</groupId>
                         <artifactId>snakeyaml</artifactId>
                         <version>1.17</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.liquibase.ext</groupId>
+                        <artifactId>liquibase-hibernate4</artifactId>
+                        <version>3.5</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-data-jpa</artifactId>
+                        <version>${project.parent.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

@@ -1,5 +1,22 @@
-changeLogFile: liquibase/changelogs.yml
+changeLogFile: liquibase/changelogs.groovy
 driver: org.h2.Driver
-url: jdbc:h2:file:~/ataliasflame_h2.db
+url: jdbc:h2:mem:testdb
+#url: jdbc:h2:file:~/ataliasflame_h2.db
 username: sa
 password:
+referenceUrl: hibernate:spring:hu.asgames.domain.entities?dialect=org.hibernate.dialect.H2Dialect
+#referenceUrl: jdbc:h2:file:~/ataliasflame_h2.db
+#referenceDriver: org.h2.Driver
+#referenceUsername: sa
+#referencePassword:
+
+# yml format comes with a bug, 'constraints' tag is duplicated (can be fixed manually (or with a script))
+# hibernate-3.5 dependency is not compatible with liquibase 3.5
+# liquibase-3.4 doesn't seem to work with sql output (could not determine database type as liquibase-3.5 can do)
+diffChangeLogFile: target/liquibase-diffChangeLog.groovy
+outputChangeLogFile: target/liquibase-outputChangeLog.groovy
+
+# with an h2 url this causes NullPointerException
+# with an oracle url the first and last part is omitted so there is a hack with extra commas
+# as command parameter, this seems to work correctly (no need hack)
+#diffExcludeObjects: ""
