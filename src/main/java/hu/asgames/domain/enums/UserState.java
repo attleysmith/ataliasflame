@@ -23,5 +23,10 @@ public enum UserState {
     /**
      * Inactive user
      */
-    DORMANT
+    DORMANT,
+
+    /**
+     * Deleted user
+     */
+    DELETED
 }
