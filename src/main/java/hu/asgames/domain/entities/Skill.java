@@ -13,7 +13,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "skill")
-// TODO: funkció bekötése
 public class Skill extends IdentifiedEntityBase {
 
     @Column(name = "code")

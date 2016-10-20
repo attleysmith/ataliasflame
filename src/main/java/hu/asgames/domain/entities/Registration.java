@@ -19,7 +19,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "registration")
-// TODO: funkció bekötése
 public class Registration extends IdentifiedEntityBase {
 
     @OneToOne(optional = false, fetch = FetchType.EAGER)

@@ -13,7 +13,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "permission")
-// TODO: funkció bekötése
 public class Permission extends IdentifiedEntityBase {
 
     @Column(name = "name")

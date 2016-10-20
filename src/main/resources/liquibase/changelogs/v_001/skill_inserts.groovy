@@ -31,7 +31,6 @@ databaseChangeLog() {
     insertSkill(delegate, [CODE: 'ECONOMY', NAME: 'gazdaság', SKILL_TYPE: 'SCIENCE'])
     insertSkill(delegate, [CODE: 'CRAFT', NAME: 'kézművesség', SKILL_TYPE: 'SCIENCE'])
 
-
   }
 
 }
