@@ -16,7 +16,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "caste")
-// TODO: funkció bekötése
 public class Caste extends IdentifiedEntityBase {
 
     @Column(name = "code")
@@ -25,7 +24,6 @@ public class Caste extends IdentifiedEntityBase {
     @Column(name = "name")
     private String name;
 
-    // TODO: fill out in db
     @Column(name = "description")
     private String description;
 

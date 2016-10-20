@@ -18,7 +18,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "race")
-// TODO: funkció bekötése
 public class Race extends IdentifiedEntityBase {
 
     @Column(name = "code")

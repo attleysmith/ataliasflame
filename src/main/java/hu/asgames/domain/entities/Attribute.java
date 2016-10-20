@@ -9,7 +9,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "attribute")
-// TODO: funkció bekötése
 public class Attribute extends IdentifiedEntityBase {
 
     @Column(name = "code")
@@ -33,7 +32,6 @@ public class Attribute extends IdentifiedEntityBase {
     @Column(name = "magic_modifier")
     private int magicModifier;
 
-    // TODO: fill out in db
     @Column(name = "description")
     private String description;
 

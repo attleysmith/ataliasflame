@@ -9,7 +9,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "special_ability")
-// TODO: funkció bekötése
 public class SpecialAbility extends IdentifiedEntityBase {
 
     @Column(name = "name")

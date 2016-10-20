@@ -14,7 +14,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "login_history")
-// TODO: funkció bekötése
 public class LoginHistory extends IdentifiedEntityBase {
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)

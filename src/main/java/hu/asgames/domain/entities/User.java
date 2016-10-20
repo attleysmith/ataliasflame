@@ -25,7 +25,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "user")
-// TODO: funkció bekötése
 public class User extends IdentifiedEntityBase {
 
     @Column(name = "username")

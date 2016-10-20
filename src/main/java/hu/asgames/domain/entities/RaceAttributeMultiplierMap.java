@@ -17,7 +17,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "race_attribute_multiplier_map")
 @IdClass(RaceAttributeMapKey.class)
-// TODO: funkció bekötése
 public class RaceAttributeMultiplierMap {
 
     @Id

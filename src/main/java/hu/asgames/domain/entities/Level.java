@@ -12,7 +12,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "level")
-// TODO: funkció bekötése
 public class Level extends IdentifiedEntityBase {
 
     @Column(name = "level")

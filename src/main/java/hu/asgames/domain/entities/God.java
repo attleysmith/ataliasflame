@@ -13,7 +13,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "god")
-// TODO: funkció bekötése
 public class God extends IdentifiedEntityBase {
 
     @Column(name = "code")

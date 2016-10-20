@@ -20,7 +20,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "character")
-// TODO: funkció bekötése
 public class Character extends IdentifiedEntityBase {
 
     @Column(name = "name")
