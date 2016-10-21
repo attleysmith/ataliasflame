@@ -19,13 +19,13 @@ public interface UserWebService {
     List<UserVo> getUserList();
 
     @RequestMapping(path = "/create", method = RequestMethod.POST)
-    UserVo createUser(@RequestBody UserVo userVo);
+    Long createUser(@RequestBody UserVo userVo);
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     UserVo getUser(@PathVariable Long id);
 
     @RequestMapping(path = "/{id}/modify", method = RequestMethod.POST)
-    UserVo modifyUser(@PathVariable Long id, @RequestBody UserVo userVo);
+    void modifyUser(@PathVariable Long id, @RequestBody UserVo userVo);
 
     @RequestMapping(path = "/{id}/delete", method = RequestMethod.POST)
     void deleteUser(@PathVariable Long id);

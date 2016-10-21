@@ -1,0 +1,29 @@
+User list is available:
+ When we get the list of users
+ then at start there is only one user
+ and the user name is admin.
+SUCCESS
+
+User creation succeed:
+ When we take a new user
+ and we save it
+ then we can get the user by id
+ and the user has a TEMPORARY status
+ and it has a valid registration
+ and given data are stored
+ and the returned password is empty.
+SUCCESS
+
+User modification succeed:
+ When we have a user
+ and make some changes on her user data
+ and save modifications
+ then the changes are executed.
+SUCCESS
+
+User deletion succeed:
+ When we have a user
+ and delete user
+ then the deletion is performed.
+SUCCESS
+
