@@ -8,15 +8,23 @@ import hu.asgames.ws.api.vo.UserVo
  */
 class WebServiceSpecFixtures extends TestWebServiceRepository {
 
-  UserVo createUser() {
-    UserVo user = new UserVo().with {
-      username = UUID.randomUUID()
+  UserVo createNewUser() {
+    UserVo user = newUser()
+    Long userId = userService.createUser(user)
+    return userService.getUser(userId)
+  }
+
+  UserVo newUser() {
+    return new UserVo().with {
+      username = dummy()
       password = 'dummy'
       email = 'dummy@asgames.hu'
       return it
     }
-    Long userId = userService.createUser(user)
-    return userService.getUser(userId)
+  }
+
+  String dummy() {
+    UUID.randomUUID()
   }
 
 }

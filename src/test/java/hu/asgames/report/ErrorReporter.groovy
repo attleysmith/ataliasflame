@@ -7,23 +7,23 @@ import org.spockframework.runtime.ConditionNotSatisfiedError
 /**
  * @author AMiklo on 2016.10.21.
  */
-class ErrorHandler {
+class ErrorReporter {
 
   private final PrintWriter writer;
 
-  ErrorHandler(PrintWriter writer) {
+  ErrorReporter(PrintWriter writer) {
     this.writer = writer
   }
 
-  private void handleError(ConnectException error) {
+  private void reportError(ConnectException error) {
     writer.println(' - ' + error.message)
   }
 
-  private void handleError(HttpResponseException error) {
+  private void reportError(HttpResponseException error) {
     writer.println(' - ' + error.message + ' (statusCode: ' + error.statusCode + ')')
   }
 
-  private void handleError(ConditionNotSatisfiedError error) {
+  private void reportError(ConditionNotSatisfiedError error) {
     Condition condition = error.condition
     writer.println(' - Condition: ' + condition.text)
     writer.println(' - Result: ' + condition.expression.value)

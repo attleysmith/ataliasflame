@@ -13,22 +13,17 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
   def "User list is available"() {
     when: "we get the list of users"
     List<UserVo> userList = userService.getUserList()
-    then: "at start there is only one user"
-    userList.size() == 1
-    and: "the user name is admin."
-    userList[0].username == 'admin'
+    then: "at start there is at least one user"
+    userList.size() >= 1
+    and: "there is a user, named admin."
+    userList.find({ it.username == 'admin' }) != null
   }
 
   def "User creation succeed"() {
     when: "we take a new user"
-    UserVo user = new UserVo().with {
-      username = 'user'
-      password = 'pw'
-      email = 'user@asgames.hu'
-      return it
-    }
+    UserVo newUser = newUser()
     and: "we save it"
-    Long userId = userService.createUser(user)
+    Long userId = userService.createUser(newUser)
     then: "we can get the user by id"
     UserVo savedUser = userService.getUser(userId)
     and: "the user has a TEMPORARY status"
@@ -37,29 +32,29 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     savedUser.registrationCode == 'DUMMY'
     savedUser.registrationState == 'NEW'
     and: "given data are stored"
-    savedUser.username == 'user'
-    savedUser.email == 'user@asgames.hu'
+    savedUser.username == newUser.username
+    savedUser.email == newUser.email
     and: "the returned password is empty."
     savedUser.password == null
   }
 
   def "User modification succeed"() {
     when: "we have a user"
-    UserVo user = createUser()
+    UserVo user = createNewUser()
     and: "make some changes on her user data"
-    user.username = 'newusername'
+    user.username = dummy()
     user.email = 'newemail@asgames.hu'
     and: "save modifications"
     userService.modifyUser(user)
     then: "the changes are executed."
     UserVo modifiedUser = userService.getUser(user.id)
-    modifiedUser.username == 'newusername'
-    modifiedUser.email == 'newemail@asgames.hu'
+    modifiedUser.username == user.username
+    modifiedUser.email == user.email
   }
 
   def "User deletion succeed"() {
     when: "we have a user"
-    UserVo user = createUser()
+    UserVo user = createNewUser()
     and: "delete user"
     userService.deleteUser(user.id)
     then: "the deletion is performed."

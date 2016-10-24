@@ -1,7 +1,7 @@
 User list is available:
  When we get the list of users
- then at start there is only one user
- and the user name is admin.
+ then at start there is at least one user
+ and there is a user, named admin.
 SUCCESS
 
 User creation succeed:

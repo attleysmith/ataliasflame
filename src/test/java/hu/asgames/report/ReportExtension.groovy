@@ -3,6 +3,7 @@ package hu.asgames.report
 import org.spockframework.runtime.AbstractRunListener
 import org.spockframework.runtime.extension.AbstractAnnotationDrivenExtension
 import org.spockframework.runtime.model.ErrorInfo
+import org.spockframework.runtime.model.FeatureInfo
 import org.spockframework.runtime.model.IterationInfo
 import org.spockframework.runtime.model.SpecInfo
 
@@ -50,33 +51,13 @@ class ReportExtension extends AbstractAnnotationDrivenExtension<Report> {
       @Override
       void beforeSpec(SpecInfo specInfo) {
 //        println('--- ' + specInfo.name + ' ---')
-        String timestamp = LocalDateTime.now().format(DT_FORMATTER)
-        writer = new PrintWriter("${REPORT_PATH + specInfo.name + '_' + timestamp}.txt", "UTF-8");
+        writer = printWriter(specInfo.name)
       }
 
       @Override
       void beforeIteration(IterationInfo iteration) {
         success = true
-        writer.println(iteration.name + ':')
-
-        def feature = iteration.feature
-        boolean firstBlock = true
-        for (block in feature.blocks) {
-          String blockName = block.kind.name().toLowerCase()
-          if (firstBlock) {
-            blockName = blockName.capitalize()
-            firstBlock = false
-          }
-          boolean firstText = true
-          for (text in block.texts) {
-            if (firstText) {
-              writer.println(' ' + blockName + ' ' + text)
-              firstText = false
-            } else {
-              writer.println(' ' + 'and ' + text)
-            }
-          }
-        }
+        new FeatureReporter(writer).reportFeature(iteration.feature)
       }
 
       @Override
@@ -103,22 +84,37 @@ class ReportExtension extends AbstractAnnotationDrivenExtension<Report> {
         writer.println('ERROR:')
         def error = errorInfo.error
         try {
-          new ErrorHandler(writer).handleError(errorInfo.error)
+          new ErrorReporter(writer).reportError(errorInfo.error)
         } catch (Exception e) {
           writer.println('!!!Error handler failure for error type!!! ( ' + error.class + ' )')
           writer.println(' - ' + error.message)
         }
       }
 
-//      @Override
-//      void specSkipped(SpecInfo specInfo) {
-//        println(specInfo)
-//      }
-//
-//      @Override
-//      void featureSkipped(FeatureInfo feature) {
-//        println(feature)
-//      }
+      @Override
+      void specSkipped(SpecInfo specInfo) {
+        PrintWriter skipWriter = printWriter(specInfo.name)
+        specInfo.getAllFeatures().each { feature ->
+          reportSkippedFeature(skipWriter, feature)
+        }
+        skipWriter.close()
+      }
+
+      @Override
+      void featureSkipped(FeatureInfo feature) {
+        reportSkippedFeature(writer, feature)
+      }
+
+      private PrintWriter printWriter(String fileName) {
+        String timestamp = LocalDateTime.now().format(DT_FORMATTER)
+        return new PrintWriter("${REPORT_PATH + fileName + '_' + timestamp}.txt", "UTF-8");
+      }
+
+      private void reportSkippedFeature(PrintWriter skipWriter, FeatureInfo feature) {
+        new FeatureReporter(skipWriter).reportFeature(feature)
+        skipWriter.println('SKIPPED')
+        skipWriter.println()
+      }
     })
   }
 }
