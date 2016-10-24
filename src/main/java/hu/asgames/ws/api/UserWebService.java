@@ -15,19 +15,19 @@ import java.util.List;
 @RequestMapping(path = "/user")
 public interface UserWebService {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(path = "/get", method = RequestMethod.GET)
     List<UserVo> getUserList();
 
     @RequestMapping(path = "/create", method = RequestMethod.POST)
     Long createUser(@RequestBody UserVo userVo);
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/get/{id}", method = RequestMethod.GET)
     UserVo getUser(@PathVariable Long id);
 
-    @RequestMapping(path = "/{id}/modify", method = RequestMethod.POST)
+    @RequestMapping(path = "/modify/{id}", method = RequestMethod.POST)
     void modifyUser(@PathVariable Long id, @RequestBody UserVo userVo);
 
-    @RequestMapping(path = "/{id}/delete", method = RequestMethod.POST)
+    @RequestMapping(path = "/delete/{id}", method = RequestMethod.POST)
     void deleteUser(@PathVariable Long id);
 
 }
