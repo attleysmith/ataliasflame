@@ -26,7 +26,7 @@ public class UserWebServiceImpl implements UserWebService {
     }
 
     @Override
-    public UserVo createUser(@RequestBody final UserVo userVo) {
+    public Long createUser(@RequestBody final UserVo userVo) {
         return userService.createUser(userVo);
     }
 
@@ -36,8 +36,8 @@ public class UserWebServiceImpl implements UserWebService {
     }
 
     @Override
-    public UserVo modifyUser(@PathVariable Long id, @RequestBody final UserVo userVo) {
-        return userService.modifyUser(id, userVo);
+    public void modifyUser(@PathVariable Long id, @RequestBody final UserVo userVo) {
+        userService.modifyUser(id, userVo);
     }
 
     @Override

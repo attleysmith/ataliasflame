@@ -27,7 +27,7 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User extends IdentifiedEntityBase {
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "password")

@@ -1,11 +1,13 @@
 package hu.asgames.service.api
 
+import hu.asgames.report.Report
 import hu.asgames.service.impl.AuthenticationServiceImpl
 import spock.lang.Specification
 
 /**
  * @author AMiklo on 2016.10.19.
  */
+@Report
 class AuthenticationServiceTest extends Specification {
 
   private AuthenticationService authenticationService = new AuthenticationServiceImpl();

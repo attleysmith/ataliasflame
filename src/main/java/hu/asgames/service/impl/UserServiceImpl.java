@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVo createUser(final UserVo userVo) {
+    public Long createUser(final UserVo userVo) {
 
         User user = new User();
         user.setUsername(userVo.getUsername());
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 
         userDao.save(user);
 
-        return entityToVo(user);
+        return user.getId();
     }
 
     @Override
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVo modifyUser(final Long id, final UserVo userVo) {
+    public void modifyUser(final Long id, final UserVo userVo) {
         User user = userDao.findOne(id);
 
         user.setUsername(userVo.getUsername());
@@ -70,8 +70,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(authenticationService.encodePassword(userVo.getPassword()));
         user.setEmail(userVo.getEmail());
         userDao.save(user);
-
-        return entityToVo(user);
     }
 
     @Override
