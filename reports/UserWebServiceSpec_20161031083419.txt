@@ -1,0 +1,86 @@
+User creation succeed:
+ When we take a new user
+ and we save it
+ then we can get the user by id
+ and the user has a TEMPORARY status
+ and it has a valid registration
+ and given data are stored.
+SUCCESS
+
+User list contains created user:
+ When we get the list of users
+ then there is at least one user
+ and the user we created before is in the list.
+SUCCESS
+
+Login works[0] - Login with correct data:
+ When we have a user
+ and we send login data
+ then the success comes with our expectations
+ where we take different login combinations.
+   [loginPassword: myprecious]
+   [loginUsername: a1a5d6c7-e054-4a7b-9fa7-764bac4232f6]
+   [loginSuccessed: true]
+SUCCESS
+
+Login works[1] - Login with wrong username:
+ When we have a user
+ and we send login data
+ then the success comes with our expectations
+ where we take different login combinations.
+   [loginPassword: myprecious]
+   [loginUsername: Gollum]
+   [loginSuccessed: false]
+SUCCESS
+
+Login works[2] - Login with wrong password:
+ When we have a user
+ and we send login data
+ then the success comes with our expectations
+ where we take different login combinations.
+   [loginPassword: sting]
+   [loginUsername: a1a5d6c7-e054-4a7b-9fa7-764bac4232f6]
+   [loginSuccessed: false]
+SUCCESS
+
+Login works[3] - Login with wrong username and password:
+ When we have a user
+ and we send login data
+ then the success comes with our expectations
+ where we take different login combinations.
+   [loginPassword: sting]
+   [loginUsername: Gollum]
+   [loginSuccessed: false]
+SUCCESS
+
+User modification succeed:
+ When we have a user
+ and we make some changes on her user data
+ and we save modifications
+ then the changes are executed.
+SUCCESS
+
+Change password works and use credentials properly[0] - Change password with wrong old password:
+ When we have a user
+ and we request a password change
+ then password is changed only with correct credentials
+ where we take different password combinations.
+   [loginPassword: sting]
+   [changeSuccessed: false]
+SUCCESS
+
+Change password works and use credentials properly[1] - Change password with correct data:
+ When we have a user
+ and we request a password change
+ then password is changed only with correct credentials
+ where we take different password combinations.
+   [loginPassword: myprecious]
+   [changeSuccessed: true]
+SUCCESS
+
+User deletion succeed:
+ When we have a user
+ and we delete this user
+ then the deletion is performed.
+SUCCESS
+

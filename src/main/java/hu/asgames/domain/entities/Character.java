@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Table(name = "character")
 public class Character extends IdentifiedEntityBase {
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -45,38 +45,38 @@ public class Character extends IdentifiedEntityBase {
     @JoinColumn(name = "level_id", nullable = false)
     private Level level;
 
-    @Column(name = "experience")
+    @Column(name = "experience", nullable = false)
     private long experience;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "state")
+    @Column(name = "state", nullable = false)
     private CharacterState state;
 
-    @Column(name = "attack")
+    @Column(name = "attack", nullable = false)
     private int attack;
 
-    @Column(name = "defense")
+    @Column(name = "defense", nullable = false)
     private int defense;
 
-    @Column(name = "health")
+    @Column(name = "health", nullable = false)
     private int health;
 
-    @Column(name = "actual_health")
+    @Column(name = "actual_health", nullable = false)
     private int actualHealth;
 
-    @Column(name = "magic")
+    @Column(name = "magic", nullable = false)
     private int magic;
 
-    @Column(name = "actual_magic")
+    @Column(name = "actual_magic", nullable = false)
     private int actualMagic;
 
-    @Column(name = "attribute_points")
+    @Column(name = "attribute_points", nullable = false)
     private int attributePoints;
 
-    @Column(name = "skill_points")
+    @Column(name = "skill_points", nullable = false)
     private int skillPoints;
 
-    @Column(name = "wounds")
+    @Column(name = "wounds", nullable = false)
     private int wounds;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "special_ability")
 public class SpecialAbility extends IdentifiedEntityBase {
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     // Getters and setters

@@ -15,13 +15,13 @@ import javax.persistence.Table;
 @Table(name = "god")
 public class God extends IdentifiedEntityBase {
 
-    @Column(name = "code")
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "influence")
+    @Column(name = "influence", nullable = false)
     private String influence;
 
     @Column(name = "description")

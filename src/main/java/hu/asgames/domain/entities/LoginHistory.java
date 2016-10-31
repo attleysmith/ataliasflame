@@ -20,7 +20,7 @@ public class LoginHistory extends IdentifiedEntityBase {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "login_date")
+    @Column(name = "login_date", nullable = false)
     private LocalDateTime loginDate;
 
     // Getters and setters

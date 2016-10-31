@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "level")
 public class Level extends IdentifiedEntityBase {
 
-    @Column(name = "level")
+    @Column(name = "level", nullable = false)
     private int level;
 
     @OneToOne(fetch = FetchType.LAZY)

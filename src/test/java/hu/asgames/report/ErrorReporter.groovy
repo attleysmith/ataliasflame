@@ -15,15 +15,15 @@ class ErrorReporter {
     this.writer = writer
   }
 
-  private void reportError(ConnectException error) {
+  public void reportError(ConnectException error) {
     writer.println(' - ' + error.message)
   }
 
-  private void reportError(HttpResponseException error) {
+  public void reportError(HttpResponseException error) {
     writer.println(' - ' + error.message + ' (statusCode: ' + error.statusCode + ')')
   }
 
-  private void reportError(ConditionNotSatisfiedError error) {
+  public void reportError(ConditionNotSatisfiedError error) {
     Condition condition = error.condition
     writer.println(' - Condition: ' + condition.text)
     writer.println(' - Result: ' + condition.expression.value)

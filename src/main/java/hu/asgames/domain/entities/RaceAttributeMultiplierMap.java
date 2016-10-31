@@ -29,7 +29,7 @@ public class RaceAttributeMultiplierMap {
     @JoinColumn(name = "attribute_id", nullable = false)
     private Attribute attribute;
 
-    @Column(name = "multiplier")
+    @Column(name = "multiplier", nullable = false)
     private int multiplier;
 
     // Getters and setters

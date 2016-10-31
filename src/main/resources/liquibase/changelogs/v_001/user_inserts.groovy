@@ -10,7 +10,7 @@ databaseChangeLog() {
   changeSet(id: 'INSERT_USERS', author: 'amiklo') {
     comment "Initial insertion of users"
 
-    insertUser(delegate, [USERNAME: 'admin', PASSWORD: 'admin', EMAIL: 'admin@asgames.hu'])
+    insertUser(delegate, [DISPLAY_NAME: 'Admin', USERNAME: 'admin', PASSWORD: 'admin', EMAIL: 'admin@asgames.hu'])
 
   }
 

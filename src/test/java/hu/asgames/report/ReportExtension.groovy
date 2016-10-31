@@ -57,7 +57,7 @@ class ReportExtension extends AbstractAnnotationDrivenExtension<Report> {
       @Override
       void beforeIteration(IterationInfo iteration) {
         success = true
-        new FeatureReporter(writer).reportFeature(iteration.feature)
+        new FeatureReporter(writer).reportIteration(iteration)
       }
 
       @Override

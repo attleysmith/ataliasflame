@@ -12,6 +12,7 @@ class UserUtil {
   static void insertUser(ChangeSetDelegate delegate, Map<String, Object> map) {
     delegate.insert(tableName: 'USER') {
       column(name: 'ID', valueComputed: nextSeq())
+      column(name: 'DISPLAY_NAME', valueComputed: stringValue(map.DISPLAY_NAME))
       column(name: 'USERNAME', valueComputed: stringValue(map.USERNAME))
       column(name: 'PASSWORD', valueComputed: passValue(map.PASSWORD))
       column(name: 'EMAIL', valueComputed: stringValue(map.EMAIL))
