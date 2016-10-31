@@ -15,14 +15,14 @@ import javax.persistence.Table;
 @Table(name = "skill")
 public class Skill extends IdentifiedEntityBase {
 
-    @Column(name = "code")
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "skill_type")
+    @Column(name = "skill_type", nullable = false)
     private SkillType skillType;
 
     @Column(name = "description")

@@ -27,17 +27,20 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User extends IdentifiedEntityBase {
 
-    @Column(name = "username", unique = true)
+    @Column(name = "display_name", nullable = false)
+    private String displayName;
+
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "state")
+    @Column(name = "state", nullable = false)
     private UserState state;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -68,6 +71,14 @@ public class User extends IdentifiedEntityBase {
     }
 
     // Getters and setters
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(final String displayName) {
+        this.displayName = displayName;
+    }
 
     public String getUsername() {
         return username;

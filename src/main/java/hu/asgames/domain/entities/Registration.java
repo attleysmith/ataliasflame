@@ -25,10 +25,10 @@ public class Registration extends IdentifiedEntityBase {
     @JoinColumn(name = "user_id", unique = true, nullable = false)
     private User user;
 
-    @Column(name = "registration_code")
+    @Column(name = "registration_code", nullable = false)
     private String registrationCode;
 
-    @Column(name = "registration_date")
+    @Column(name = "registration_date", nullable = false)
     private LocalDateTime registrationDate;
 
     @Column(name = "confirmation_date")
@@ -38,7 +38,7 @@ public class Registration extends IdentifiedEntityBase {
     private LocalDate expirationDate;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "state")
+    @Column(name = "state", nullable = false)
     private RegistrationState state;
 
     // Getters and setters

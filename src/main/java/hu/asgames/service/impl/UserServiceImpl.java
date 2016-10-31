@@ -7,8 +7,14 @@ import hu.asgames.domain.enums.RegistrationState;
 import hu.asgames.domain.enums.UserState;
 import hu.asgames.service.api.AuthenticationService;
 import hu.asgames.service.api.UserService;
-import hu.asgames.ws.api.vo.UserVo;
+import hu.asgames.ws.api.vo.user.ChangePasswordRequest;
+import hu.asgames.ws.api.vo.user.CreateUserRequest;
+import hu.asgames.ws.api.vo.user.LoginRequest;
+import hu.asgames.ws.api.vo.user.ModifyUserRequest;
+import hu.asgames.ws.api.vo.user.UserVo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +28,8 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
     AuthenticationService authenticationService;
 
@@ -34,12 +42,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long createUser(final UserVo userVo) {
-
+    public Long createUser(final CreateUserRequest request) {
         User user = new User();
-        user.setUsername(userVo.getUsername());
-        user.setPassword(authenticationService.encodePassword(userVo.getPassword()));
-        user.setEmail(userVo.getEmail());
+        user.setDisplayName(request.getDisplayName());
+        user.setUsername(request.getUsername());
+        user.setPassword(authenticationService.encodePassword(request.getPassword()));
+        user.setEmail(request.getEmail());
         user.setState(UserState.TEMPORARY);
 
         Registration registration = new Registration();
@@ -53,6 +61,8 @@ public class UserServiceImpl implements UserService {
 
         userDao.save(user);
 
+        LOGGER.info("User created - {}", user.getUsername());
+
         return user.getId();
     }
 
@@ -62,21 +72,47 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void modifyUser(final Long id, final UserVo userVo) {
+    public void modifyUser(final Long id, final ModifyUserRequest request) {
         User user = userDao.findOne(id);
-
-        user.setUsername(userVo.getUsername());
-        // TODO: change password method
-        user.setPassword(authenticationService.encodePassword(userVo.getPassword()));
-        user.setEmail(userVo.getEmail());
+        user.setDisplayName(request.getDisplayName());
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
         userDao.save(user);
+
+        LOGGER.info("User modified - {}", user.getUsername());
     }
 
     @Override
     public void deleteUser(final Long id) {
-        User user = userDao.getOne(id);
+        User user = userDao.findOne(id);
         user.setState(UserState.DELETED);
         userDao.save(user);
+
+        LOGGER.info("User deleted - {}", user.getUsername());
+    }
+
+    @Override
+    public void changePassword(final Long id, final ChangePasswordRequest request) {
+        User user = userDao.findOne(id);
+
+        if (authenticationService.checkPassword(request.getOldPassword(), user.getPassword())) {
+            user.setPassword(authenticationService.encodePassword(request.getNewPassword()));
+            userDao.save(user);
+
+            LOGGER.info("User password changed - {}", user.getUsername());
+        } else {
+            LOGGER.info("User password change is denied - {}", user.getUsername());
+            // TODO: error message
+        }
+    }
+
+    @Override
+    public Long login(final LoginRequest request) {
+        User user = userDao.findByUsername(request.getUsername());
+        if (user != null && authenticationService.checkPassword(request.getPassword(), user.getPassword())) {
+            return user.getId();
+        }
+        return null;
     }
 
     private List<UserVo> entitiesToVos(List<User> userList) {
@@ -87,6 +123,7 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             UserVo userVo = new UserVo();
             userVo.setId(user.getId());
+            userVo.setDisplayName(user.getDisplayName());
             userVo.setUsername(user.getUsername());
             userVo.setEmail(user.getEmail());
             userVo.setUserState(user.getState().name());

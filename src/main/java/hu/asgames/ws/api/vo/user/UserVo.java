@@ -1,22 +1,31 @@
-package hu.asgames.ws.api.vo;
+package hu.asgames.ws.api.vo.user;
+
+import hu.asgames.ws.api.vo.IdentifiedVoBase;
 
 /**
  * @author AMiklo on 2016.10.15.
  */
 public class UserVo extends IdentifiedVoBase {
 
-    private String username;
+    private String displayName;
 
-    private String password;
+    private String username;
 
     private String email;
 
     private String userState;
 
-    // TODO: go into another object
     private String registrationState;
 
     private String registrationCode;
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(final String displayName) {
+        this.displayName = displayName;
+    }
 
     public String getUsername() {
         return username;
@@ -24,14 +33,6 @@ public class UserVo extends IdentifiedVoBase {
 
     public void setUsername(final String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(final String password) {
-        this.password = password;
     }
 
     public String getEmail() {

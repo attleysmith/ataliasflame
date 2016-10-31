@@ -11,25 +11,25 @@ import javax.persistence.Table;
 @Table(name = "attribute")
 public class Attribute extends IdentifiedEntityBase {
 
-    @Column(name = "code")
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "attack_multiplier")
+    @Column(name = "attack_multiplier", nullable = false)
     private int attackMultiplier;
 
-    @Column(name = "defense_multiplier")
+    @Column(name = "defense_multiplier", nullable = false)
     private int defenseMultiplier;
 
-    @Column(name = "damage_multiplier")
+    @Column(name = "damage_multiplier", nullable = false)
     private int damageMultiplier;
 
-    @Column(name = "health_multiplier")
+    @Column(name = "health_multiplier", nullable = false)
     private int healthMultiplier;
 
-    @Column(name = "magic_modifier")
+    @Column(name = "magic_modifier", nullable = false)
     private int magicModifier;
 
     @Column(name = "description")

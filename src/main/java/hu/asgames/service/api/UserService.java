@@ -1,6 +1,10 @@
 package hu.asgames.service.api;
 
-import hu.asgames.ws.api.vo.UserVo;
+import hu.asgames.ws.api.vo.user.ChangePasswordRequest;
+import hu.asgames.ws.api.vo.user.CreateUserRequest;
+import hu.asgames.ws.api.vo.user.LoginRequest;
+import hu.asgames.ws.api.vo.user.ModifyUserRequest;
+import hu.asgames.ws.api.vo.user.UserVo;
 
 import java.util.List;
 
@@ -11,12 +15,15 @@ public interface UserService {
 
     List<UserVo> getUserList();
 
-    Long createUser(UserVo userVo);
+    Long createUser(CreateUserRequest request);
 
     UserVo getUser(Long id);
 
-    void modifyUser(Long id, UserVo userVo);
+    void modifyUser(Long id, ModifyUserRequest request);
 
     void deleteUser(Long id);
 
+    void changePassword(Long id, ChangePasswordRequest request);
+
+    Long login(LoginRequest request);
 }

@@ -18,7 +18,7 @@ public class Permission extends IdentifiedEntityBase {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "code")
+    @Column(name = "code", nullable = false)
     private String code;
 
     @Column(name = "description")
