@@ -1,8 +1,0 @@
-Password encoding and checking are synchronized:
- When there is a password to use
- and there is a misspelled one
- and we encode the correct password to store
- then checking the correct one succeed
- and checking the wrong one fail
-SUCCESS
-

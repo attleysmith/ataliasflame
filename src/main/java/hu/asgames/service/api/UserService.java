@@ -1,10 +1,10 @@
 package hu.asgames.service.api;
 
-import hu.asgames.ws.api.vo.user.ChangePasswordRequest;
-import hu.asgames.ws.api.vo.user.CreateUserRequest;
-import hu.asgames.ws.api.vo.user.LoginRequest;
-import hu.asgames.ws.api.vo.user.ModifyUserRequest;
-import hu.asgames.ws.api.vo.user.UserVo;
+import hu.asgames.ws.api.domain.user.ChangePasswordRequest;
+import hu.asgames.ws.api.domain.user.CreateUserRequest;
+import hu.asgames.ws.api.domain.user.LoginRequest;
+import hu.asgames.ws.api.domain.user.ModifyUserRequest;
+import hu.asgames.ws.api.domain.user.UserVo;
 
 import java.util.List;
 

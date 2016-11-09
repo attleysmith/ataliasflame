@@ -1,8 +1,9 @@
 package hu.asgames.specifications
 
+import hu.asgames.domain.enums.UserState
 import hu.asgames.report.Report
 import hu.asgames.specifications.ws.WebServiceSpecFixtures
-import hu.asgames.ws.api.vo.user.*
+import hu.asgames.ws.api.domain.user.*
 import spock.lang.Shared
 import spock.lang.Stepwise
 import spock.lang.Unroll
@@ -28,8 +29,8 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
   @Shared
   private Long USER_ID = null; //Store value between test cases for use of the same user.
 
-  def "User creation succeed"() {
-    when: "we take a new user"
+  def "User creation succeeds"() {
+    given: "a new user."
     CreateUserRequest newUser = new CreateUserRequest().with {
       displayName = ORIGINAL_DISPLAY_NAME
       username = ORIGINAL_USERNAME
@@ -37,13 +38,13 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
       password = ORIGINAL_PASSWORD
       return it
     }
-    and: "we save it"
+    when: "we save the user"
     USER_ID = userService.createUser(newUser)
-    then: "we can get the user by id"
+    then: "we can get it by id"
     UserVo savedUser = userService.getUser(USER_ID)
-    and: "the user has a TEMPORARY status"
-    savedUser.userState == 'TEMPORARY'
-    and: "it has a valid registration"
+    and: "it has a TEMPORARY status"
+    savedUser.userState == UserState.TEMPORARY.name()
+    and: "a valid registration"
     savedUser.registrationCode == 'DUMMY'
     savedUser.registrationState == 'NEW'
     and: "given data are stored."
@@ -64,14 +65,15 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
 
   @Unroll
   def "Login works"() {
-    when: "we have a user"
+    given: "a user"
     UserVo user = userService.getUser(USER_ID)
-    and: "we send login data"
+    and: "her login data."
     LoginRequest loginData = new LoginRequest().with {
       username = loginUsername
       password = loginPassword
       return it
     }
+    when: "we try login"
     Long userId = userService.login(loginData)
     then: "the success comes with our expectations"
     (userId == user.id) == loginSuccessed
@@ -84,17 +86,17 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     WRONG_PASSWORD    | WRONG_USERNAME    | false          | "Login with wrong username and password"
   }
 
-  def "User modification succeed"() {
-    when: "we have a user"
+  def "User modification succeeds"() {
+    given: "a user"
     UserVo user = userService.getUser(USER_ID)
-    and: "we make some changes on her user data"
+    and: "some changes on her user data."
     ModifyUserRequest modification = new ModifyUserRequest().with {
       displayName = MODIFIED_DISPLAY_NAME
       username = MODIFIED_USERNAME
       email = MODIFIED_EMAIL
       return it
     }
-    and: "we save modifications"
+    when: "we save modifications"
     userService.modifyUser(user.id, modification)
     then: "the changes are executed."
     UserVo modifiedUser = userService.getUser(user.id)
@@ -105,14 +107,15 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
 
   @Unroll
   def "Change password works and use credentials properly"() {
-    when: "we have a user"
+    given: "a user"
     UserVo user = userService.getUser(USER_ID)
-    and: "we request a password change"
+    and: "a request of password change."
     ChangePasswordRequest request = new ChangePasswordRequest().with {
       oldPassword = loginPassword
       newPassword = MODIFIED_PASSWORD
       return it
     }
+    when: "we send request"
     userService.changePassword(user.id, request)
     then: "password is changed only with correct credentials"
     LoginRequest loginData = new LoginRequest().with {
@@ -123,16 +126,16 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     Long userId = userService.login(loginData)
     (userId != null) == changeSuccessed
     where: "we take different password combinations."
-    // Case order is important! After a successed change the checking login always will succeed.
+    // Test case order is important! After a successed change the checking login always will succeed.
     loginPassword     | changeSuccessed | testCase
     WRONG_PASSWORD    | false           | "Change password with wrong old password"
     ORIGINAL_PASSWORD | true            | "Change password with correct data"
   }
 
-  def "User deletion succeed"() {
-    when: "we have a user"
+  def "User deletion succeeds"() {
+    given: "a user."
     UserVo user = userService.getUser(USER_ID)
-    and: "we delete this user"
+    when: "we delete this user"
     userService.deleteUser(user.id)
     then: "the deletion is performed."
     UserVo deletedUser = userService.getUser(user.id)

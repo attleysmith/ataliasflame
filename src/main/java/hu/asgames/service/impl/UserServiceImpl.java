@@ -7,11 +7,11 @@ import hu.asgames.domain.enums.RegistrationState;
 import hu.asgames.domain.enums.UserState;
 import hu.asgames.service.api.AuthenticationService;
 import hu.asgames.service.api.UserService;
-import hu.asgames.ws.api.vo.user.ChangePasswordRequest;
-import hu.asgames.ws.api.vo.user.CreateUserRequest;
-import hu.asgames.ws.api.vo.user.LoginRequest;
-import hu.asgames.ws.api.vo.user.ModifyUserRequest;
-import hu.asgames.ws.api.vo.user.UserVo;
+import hu.asgames.ws.api.domain.user.ChangePasswordRequest;
+import hu.asgames.ws.api.domain.user.CreateUserRequest;
+import hu.asgames.ws.api.domain.user.LoginRequest;
+import hu.asgames.ws.api.domain.user.ModifyUserRequest;
+import hu.asgames.ws.api.domain.user.UserVo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

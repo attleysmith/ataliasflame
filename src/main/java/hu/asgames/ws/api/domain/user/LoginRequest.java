@@ -1,4 +1,4 @@
-package hu.asgames.ws.api.vo.user;
+package hu.asgames.ws.api.domain.user;
 
 /**
  * @author AMiklo on 2016.10.25.

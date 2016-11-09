@@ -13,15 +13,15 @@ class AuthenticationServiceTest extends Specification {
   private AuthenticationService authenticationService = new AuthenticationServiceImpl();
 
   def "Password encoding and checking are synchronized"() {
-    when: "there is a password to use"
+    given: "a password to use"
     String correctPassword = 'verysecretpassword'
-    and: "there is a misspelled one"
+    and: "there is a misspelled one."
     String wrongPassword = 'verzsecretpassword'
-    and: "we encode the correct password to store"
+    when: "we encode the correct password to store"
     String encodedPassword = authenticationService.encodePassword(correctPassword)
-    then: "checking the correct one succeed"
+    then: "checking the correct one succeeds"
     authenticationService.checkPassword(correctPassword, encodedPassword)
-    and: "checking the wrong one fail"
+    and: "checking the wrong one fails."
     !authenticationService.checkPassword(wrongPassword, encodedPassword)
   }
 }

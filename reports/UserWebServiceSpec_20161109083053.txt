@@ -1,9 +1,9 @@
-User creation succeed:
- When we take a new user
- and we save it
- then we can get the user by id
- and the user has a TEMPORARY status
- and it has a valid registration
+User creation succeeds:
+ Setup a new user.
+ When we save the user
+ then we can get it by id
+ and it has a TEMPORARY status
+ and a valid registration
  and given data are stored.
 SUCCESS
 
@@ -14,18 +14,20 @@ User list contains created user:
 SUCCESS
 
 Login works[0] - Login with correct data:
- When we have a user
- and we send login data
+ Setup a user
+ and her login data.
+ When we try login
  then the success comes with our expectations
  where we take different login combinations.
    [loginPassword: myprecious]
-   [loginUsername: a1a5d6c7-e054-4a7b-9fa7-764bac4232f6]
+   [loginUsername: 027cc1b0-db90-4c44-ac8c-7f204e9dc008]
    [loginSuccessed: true]
 SUCCESS
 
 Login works[1] - Login with wrong username:
- When we have a user
- and we send login data
+ Setup a user
+ and her login data.
+ When we try login
  then the success comes with our expectations
  where we take different login combinations.
    [loginPassword: myprecious]
@@ -34,18 +36,20 @@ Login works[1] - Login with wrong username:
 SUCCESS
 
 Login works[2] - Login with wrong password:
- When we have a user
- and we send login data
+ Setup a user
+ and her login data.
+ When we try login
  then the success comes with our expectations
  where we take different login combinations.
    [loginPassword: sting]
-   [loginUsername: a1a5d6c7-e054-4a7b-9fa7-764bac4232f6]
+   [loginUsername: 027cc1b0-db90-4c44-ac8c-7f204e9dc008]
    [loginSuccessed: false]
 SUCCESS
 
 Login works[3] - Login with wrong username and password:
- When we have a user
- and we send login data
+ Setup a user
+ and her login data.
+ When we try login
  then the success comes with our expectations
  where we take different login combinations.
    [loginPassword: sting]
@@ -53,16 +57,17 @@ Login works[3] - Login with wrong username and password:
    [loginSuccessed: false]
 SUCCESS
 
-User modification succeed:
- When we have a user
- and we make some changes on her user data
- and we save modifications
+User modification succeeds:
+ Setup a user
+ and some changes on her user data.
+ When we save modifications
  then the changes are executed.
 SUCCESS
 
 Change password works and use credentials properly[0] - Change password with wrong old password:
- When we have a user
- and we request a password change
+ Setup a user
+ and a request of password change.
+ When we send request
  then password is changed only with correct credentials
  where we take different password combinations.
    [loginPassword: sting]
@@ -70,17 +75,18 @@ Change password works and use credentials properly[0] - Change password with wro
 SUCCESS
 
 Change password works and use credentials properly[1] - Change password with correct data:
- When we have a user
- and we request a password change
+ Setup a user
+ and a request of password change.
+ When we send request
  then password is changed only with correct credentials
  where we take different password combinations.
    [loginPassword: myprecious]
    [changeSuccessed: true]
 SUCCESS
 
-User deletion succeed:
- When we have a user
- and we delete this user
+User deletion succeeds:
+ Setup a user.
+ When we delete this user
  then the deletion is performed.
 SUCCESS
 

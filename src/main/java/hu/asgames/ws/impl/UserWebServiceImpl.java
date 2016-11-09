@@ -2,17 +2,21 @@ package hu.asgames.ws.impl;
 
 import hu.asgames.service.api.UserService;
 import hu.asgames.ws.api.UserWebService;
-import hu.asgames.ws.api.vo.user.ChangePasswordRequest;
-import hu.asgames.ws.api.vo.user.CreateUserRequest;
-import hu.asgames.ws.api.vo.user.LoginRequest;
-import hu.asgames.ws.api.vo.user.ModifyUserRequest;
-import hu.asgames.ws.api.vo.user.UserVo;
+import hu.asgames.ws.api.domain.BaseRequest;
+import hu.asgames.ws.api.domain.GenericResponse;
+import hu.asgames.ws.api.domain.ResponseStatus;
+import hu.asgames.ws.api.domain.user.ChangePasswordRequest;
+import hu.asgames.ws.api.domain.user.CreateUserRequest;
+import hu.asgames.ws.api.domain.user.LoginRequest;
+import hu.asgames.ws.api.domain.user.ModifyUserRequest;
+import hu.asgames.ws.api.domain.user.UserVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -25,8 +29,18 @@ public class UserWebServiceImpl implements UserWebService {
     private UserService userService;
 
     @Override
-    public List<UserVo> getUserList() {
-        return userService.getUserList();
+    public GenericResponse<List<UserVo>> getUserList(@RequestBody final BaseRequest request) {
+        GenericResponse<List<UserVo>> response = new GenericResponse<>();
+        try {
+            List<UserVo> userList = userService.getUserList();
+            response.setResponseBody(userList);
+            response.setResponseStatus(ResponseStatus.OK);
+        } catch (Exception e) {
+            response.setErrorMessage(e.getMessage());
+            response.setResponseStatus(ResponseStatus.ERROR);
+        }
+        response.setResponseTime(LocalDateTime.now());
+        return response;
     }
 
     @Override
