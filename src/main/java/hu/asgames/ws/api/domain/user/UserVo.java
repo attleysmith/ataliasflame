@@ -1,6 +1,6 @@
-package hu.asgames.ws.api.vo.user;
+package hu.asgames.ws.api.domain.user;
 
-import hu.asgames.ws.api.vo.IdentifiedVoBase;
+import hu.asgames.ws.api.domain.IdentifiedVoBase;
 
 /**
  * @author AMiklo on 2016.10.15.

@@ -1,10 +1,12 @@
 package hu.asgames.ws.api;
 
-import hu.asgames.ws.api.vo.user.ChangePasswordRequest;
-import hu.asgames.ws.api.vo.user.CreateUserRequest;
-import hu.asgames.ws.api.vo.user.LoginRequest;
-import hu.asgames.ws.api.vo.user.ModifyUserRequest;
-import hu.asgames.ws.api.vo.user.UserVo;
+import hu.asgames.ws.api.domain.BaseRequest;
+import hu.asgames.ws.api.domain.GenericResponse;
+import hu.asgames.ws.api.domain.user.ChangePasswordRequest;
+import hu.asgames.ws.api.domain.user.CreateUserRequest;
+import hu.asgames.ws.api.domain.user.LoginRequest;
+import hu.asgames.ws.api.domain.user.ModifyUserRequest;
+import hu.asgames.ws.api.domain.user.UserVo;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +21,8 @@ import java.util.List;
 @RequestMapping(path = "/user")
 public interface UserWebService {
 
-    @RequestMapping(path = "/get", method = RequestMethod.GET)
-    List<UserVo> getUserList();
+    @RequestMapping(path = "/list", method = RequestMethod.POST)
+    GenericResponse<List<UserVo>> getUserList(@RequestBody BaseRequest request);
 
     @RequestMapping(path = "/create", method = RequestMethod.POST)
     Long createUser(@RequestBody CreateUserRequest request);

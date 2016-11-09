@@ -108,6 +108,20 @@ spring:
 #        enabled: true # Enable remote restart.
 #      secret: # A shared secret required to establish a connection (required to enable remote support).
 #      secret-header-name: X-AUTH-TOKEN # HTTP header used to transfer the shared secret.
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss.SSS # Date format string or a fully-qualified date format class name. For instance `yyyy-MM-dd HH:mm:ss`.
+#    default-property-inclusion: # Controls the inclusion of properties during serialization.
+#    deserialization.*: # Jackson on/off features that affect the way Java objects are deserialized.
+#    generator.*: # Jackson on/off features for generators.
+#    joda-date-time-format: # Joda date time format string. If not configured, "date-format" will be used as a fallback if it is configured with a format string.
+#    locale: # Locale used for formatting.
+#    mapper.*: # Jackson general purpose on/off features.
+#    parser.*: # Jackson on/off features for parsers.
+#    property-naming-strategy: # One of the constants on Jackson's PropertyNamingStrategy. Can also be a fully-qualified class name of a PropertyNamingStrategy subclass.
+#    serialization.*: # Jackson on/off features that affect the way Java objects are serialized.
+#    serialization-inclusion: # Controls the inclusion of properties during serialization. Configured with one of the values in Jackson's JsonInclude.Include enumeration.
+#    time-zone: # Time zone used when formatting dates. For instance `America/Los_Angeles`
+
 
 
 # EMBEDDED SERVER CONFIGURATION (ServerProperties)

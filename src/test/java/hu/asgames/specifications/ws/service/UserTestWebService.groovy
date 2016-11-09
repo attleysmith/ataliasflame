@@ -2,7 +2,11 @@ package hu.asgames.specifications.ws.service
 
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.RESTClient
-import hu.asgames.ws.api.vo.user.*
+import hu.asgames.ws.api.domain.BaseRequest
+import hu.asgames.ws.api.domain.ResponseStatus
+import hu.asgames.ws.api.domain.user.*
+
+import java.time.LocalDateTime
 
 /**
  * @author AMiklo on 2016.10.20.
@@ -12,15 +16,21 @@ class UserTestWebService {
   private static final String ROOT_PATH = "/user"
 
   private final RESTClient restClient;
+  private final String clientCode;
 
-  UserTestWebService(RESTClient restClient) {
+  UserTestWebService(RESTClient restClient, String clientCode) {
     this.restClient = restClient
+    this.clientCode = clientCode
   }
 
   List<UserVo> getUserList() {
-    HttpResponseDecorator response = restClient.get(path: ROOT_PATH + "/get")
+    BaseRequest request = new BaseRequest()
+    request.setRequestTime(LocalDateTime.now())
+    request.setClientCode(clientCode)
+    HttpResponseDecorator response = restClient.post(path: ROOT_PATH + "/list", body: request)
     assert response.status == 200
-    return response.data
+    assert response.data.responseStatus == ResponseStatus.OK.name()
+    return response.data.responseBody
   }
 
   Long createUser(CreateUserRequest request) {
