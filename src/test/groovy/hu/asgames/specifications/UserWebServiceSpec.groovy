@@ -106,7 +106,7 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
   }
 
   @Unroll
-  def "Change password works and use credentials properly"() {
+  def "Change password works and uses credentials properly"() {
     given: "a user"
     UserVo user = userService.getUser(USER_ID)
     and: "a request of password change."

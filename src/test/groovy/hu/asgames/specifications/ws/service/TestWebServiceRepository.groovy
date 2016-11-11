@@ -30,7 +30,7 @@ class TestWebServiceRepository extends Specification {
   private RESTClient restClient = new RESTClient(ROOT_ENDPOINT)
 
   @Shared
-  UserTestWebService userService = new UserTestWebService(restClient, CLIENT_CODE)
+  private UserTestWebService userService = new UserTestWebService(restClient, CLIENT_CODE)
 
   void setupSpec() {
     restClient.auth.basic(USER, PASSWORD)

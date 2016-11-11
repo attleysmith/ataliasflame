@@ -20,7 +20,7 @@ Login works[0] - Login with correct data:
  then the success comes with our expectations
  where we take different login combinations.
    [loginPassword: myprecious]
-   [loginUsername: 027cc1b0-db90-4c44-ac8c-7f204e9dc008]
+   [loginUsername: 38ff89df-1df8-43c5-94ef-fe7a1bc75f27]
    [loginSuccessed: true]
 SUCCESS
 
@@ -42,7 +42,7 @@ Login works[2] - Login with wrong password:
  then the success comes with our expectations
  where we take different login combinations.
    [loginPassword: sting]
-   [loginUsername: 027cc1b0-db90-4c44-ac8c-7f204e9dc008]
+   [loginUsername: 38ff89df-1df8-43c5-94ef-fe7a1bc75f27]
    [loginSuccessed: false]
 SUCCESS
 
@@ -64,7 +64,7 @@ User modification succeeds:
  then the changes are executed.
 SUCCESS
 
-Change password works and use credentials properly[0] - Change password with wrong old password:
+Change password works and uses credentials properly[0] - Change password with wrong old password:
  Setup a user
  and a request of password change.
  When we send request
@@ -74,7 +74,7 @@ Change password works and use credentials properly[0] - Change password with wro
    [changeSuccessed: false]
 SUCCESS
 
-Change password works and use credentials properly[1] - Change password with correct data:
+Change password works and uses credentials properly[1] - Change password with correct data:
  Setup a user
  and a request of password change.
  When we send request
