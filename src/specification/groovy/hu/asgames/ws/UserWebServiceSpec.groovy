@@ -1,8 +1,7 @@
-package hu.asgames.specifications
+package hu.asgames.ws
 
 import hu.asgames.domain.enums.UserState
 import hu.asgames.report.Report
-import hu.asgames.specifications.ws.WebServiceSpecFixtures
 import hu.asgames.ws.api.domain.user.*
 import spock.lang.Shared
 import spock.lang.Stepwise
@@ -27,7 +26,7 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
   private static final String MODIFIED_EMAIL = 'janedoe@asgames.hu'
 
   @Shared
-  private Long USER_ID = null; //Store value between test cases for use of the same user.
+  private Long USER_ID = null //Store value between test cases for use of the same user.
 
   def "User creation succeeds"() {
     given: "a new user."
@@ -45,8 +44,8 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     and: "it has a TEMPORARY status"
     savedUser.userState == UserState.TEMPORARY.name()
     and: "a valid registration"
-    savedUser.registrationCode == 'DUMMY'
     savedUser.registrationState == 'NEW'
+    !savedUser.registrationCode.isEmpty()
     and: "given data are stored."
     savedUser.displayName == ORIGINAL_DISPLAY_NAME
     savedUser.username == ORIGINAL_USERNAME
@@ -76,14 +75,14 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     when: "we try login"
     Long userId = userService.login(loginData)
     then: "the success comes with our expectations"
-    (userId == user.id) == loginSuccessed
+    (userId == user.id) == loginSucceed
 
     where: "we take different login combinations."
-    loginPassword     | loginUsername     | loginSuccessed | testCase
-    ORIGINAL_PASSWORD | ORIGINAL_USERNAME | true           | "Login with correct data"
-    ORIGINAL_PASSWORD | WRONG_USERNAME    | false          | "Login with wrong username"
-    WRONG_PASSWORD    | ORIGINAL_USERNAME | false          | "Login with wrong password"
-    WRONG_PASSWORD    | WRONG_USERNAME    | false          | "Login with wrong username and password"
+    loginPassword     | loginUsername     | loginSucceed | testCase
+    ORIGINAL_PASSWORD | ORIGINAL_USERNAME | true         | "Login with correct data"
+    ORIGINAL_PASSWORD | WRONG_USERNAME    | false        | "Login with wrong username"
+    WRONG_PASSWORD    | ORIGINAL_USERNAME | false        | "Login with wrong password"
+    WRONG_PASSWORD    | WRONG_USERNAME    | false        | "Login with wrong username and password"
   }
 
   def "User modification succeeds"() {
@@ -124,12 +123,12 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
       return it
     }
     Long userId = userService.login(loginData)
-    (userId != null) == changeSuccessed
+    (userId != null) == changeSucceed
     where: "we take different password combinations."
-    // Test case order is important! After a successed change the checking login always will succeed.
-    loginPassword     | changeSuccessed | testCase
-    WRONG_PASSWORD    | false           | "Change password with wrong old password"
-    ORIGINAL_PASSWORD | true            | "Change password with correct data"
+    // Test case order is important! After a successful change the checking login always will succeed.
+    loginPassword     | changeSucceed | testCase
+    WRONG_PASSWORD    | false         | "Change password with wrong old password"
+    ORIGINAL_PASSWORD | true          | "Change password with correct data"
   }
 
   def "User deletion succeeds"() {

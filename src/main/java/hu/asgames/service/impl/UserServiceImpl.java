@@ -6,6 +6,7 @@ import hu.asgames.domain.entities.User;
 import hu.asgames.domain.enums.RegistrationState;
 import hu.asgames.domain.enums.UserState;
 import hu.asgames.service.api.AuthenticationService;
+import hu.asgames.service.api.CodeGeneratorService;
 import hu.asgames.service.api.UserService;
 import hu.asgames.ws.api.domain.user.ChangePasswordRequest;
 import hu.asgames.ws.api.domain.user.CreateUserRequest;
@@ -31,7 +32,10 @@ public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
-    AuthenticationService authenticationService;
+    private AuthenticationService authenticationService;
+
+    @Autowired
+    private CodeGeneratorService codeGeneratorService;
 
     @Autowired
     private UserDao userDao;
@@ -54,7 +58,7 @@ public class UserServiceImpl implements UserService {
         registration.setUser(user);
         registration.setState(RegistrationState.NEW);
         registration.setRegistrationDate(LocalDateTime.now());
-        registration.setRegistrationCode(generateRegistrationCode());
+        registration.setRegistrationCode(codeGeneratorService.generateRegistrationCode());
         user.setRegistration(registration);
 
         // TODO: roles and permissions
@@ -135,11 +139,5 @@ public class UserServiceImpl implements UserService {
             return userVo;
         }
         return null;
-    }
-
-    // TODO: maybe this can go into a helper service
-    private String generateRegistrationCode() {
-        // TODO: implementation
-        return "DUMMY";
     }
 }

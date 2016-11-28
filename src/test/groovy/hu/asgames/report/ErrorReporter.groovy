@@ -9,21 +9,21 @@ import org.spockframework.runtime.ConditionNotSatisfiedError
  */
 class ErrorReporter {
 
-  private final PrintWriter writer;
+  private final PrintWriter writer
 
   ErrorReporter(PrintWriter writer) {
     this.writer = writer
   }
 
-  public void reportError(ConnectException error) {
+  void reportError(ConnectException error) {
     writer.println(' - ' + error.message)
   }
 
-  public void reportError(HttpResponseException error) {
+  void reportError(HttpResponseException error) {
     writer.println(' - ' + error.message + ' (statusCode: ' + error.statusCode + ')')
   }
 
-  public void reportError(ConditionNotSatisfiedError error) {
+  void reportError(ConditionNotSatisfiedError error) {
     Condition condition = error.condition
     writer.println(' - Condition: ' + condition.text)
     writer.println(' - Result: ' + condition.expression.value)

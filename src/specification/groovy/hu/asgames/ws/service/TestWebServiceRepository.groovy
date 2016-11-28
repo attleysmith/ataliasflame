@@ -1,8 +1,8 @@
-package hu.asgames.specifications.ws.service
+package hu.asgames.ws.service
 
 import groovyx.net.http.EncoderRegistry
 import groovyx.net.http.RESTClient
-import hu.asgames.specifications.ws.service.json.LocalDateJsonValueProcessor
+import hu.asgames.ws.service.json.LocalDateJsonValueProcessor
 import net.sf.json.JSON
 import net.sf.json.JSONArray
 import net.sf.json.JSONObject
@@ -40,30 +40,30 @@ class TestWebServiceRepository extends Specification {
     jsonConfig.registerJsonValueProcessor(LocalDate.class, new LocalDateJsonValueProcessor())
     jsonConfig.registerJsonValueProcessor(LocalDateTime.class, new LocalDateJsonValueProcessor())
 
-    EncoderRegistry encoderRegistry = restClient.getEncoder();
+    EncoderRegistry encoderRegistry = restClient.getEncoder()
     encoderRegistry[groovyx.net.http.ContentType.JSON] = { Object model, Object contentType ->
-      Object json;
+      Object json
       if (model instanceof Map) {
-        json = new JSONObject();
-        ((JSONObject) json).putAll((Map) model);
+        json = new JSONObject()
+        ((JSONObject) json).putAll((Map) model)
       } else if (model instanceof Collection) {
-        json = new JSONArray();
-        ((JSONArray) json).addAll((Collection) model);
+        json = new JSONArray()
+        ((JSONArray) json).addAll((Collection) model)
       } else if (model instanceof Closure) {
-        Closure closure = (Closure) model;
-        closure.setDelegate(new JsonGroovyBuilder());
-        json = (JSON) closure.call();
+        Closure closure = (Closure) model
+        closure.setDelegate(new JsonGroovyBuilder())
+        json = (JSON) closure.call()
       } else if (model instanceof String || model instanceof GString) {
         json = model
       } // assume string is valid JSON already.
       else {
         json = JSONObject.fromObject(model, jsonConfig)
-      }; // Assume object is a JavaBean
+      } // Assume object is a JavaBean
 
       if (contentType == null) {
         contentType = ContentType.JSON
-      };
-      return encoderRegistry.createEntity(contentType, json.toString());
+      }
+      return encoderRegistry.createEntity(contentType, json.toString())
     }
   }
 

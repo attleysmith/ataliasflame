@@ -10,7 +10,7 @@ import spock.lang.Specification
 @Report
 class AuthenticationServiceTest extends Specification {
 
-  private AuthenticationService authenticationService = new AuthenticationServiceImpl();
+  private final AuthenticationService authenticationService = new AuthenticationServiceImpl()
 
   def "Password encoding and checking are synchronized"() {
     given: "a password to use"

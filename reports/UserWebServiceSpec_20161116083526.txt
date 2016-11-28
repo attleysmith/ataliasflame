@@ -20,8 +20,8 @@ Login works[0] - Login with correct data:
  then the success comes with our expectations
  where we take different login combinations.
    [loginPassword: myprecious]
-   [loginUsername: 38ff89df-1df8-43c5-94ef-fe7a1bc75f27]
-   [loginSuccessed: true]
+   [loginUsername: 72551885-5211-4615-9bea-959430ed789c]
+   [loginSucceed: true]
 SUCCESS
 
 Login works[1] - Login with wrong username:
@@ -32,7 +32,7 @@ Login works[1] - Login with wrong username:
  where we take different login combinations.
    [loginPassword: myprecious]
    [loginUsername: Gollum]
-   [loginSuccessed: false]
+   [loginSucceed: false]
 SUCCESS
 
 Login works[2] - Login with wrong password:
@@ -42,8 +42,8 @@ Login works[2] - Login with wrong password:
  then the success comes with our expectations
  where we take different login combinations.
    [loginPassword: sting]
-   [loginUsername: 38ff89df-1df8-43c5-94ef-fe7a1bc75f27]
-   [loginSuccessed: false]
+   [loginUsername: 72551885-5211-4615-9bea-959430ed789c]
+   [loginSucceed: false]
 SUCCESS
 
 Login works[3] - Login with wrong username and password:
@@ -54,7 +54,7 @@ Login works[3] - Login with wrong username and password:
  where we take different login combinations.
    [loginPassword: sting]
    [loginUsername: Gollum]
-   [loginSuccessed: false]
+   [loginSucceed: false]
 SUCCESS
 
 User modification succeeds:
@@ -71,7 +71,7 @@ Change password works and uses credentials properly[0] - Change password with wr
  then password is changed only with correct credentials
  where we take different password combinations.
    [loginPassword: sting]
-   [changeSuccessed: false]
+   [changeSucceed: false]
 SUCCESS
 
 Change password works and uses credentials properly[1] - Change password with correct data:
@@ -81,7 +81,7 @@ Change password works and uses credentials properly[1] - Change password with co
  then password is changed only with correct credentials
  where we take different password combinations.
    [loginPassword: myprecious]
-   [changeSuccessed: true]
+   [changeSucceed: true]
 SUCCESS
 
 User deletion succeeds:

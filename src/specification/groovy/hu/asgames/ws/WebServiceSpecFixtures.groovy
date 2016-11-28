@@ -1,6 +1,6 @@
-package hu.asgames.specifications.ws
+package hu.asgames.ws
 
-import hu.asgames.specifications.ws.service.TestWebServiceRepository
+import hu.asgames.ws.service.TestWebServiceRepository
 
 /**
  * @author AMiklo on 2016.10.20.

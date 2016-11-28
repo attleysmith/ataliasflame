@@ -9,10 +9,10 @@ class FieldValueUtil {
 
   private static final String DEFAULT_SEQ = 'base_id_generator_seq'
   private static final String NULL = 'NULL'
-  private static final BCryptPasswordEncoder ENCODER = new BCryptPasswordEncoder();
+  private static final BCryptPasswordEncoder ENCODER = new BCryptPasswordEncoder()
 
   static String nextSeq() {
-    nextSeq(DEFAULT_SEQ);
+    nextSeq(DEFAULT_SEQ)
   }
 
   static String nextSeq(String sequenceName) {
@@ -20,7 +20,7 @@ class FieldValueUtil {
   }
 
   static String currSeq() {
-    currSeq(DEFAULT_SEQ);
+    currSeq(DEFAULT_SEQ)
   }
 
   static String currSeq(String sequenceName) {

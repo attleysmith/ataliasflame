@@ -1,4 +1,4 @@
-package hu.asgames.specifications.ws.service
+package hu.asgames.ws.service
 
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.RESTClient
@@ -16,8 +16,8 @@ class UserTestWebService {
 
   private static final String ROOT_PATH = "/user"
 
-  private final RESTClient restClient;
-  private final String clientCode;
+  private final RESTClient restClient
+  private final String clientCode
 
   UserTestWebService(RESTClient restClient, String clientCode) {
     this.restClient = restClient

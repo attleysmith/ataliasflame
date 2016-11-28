@@ -145,6 +145,22 @@
                             <goal>addTestSources</goal>
                             <goal>testCompile</goal>
                         </goals>
+                        <configuration>
+                            <testSources>
+                                <fileset>
+                                    <directory>${basedir}/src/test/groovy</directory>
+                                    <includes>
+                                        <include>**/*.groovy</include>
+                                    </includes>
+                                </fileset>
+                                <fileset>
+                                    <directory>${basedir}/src/specification/groovy</directory>
+                                    <includes>
+                                        <include>**/*.groovy</include>
+                                    </includes>
+                                </fileset>
+                            </testSources>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

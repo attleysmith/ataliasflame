@@ -10,6 +10,8 @@ import java.io.Serializable;
  */
 public class RaceAttributeMapKey implements Serializable {
 
+    private static final long serialVersionUID = -1985691385295208833L;
+
     private Race race;
 
     private Attribute attribute;
