@@ -1,4 +1,4 @@
-package hu.asgames.specifications.ws.service.json
+package hu.asgames.ws.service.json
 
 import net.sf.json.JsonConfig
 import net.sf.json.processors.JsonValueProcessor

@@ -12,21 +12,21 @@ class FeatureReporter {
   private static final String TEST_CASE_DESCRIPTION = "testCase"
   private static final List<BlockKind> CAPITALIZED_BLOCKS = [BlockKind.SETUP, BlockKind.WHEN, BlockKind.EXPECT]
 
-  private final PrintWriter writer;
+  private final PrintWriter writer
 
   FeatureReporter(PrintWriter writer) {
     this.writer = writer
   }
 
-  public void reportFeature(FeatureInfo feature) {
+  void reportFeature(FeatureInfo feature) {
     reportFeature(feature, null, null)
   }
 
-  public void reportIteration(IterationInfo iteration) {
+  void reportIteration(IterationInfo iteration) {
     reportFeature(iteration.feature, iteration.name, iteration.dataValues)
   }
 
-  public void reportFeature(FeatureInfo feature, String testName, Object... params) {
+  void reportFeature(FeatureInfo feature, String testName, Object... params) {
     String testCase = testName ?: feature.name
     int testCaseParamCount = feature.dataVariables.indexOf(TEST_CASE_DESCRIPTION)
     if (params && testCaseParamCount > -1) {

@@ -22,8 +22,8 @@ class ReportExtension extends AbstractAnnotationDrivenExtension<Report> {
   void visitSpecAnnotation(Report annotation, SpecInfo spec) {
     spec.addListener(new AbstractRunListener() {
 
-      PrintWriter writer;
-      boolean success = true;
+      PrintWriter writer
+      boolean success = true
 
 //      @Override
 //      void beforeFeature(FeatureInfo feature) {
@@ -107,7 +107,7 @@ class ReportExtension extends AbstractAnnotationDrivenExtension<Report> {
 
       private PrintWriter printWriter(String fileName) {
         String timestamp = LocalDateTime.now().format(DT_FORMATTER)
-        return new PrintWriter("${REPORT_PATH + fileName + '_' + timestamp}.txt", "UTF-8");
+        return new PrintWriter("${REPORT_PATH + fileName + '_' + timestamp}.txt", "UTF-8")
       }
 
       private void reportSkippedFeature(PrintWriter skipWriter, FeatureInfo feature) {
