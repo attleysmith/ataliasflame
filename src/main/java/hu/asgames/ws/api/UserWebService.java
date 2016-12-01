@@ -43,4 +43,7 @@ public interface UserWebService {
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     GenericResponse<Long> login(@RequestBody GenericRequest<LoginRequest> request);
+
+    @RequestMapping(path = "/registration/{registrationCode}", method = RequestMethod.POST)
+    GenericResponse<UserVo> registration(@PathVariable String registrationCode, @RequestBody BaseRequest request);
 }

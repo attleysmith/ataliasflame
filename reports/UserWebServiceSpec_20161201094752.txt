@@ -1,0 +1,98 @@
+User creation succeeds:
+ Setup a new user.
+ When we save the user
+ then we can get it by id
+ and it has a TEMPORARY status
+ and a valid registration
+ and given data are stored.
+SUCCESS
+
+User list contains created user:
+ When we get the list of users
+ then there is at least one user
+ and the user we created before is in the list.
+SUCCESS
+
+User registration can be confirmed:
+ Setup a user
+ and this user has a non-confirmed registration.
+ When we send a confirmation with the registration code
+ then we get refreshed user data belonging to the registration
+ and the registration is finalized
+ and the user gets to NORMAL status.
+SUCCESS
+
+Confirmed registration cannot be confirmed again:
+ Setup a user
+ and this user has an already confirmed registration.
+ When we send a confirmation with the registration code
+ then we get an error.
+SUCCESS
+
+Login works with proper credentials:
+ Setup a user
+ and her correct login data.
+ When we try login
+ then we get the user's identifier.
+SUCCESS
+
+Login fails with incorrect credentials[0] - Login with wrong username:
+ Setup a user
+ and a set of incorrect login data.
+ When we try login
+ then we get an error.
+ where we take different login combinations.
+   [loginPassword: myprecious]
+   [loginUsername: Gollum]
+   [loginSucceed: false]
+SUCCESS
+
+Login fails with incorrect credentials[1] - Login with wrong password:
+ Setup a user
+ and a set of incorrect login data.
+ When we try login
+ then we get an error.
+ where we take different login combinations.
+   [loginPassword: sting]
+   [loginUsername: c414059a-d86c-496e-a51a-72f027be0aab]
+   [loginSucceed: false]
+SUCCESS
+
+Login fails with incorrect credentials[2] - Login with wrong username and password:
+ Setup a user
+ and a set of incorrect login data.
+ When we try login
+ then we get an error.
+ where we take different login combinations.
+   [loginPassword: sting]
+   [loginUsername: Gollum]
+   [loginSucceed: false]
+SUCCESS
+
+User modification succeeds:
+ Setup a user
+ and some changes on her user data.
+ When we save modifications
+ then the changes are executed.
+SUCCESS
+
+Change password works with proper credentials:
+ Setup a user
+ and a request of password change given the correct old password.
+ When we send request
+ then password is changed.
+SUCCESS
+
+Change password fails with incorrect credentials:
+ Setup a user
+ and a request of password change given an incorrect old password.
+ When we send request
+ then we get an error.
+SUCCESS
+
+User deletion succeeds:
+ Setup a user.
+ When we delete this user
+ then the deletion is performed.
+SUCCESS
+

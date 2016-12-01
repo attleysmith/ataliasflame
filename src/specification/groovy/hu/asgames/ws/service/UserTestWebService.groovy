@@ -25,73 +25,53 @@ class UserTestWebService {
   }
 
   List<UserVo> getUserList() {
-    BaseRequest request = new BaseRequest()
-    request.setRequestTime(LocalDateTime.now())
-    request.setClientCode(clientCode)
-    HttpResponseDecorator response = restClient.post(path: ROOT_PATH + "/list", body: request)
-    assert response.status == 200
-    assert response.data.responseStatus == ResponseStatus.OK.name()
-    return response.data.responseBody
+    post("/list", new BaseRequest())
   }
 
   Long createUser(CreateUserRequest requestBody) {
-    GenericRequest<CreateUserRequest> request = new GenericRequest<>()
-    request.setRequestTime(LocalDateTime.now())
-    request.setClientCode(clientCode)
-    request.setRequestBody(requestBody)
-    HttpResponseDecorator response = restClient.post(path: ROOT_PATH + "/create", body: request)
-    assert response.status == 200
-    assert response.data.responseStatus == ResponseStatus.OK.name()
-    return response.data.responseBody
+    post("/create", new GenericRequest<CreateUserRequest>(), requestBody)
   }
 
   UserVo getUser(Long id) {
-    BaseRequest request = new BaseRequest()
-    request.setRequestTime(LocalDateTime.now())
-    request.setClientCode(clientCode)
-    HttpResponseDecorator response = restClient.post(path: ROOT_PATH + "/get/" + id, body: request)
-    assert response.status == 200
-    assert response.data.responseStatus == ResponseStatus.OK.name()
-    return response.data.responseBody
+    post("/get/$id", new BaseRequest())
   }
 
   void modifyUser(Long id, ModifyUserRequest requestBody) {
-    GenericRequest<ModifyUserRequest> request = new GenericRequest<>()
-    request.setRequestTime(LocalDateTime.now())
-    request.setClientCode(clientCode)
-    request.setRequestBody(requestBody)
-    HttpResponseDecorator response = restClient.post(path: ROOT_PATH + "/modify/" + id, body: request)
-    assert response.status == 200
-    assert response.data.responseStatus == ResponseStatus.OK.name()
+    post("/modify/$id", new GenericRequest<ModifyUserRequest>(), requestBody)
   }
 
   void deleteUser(Long id) {
-    BaseRequest request = new BaseRequest()
-    request.setRequestTime(LocalDateTime.now())
-    request.setClientCode(clientCode)
-    HttpResponseDecorator response = restClient.post(path: ROOT_PATH + "/delete/" + id, body: request)
-    assert response.status == 200
-    assert response.data.responseStatus == ResponseStatus.OK.name()
+    post("/delete/$id", new BaseRequest())
   }
 
   void changePassword(Long id, ChangePasswordRequest requestBody) {
-    GenericRequest<ChangePasswordRequest> request = new GenericRequest<>()
-    request.setRequestTime(LocalDateTime.now())
-    request.setClientCode(clientCode)
-    request.setRequestBody(requestBody)
-    HttpResponseDecorator response = restClient.post(path: ROOT_PATH + "/password/" + id, body: request)
-    assert response.status == 200
-    assert response.data.responseStatus == ResponseStatus.OK.name()
+    post("/password/$id", new GenericRequest<ChangePasswordRequest>(), requestBody)
   }
 
   Long login(LoginRequest requestBody) {
-    GenericRequest<LoginRequest> request = new GenericRequest<>()
-    request.setRequestTime(LocalDateTime.now())
-    request.setClientCode(clientCode)
-    request.setRequestBody(requestBody)
-    HttpResponseDecorator response = restClient.post(path: ROOT_PATH + "/login", body: request)
+    post("/login", new GenericRequest<LoginRequest>(), requestBody)
+  }
+
+  UserVo registration(String registrationCode) {
+    post("/registration/$registrationCode", new BaseRequest())
+  }
+
+  private <Q extends BaseRequest, B, R> R post(String path, Q request, B requestBody = null) {
+    HttpResponseDecorator response = restClient.post(path: ROOT_PATH + path,
+                                                     body: createRequest(request, requestBody))
     assert response.status == 200
     assert response.data.responseStatus == ResponseStatus.OK.name()
     return response.data.responseBody
+  }
+
+  private <R extends BaseRequest, B> R createRequest(R request, B requestBody = null) {
+    request.setRequestTime(LocalDateTime.now())
+    request.setClientCode(clientCode)
+
+    if (request instanceof GenericRequest) {
+      request.setRequestBody(requestBody)
+    }
+
+    return request
   }
 }
