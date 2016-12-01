@@ -1,5 +1,6 @@
 package hu.asgames.service.impl;
 
+import hu.asgames.dao.RegistrationDao;
 import hu.asgames.dao.UserDao;
 import hu.asgames.domain.entities.Registration;
 import hu.asgames.domain.entities.User;
@@ -39,6 +40,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private RegistrationDao registrationDao;
 
     @Override
     public List<UserVo> getUserList() {
@@ -105,8 +109,8 @@ public class UserServiceImpl implements UserService {
 
             LOGGER.info("User password changed - {}", user.getUsername());
         } else {
-            LOGGER.info("User password change is denied - {}", user.getUsername());
-            // TODO: error message
+            // TODO: own exception types for application
+            throw new IllegalArgumentException("User authentication failed! User: " + id);
         }
     }
 
@@ -115,6 +119,31 @@ public class UserServiceImpl implements UserService {
         User user = userDao.findByUsername(request.getUsername());
         if (user != null && authenticationService.checkPassword(request.getPassword(), user.getPassword())) {
             return user.getId();
+        } else {
+            // TODO: own exception types for application
+            throw new IllegalArgumentException("User authentication failed! Username: " + request.getUsername());
+        }
+    }
+
+    @Override
+    public UserVo registration(final String registrationCode) {
+        Registration registration = registrationDao.findByRegistrationCode(registrationCode);
+        if (registration != null) {
+            if (registration.getState() != RegistrationState.NEW) {
+                // TODO: own exception types for application
+                throw new IllegalArgumentException(
+                        "Only a " + RegistrationState.NEW.name() + "registration can be confirmed! Registration state: " + registration.getState().name());
+            }
+            registration.setConfirmationDate(LocalDateTime.now());
+            registration.setState(RegistrationState.CONFIRMED);
+
+            User user = registration.getUser();
+            user.setState(UserState.NORMAL);
+            userDao.save(user);
+
+            LOGGER.info("Registration confirmed - {}", registrationCode);
+
+            return entityToVo(user);
         }
         return null;
     }

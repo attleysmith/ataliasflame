@@ -11,4 +11,8 @@ class WebServiceSpecFixtures extends TestWebServiceRepository {
     UUID.randomUUID()
   }
 
+  static boolean hasErrorResponse(AssertionError error) {
+    error.message.contains("responseStatus:ERROR")
+  }
+
 }

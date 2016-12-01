@@ -67,6 +67,11 @@ public class UserWebServiceImpl implements UserWebService {
         return doResponse(new GenericResponse<Long>(), "login", request.getRequestBody());
     }
 
+    @Override
+    public GenericResponse<UserVo> registration(@PathVariable final String registrationCode, @RequestBody final BaseRequest request) {
+        return doResponse(new GenericResponse<UserVo>(), "registration", registrationCode);
+    }
+
     @SuppressWarnings("unchecked")
     private <R extends BaseResponse> R doResponse(R response, String methodName, Object... args) {
         try {

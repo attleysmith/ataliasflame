@@ -26,4 +26,6 @@ public interface UserService {
     void changePassword(Long id, ChangePasswordRequest request);
 
     Long login(LoginRequest request);
+
+    UserVo registration(String registrationCode);
 }

@@ -1,5 +1,6 @@
 package hu.asgames.ws
 
+import hu.asgames.domain.enums.RegistrationState
 import hu.asgames.domain.enums.UserState
 import hu.asgames.report.Report
 import hu.asgames.ws.api.domain.user.*
@@ -44,7 +45,7 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     and: "it has a TEMPORARY status"
     savedUser.userState == UserState.TEMPORARY.name()
     and: "a valid registration"
-    savedUser.registrationState == 'NEW'
+    savedUser.registrationState == RegistrationState.NEW.name()
     !savedUser.registrationCode.isEmpty()
     and: "given data are stored."
     savedUser.displayName == ORIGINAL_DISPLAY_NAME
@@ -62,11 +63,56 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     userList.find({ it.username == ORIGINAL_USERNAME }) != null
   }
 
-  @Unroll
-  def "Login works"() {
+  def "User registration can be confirmed"() {
     given: "a user"
     UserVo user = userService.getUser(USER_ID)
-    and: "her login data."
+    and: "this user has a non-confirmed registration."
+    assert user.registrationState == RegistrationState.NEW.name()
+    when: "we send a confirmation with the registration code"
+    UserVo confirmedUser = userService.registration(user.registrationCode)
+    then: "we get refreshed user data belonging to the registration"
+    confirmedUser.username == user.username
+    confirmedUser.displayName == user.displayName
+    confirmedUser.email == user.email
+    confirmedUser.registrationCode == user.registrationCode
+    and: "the registration is finalized"
+    confirmedUser.registrationState == RegistrationState.CONFIRMED.name()
+    and: "the user gets to NORMAL status."
+    confirmedUser.userState == UserState.NORMAL.name()
+  }
+
+  def "Confirmed registration cannot be confirmed again"() {
+    given: "a user"
+    UserVo user = userService.getUser(USER_ID)
+    and: "this user has an already confirmed registration."
+    assert user.registrationState == RegistrationState.CONFIRMED.name()
+    when: "we send a confirmation with the registration code"
+    UserVo confirmedUser = userService.registration(user.registrationCode)
+    then: "we get an error."
+    AssertionError error = thrown(AssertionError)
+    hasErrorResponse(error)
+  }
+
+  def "Login works with proper credentials"() {
+    given: "a user"
+    UserVo user = userService.getUser(USER_ID)
+    and: "her correct login data."
+    LoginRequest loginData = new LoginRequest().with {
+      username = ORIGINAL_USERNAME
+      password = ORIGINAL_PASSWORD
+      return it
+    }
+    when: "we try login"
+    Long userId = userService.login(loginData)
+    then: "we get the user's identifier."
+    userId == user.id
+  }
+
+  @Unroll
+  def "Login fails with incorrect credentials"() {
+    given: "a user"
+    UserVo user = userService.getUser(USER_ID)
+    and: "a set of incorrect login data."
     LoginRequest loginData = new LoginRequest().with {
       username = loginUsername
       password = loginPassword
@@ -74,12 +120,12 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     }
     when: "we try login"
     Long userId = userService.login(loginData)
-    then: "the success comes with our expectations"
-    (userId == user.id) == loginSucceed
+    then: "we get an error."
+    AssertionError error = thrown(AssertionError)
+    hasErrorResponse(error)
 
     where: "we take different login combinations."
     loginPassword     | loginUsername     | loginSucceed | testCase
-    ORIGINAL_PASSWORD | ORIGINAL_USERNAME | true         | "Login with correct data"
     ORIGINAL_PASSWORD | WRONG_USERNAME    | false        | "Login with wrong username"
     WRONG_PASSWORD    | ORIGINAL_USERNAME | false        | "Login with wrong password"
     WRONG_PASSWORD    | WRONG_USERNAME    | false        | "Login with wrong username and password"
@@ -104,31 +150,40 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     modifiedUser.email == MODIFIED_EMAIL
   }
 
-  @Unroll
-  def "Change password works and uses credentials properly"() {
+  def "Change password works with proper credentials"() {
     given: "a user"
     UserVo user = userService.getUser(USER_ID)
-    and: "a request of password change."
+    and: "a request of password change given the correct old password."
     ChangePasswordRequest request = new ChangePasswordRequest().with {
-      oldPassword = loginPassword
+      oldPassword = ORIGINAL_PASSWORD
       newPassword = MODIFIED_PASSWORD
       return it
     }
     when: "we send request"
     userService.changePassword(user.id, request)
-    then: "password is changed only with correct credentials"
+    then: "password is changed."
     LoginRequest loginData = new LoginRequest().with {
       username = MODIFIED_USERNAME // Note we use the modified username because of the user modification.
       password = MODIFIED_PASSWORD
       return it
     }
-    Long userId = userService.login(loginData)
-    (userId != null) == changeSucceed
-    where: "we take different password combinations."
-    // Test case order is important! After a successful change the checking login always will succeed.
-    loginPassword     | changeSucceed | testCase
-    WRONG_PASSWORD    | false         | "Change password with wrong old password"
-    ORIGINAL_PASSWORD | true          | "Change password with correct data"
+    userService.login(loginData) == user.id
+  }
+
+  def "Change password fails with incorrect credentials"() {
+    given: "a user"
+    UserVo user = userService.getUser(USER_ID)
+    and: "a request of password change given an incorrect old password."
+    ChangePasswordRequest request = new ChangePasswordRequest().with {
+      oldPassword = WRONG_PASSWORD
+      newPassword = MODIFIED_PASSWORD
+      return it
+    }
+    when: "we send request"
+    userService.changePassword(user.id, request)
+    then: "we get an error."
+    AssertionError error = thrown(AssertionError)
+    hasErrorResponse(error)
   }
 
   def "User deletion succeeds"() {
@@ -138,6 +193,6 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     userService.deleteUser(user.id)
     then: "the deletion is performed."
     UserVo deletedUser = userService.getUser(user.id)
-    deletedUser.userState == 'DELETED'
+    deletedUser.userState == UserState.DELETED.name()
   }
 }
