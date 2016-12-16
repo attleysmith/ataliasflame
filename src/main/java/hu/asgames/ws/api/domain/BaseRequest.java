@@ -11,6 +11,8 @@ public class BaseRequest {
 
     private String clientCode;
 
+    // Getters and setters
+
     public LocalDateTime getRequestTime() {
         return requestTime;
     }
