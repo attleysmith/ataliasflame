@@ -13,6 +13,8 @@ public class BaseResponse {
 
     private String errorMessage;
 
+    // Getters and setters
+
     public LocalDateTime getResponseTime() {
         return responseTime;
     }

@@ -7,6 +7,8 @@ public class IdentifiedVoBase {
 
     private Long id;
 
+    // Getters and setters
+
     public Long getId() {
         return id;
     }

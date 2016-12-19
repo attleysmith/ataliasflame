@@ -82,6 +82,7 @@ public class UserWebServiceImpl implements UserWebService {
             }
             response.setResponseStatus(ResponseStatus.OK);
         } catch (Exception e) {
+            // TODO: BaseException usage
             response.setErrorMessage(e.getMessage());
             response.setResponseStatus(ResponseStatus.ERROR);
         }

@@ -7,6 +7,8 @@ public class GenericRequest<T> extends BaseRequest {
 
     private T requestBody;
 
+    // Getters and setters
+
     public T getRequestBody() {
         return requestBody;
     }

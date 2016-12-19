@@ -7,6 +7,8 @@ public class GenericResponse<T> extends BaseResponse {
 
     private T responseBody;
 
+    // Getters and setters
+
     public T getResponseBody() {
         return responseBody;
     }

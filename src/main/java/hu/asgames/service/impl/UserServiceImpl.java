@@ -6,9 +6,13 @@ import hu.asgames.domain.entities.Registration;
 import hu.asgames.domain.entities.User;
 import hu.asgames.domain.enums.RegistrationState;
 import hu.asgames.domain.enums.UserState;
+import hu.asgames.domain.exception.BaseException;
+import hu.asgames.messages.MessageBuilder;
+import hu.asgames.messages.MessageUtil;
 import hu.asgames.service.api.AuthenticationService;
 import hu.asgames.service.api.CodeGeneratorService;
 import hu.asgames.service.api.UserService;
+import hu.asgames.ws.api.domain.Message;
 import hu.asgames.ws.api.domain.user.ChangePasswordRequest;
 import hu.asgames.ws.api.domain.user.CreateUserRequest;
 import hu.asgames.ws.api.domain.user.LoginRequest;
@@ -109,8 +113,10 @@ public class UserServiceImpl implements UserService {
 
             LOGGER.info("User password changed - {}", user.getUsername());
         } else {
-            // TODO: own exception types for application
-            throw new IllegalArgumentException("User authentication failed! User: " + id);
+            // TODO: string-object map as args with type conversion
+            Message message = new MessageBuilder(MessageUtil.USER_AUTH_FAILED_WITH_ID).arg("userId", id.toString()).build();
+            LOGGER.error(message.getFullMessage());
+            throw new BaseException(message);
         }
     }
 
@@ -120,8 +126,9 @@ public class UserServiceImpl implements UserService {
         if (user != null && authenticationService.checkPassword(request.getPassword(), user.getPassword())) {
             return user.getId();
         } else {
-            // TODO: own exception types for application
-            throw new IllegalArgumentException("User authentication failed! Username: " + request.getUsername());
+            Message message = new MessageBuilder(MessageUtil.USER_AUTH_FAILED_WITH_USERNAME).arg("username", request.getUsername()).build();
+            LOGGER.error(message.getFullMessage());
+            throw new BaseException(message);
         }
     }
 
@@ -130,9 +137,10 @@ public class UserServiceImpl implements UserService {
         Registration registration = registrationDao.findByRegistrationCode(registrationCode);
         if (registration != null) {
             if (registration.getState() != RegistrationState.NEW) {
-                // TODO: own exception types for application
-                throw new IllegalArgumentException(
-                        "Only a " + RegistrationState.NEW.name() + "registration can be confirmed! Registration state: " + registration.getState().name());
+                Message message = new MessageBuilder(MessageUtil.CONFIRM_REGISTRATION_WITH_WRONG_STATE)
+                        .arg("correctRegistrationState", RegistrationState.NEW.name()).arg("registrationState", registration.getState().name()).build();
+                LOGGER.error(message.getFullMessage());
+                throw new BaseException(message);
             }
             registration.setConfirmationDate(LocalDateTime.now());
             registration.setState(RegistrationState.CONFIRMED);
