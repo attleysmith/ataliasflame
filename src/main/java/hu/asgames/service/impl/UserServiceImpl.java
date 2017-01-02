@@ -1,6 +1,5 @@
 package hu.asgames.service.impl;
 
-import hu.asgames.dao.RegistrationDao;
 import hu.asgames.dao.UserDao;
 import hu.asgames.domain.entities.Registration;
 import hu.asgames.domain.entities.User;
@@ -45,9 +44,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private RegistrationDao registrationDao;
-
     @Override
     public List<UserVo> getUserList() {
         return entitiesToVos(userDao.findAll());
@@ -79,17 +75,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVo getUser(final Long id) {
-        UserVo user = entityToVo(userDao.findOne(id));
-        userExist(id, user);
+    public UserVo getUser(final Long userId) {
+        UserVo user = entityToVo(userDao.findOne(userId));
+        userExist(userId, user);
 
         return user;
     }
 
     @Override
-    public void modifyUser(final Long id, final ModifyUserRequest request) {
-        User user = userDao.findOne(id);
-        userExist(id, user);
+    public void modifyUser(final Long userId, final ModifyUserRequest request) {
+        User user = userDao.findOne(userId);
+        userExist(userId, user);
 
         user.setDisplayName(request.getDisplayName());
         user.setUsername(request.getUsername());
@@ -100,14 +96,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(final Long id) {
-        User user = userDao.findOne(id);
-        userExist(id, user);
+    public void deleteUser(final Long userId) {
+        User user = userDao.findOne(userId);
+        userExist(userId, user);
 
         if (user.getState() == UserState.DELETED) {
-            Message message = new MessageBuilder(MessageUtil.USER_ALREADY_DELETED).arg("userId", id.toString()).arg("username", user.getUsername()).build();
-            LOGGER.error(message.fullMessage());
-            throw new BaseException(message);
+            handleError(new MessageBuilder(MessageUtil.USER_ALREADY_DELETED).arg("userId", userId.toString()).arg("username", user.getUsername()).build());
         }
 
         user.setState(UserState.DELETED);
@@ -117,9 +111,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(final Long id, final ChangePasswordRequest request) {
-        User user = userDao.findOne(id);
-        userExist(id, user);
+    public void changePassword(final Long userId, final ChangePasswordRequest request) {
+        User user = userDao.findOne(userId);
+        userExist(userId, user);
 
         if (authenticationService.checkPassword(request.getOldPassword(), user.getPassword())) {
             user.setPassword(authenticationService.encodePassword(request.getNewPassword()));
@@ -128,9 +122,7 @@ public class UserServiceImpl implements UserService {
             LOGGER.info("User password changed - {}", user.getUsername());
         } else {
             // TODO: string-object map as args with type conversion
-            Message message = new MessageBuilder(MessageUtil.USER_AUTH_FAILED_WHILE_CHANGING_PASSWORD).arg("username", user.getUsername()).build();
-            LOGGER.error(message.fullMessage());
-            throw new BaseException(message);
+            handleError(new MessageBuilder(MessageUtil.USER_AUTH_FAILED).arg("username", user.getUsername()).build());
         }
     }
 
@@ -140,37 +132,36 @@ public class UserServiceImpl implements UserService {
         if (user != null && authenticationService.checkPassword(request.getPassword(), user.getPassword())) {
             return user.getId();
         } else {
-            Message message = new MessageBuilder(MessageUtil.USER_AUTH_FAILED).arg("username", request.getUsername()).build();
-            LOGGER.error(message.fullMessage());
-            throw new BaseException(message);
+            handleError(new MessageBuilder(MessageUtil.USER_AUTH_FAILED).arg("username", request.getUsername()).build());
+            return null;
         }
     }
 
     @Override
-    public UserVo registration(final String registrationCode) {
-        Registration registration = registrationDao.findByRegistrationCode(registrationCode);
-        if (registration != null) {
-            // TODO: checking of user state
-            if (registration.getState() != RegistrationState.NEW) {
-                Message message = new MessageBuilder(MessageUtil.CONFIRM_REGISTRATION_WITH_WRONG_STATE)
-                        .arg("correctRegistrationState", RegistrationState.NEW.name()).arg("registrationState", registration.getState().name()).build();
-                LOGGER.error(message.fullMessage());
-                throw new BaseException(message);
-            }
+    public void registration(final Long userId, final String registrationCode) {
+        User user = userDao.findOne(userId);
+        userExist(userId, user);
+
+        Registration registration = user.getRegistration();
+        if (registration == null) {
+            handleError(new MessageBuilder(MessageUtil.REGISTRATION_NOT_EXIST).arg("userId", userId.toString()).build());
+        } else if (!registration.getRegistrationCode().equals(registrationCode)) {
+            handleError(new MessageBuilder(MessageUtil.REGISTRATION_CODE_NOT_MATCH).arg("userId", userId.toString()).arg("registrationCode", registrationCode)
+                    .build());
+        } else if (registration.getState() != RegistrationState.NEW) {
+            handleError(new MessageBuilder(MessageUtil.CONFIRM_REGISTRATION_WITH_WRONG_STATE).arg("correctRegistrationState", RegistrationState.NEW.name())
+                    .arg("registrationState", registration.getState().name()).build());
+        } else if (user.getState() != UserState.TEMPORARY) {
+            handleError(new MessageBuilder(MessageUtil.CONFIRM_REGISTRATION_WITH_WRONG_USER_STATE).arg("correctUserState", UserState.TEMPORARY.name())
+                    .arg("userState", user.getState().name()).build());
+        } else {
             registration.setConfirmationDate(LocalDateTime.now());
             registration.setState(RegistrationState.CONFIRMED);
 
-            User user = registration.getUser();
             user.setState(UserState.NORMAL);
             userDao.save(user); // cascade saving with registration
 
             LOGGER.info("Registration confirmed - {}", registrationCode);
-
-            return entityToVo(user);
-        } else {
-            Message message = new MessageBuilder(MessageUtil.REGISTRATION_NOT_EXIST).arg("registrationCode", registrationCode).build();
-            LOGGER.error(message.fullMessage());
-            throw new BaseException(message);
         }
     }
 
@@ -198,9 +189,12 @@ public class UserServiceImpl implements UserService {
 
     private void userExist(Long userId, Object user) {
         if (user == null) {
-            Message message = new MessageBuilder(MessageUtil.USER_NOT_EXIST).arg("userId", userId.toString()).build();
-            LOGGER.error(message.fullMessage());
-            throw new BaseException(message);
+            handleError(new MessageBuilder(MessageUtil.USER_NOT_EXIST).arg("userId", userId.toString()).build());
         }
+    }
+
+    private void handleError(Message message) {
+        LOGGER.error(message.fullMessage());
+        throw new BaseException(message);
     }
 }

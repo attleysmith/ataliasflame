@@ -32,28 +32,28 @@ class UserTestWebService {
     post("/create", new GenericRequest<CreateUserRequest>(), requestBody)
   }
 
-  UserVo getUser(Long id) {
-    post("/get/$id", new BaseRequest())
+  UserVo getUser(Long userId) {
+    post("/get/$userId", new BaseRequest())
   }
 
-  void modifyUser(Long id, ModifyUserRequest requestBody) {
-    post("/modify/$id", new GenericRequest<ModifyUserRequest>(), requestBody)
+  void modifyUser(Long userId, ModifyUserRequest requestBody) {
+    post("/modify/$userId", new GenericRequest<ModifyUserRequest>(), requestBody)
   }
 
-  void deleteUser(Long id) {
-    post("/delete/$id", new BaseRequest())
+  void deleteUser(Long userId) {
+    post("/delete/$userId", new BaseRequest())
   }
 
-  void changePassword(Long id, ChangePasswordRequest requestBody) {
-    post("/password/$id", new GenericRequest<ChangePasswordRequest>(), requestBody)
+  void changePassword(Long userId, ChangePasswordRequest requestBody) {
+    post("/password/$userId", new GenericRequest<ChangePasswordRequest>(), requestBody)
   }
 
   Long login(LoginRequest requestBody) {
     post("/login", new GenericRequest<LoginRequest>(), requestBody)
   }
 
-  UserVo registration(String registrationCode) {
-    post("/registration/$registrationCode", new BaseRequest())
+  void registration(Long userId, String registrationCode) {
+    post("/registration/$userId/$registrationCode", new BaseRequest())
   }
 
   private <Q extends BaseRequest, B, R> R post(String path, Q request, B requestBody = null) {

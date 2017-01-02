@@ -75,8 +75,8 @@ public class UserWebServiceImpl implements UserWebService {
     }
 
     @Override
-    public GenericResponse<UserVo> registration(@PathVariable final String registrationCode, @RequestBody final BaseRequest request) {
-        return doResponse(new GenericResponse<UserVo>(), "registration", registrationCode);
+    public BaseResponse registration(@PathVariable final Long id, @PathVariable final String registrationCode, @RequestBody final BaseRequest request) {
+        return doResponse(new BaseResponse(), "registration", id, registrationCode);
     }
 
     @SuppressWarnings("unchecked")

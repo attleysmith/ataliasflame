@@ -17,8 +17,7 @@ User registration can be confirmed:
  Setup a user
  and this user has a non-confirmed registration.
  When we send a confirmation with the registration code
- then we get refreshed user data belonging to the registration
- and the registration is finalized
+ then the registration is finalized
  and the user gets to NORMAL status.
 SUCCESS
 
@@ -54,7 +53,7 @@ Login fails with incorrect credentials[1] - Login with wrong password:
  then we get an error.
  where we take different login combinations.
    [loginPassword: sting]
-   [loginUsername: c414059a-d86c-496e-a51a-72f027be0aab]
+   [loginUsername: 988556b6-da1b-4e02-87dc-aa31e99b45e5]
    [loginSucceed: false]
 SUCCESS
 
