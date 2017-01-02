@@ -26,7 +26,7 @@ public class Message {
 
     // Object methods
 
-    public String getFullMessage() {
+    public String fullMessage() {
         return type.getCode() + ':' + messageCode + " - " + message;
     }
 

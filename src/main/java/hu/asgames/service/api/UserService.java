@@ -27,5 +27,6 @@ public interface UserService {
 
     Long login(LoginRequest request);
 
+    // TODO: this should be connected to user by id
     UserVo registration(String registrationCode);
 }

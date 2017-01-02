@@ -31,7 +31,7 @@ class MessageBuilderTest extends Specification {
     message.args['key2'] == PARAM_2
     and: "we get the expected message string."
     message.message == EXPECTED_MESSAGE
-    message.fullMessage == "error:$ERROR_WITH_ARGS_CODE - $EXPECTED_MESSAGE"
+    message.fullMessage() == "error:$ERROR_WITH_ARGS_CODE - $EXPECTED_MESSAGE"
   }
 
   def "MessageBuilder can set args one-by-one and provides a fully built message structure"() {
@@ -45,7 +45,7 @@ class MessageBuilderTest extends Specification {
     message.args['key2'] == PARAM_2
     and: "we get the expected message string."
     message.message == EXPECTED_MESSAGE
-    message.fullMessage == "error:$ERROR_WITH_ARGS_CODE - $EXPECTED_MESSAGE"
+    message.fullMessage() == "error:$ERROR_WITH_ARGS_CODE - $EXPECTED_MESSAGE"
   }
 
   def "MessageBuilder can provide a fully built message structure without a need of args"() {
@@ -58,7 +58,7 @@ class MessageBuilderTest extends Specification {
     message.args.isEmpty()
     and: "we get the expected message string."
     message.message == EXPECTED_MESSAGE
-    message.fullMessage == "error:$ERROR_WITHOUT_ARGS_CODE - $EXPECTED_MESSAGE"
+    message.fullMessage() == "error:$ERROR_WITHOUT_ARGS_CODE - $EXPECTED_MESSAGE"
   }
 
   private final class DummyMessageUtil extends MessageUtilBase {
