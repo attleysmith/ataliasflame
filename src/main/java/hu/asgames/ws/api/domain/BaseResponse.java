@@ -11,7 +11,7 @@ public class BaseResponse {
 
     private ResponseStatus responseStatus;
 
-    private String errorMessage;
+    private Message responseMessage;
 
     // Getters and setters
 
@@ -31,11 +31,11 @@ public class BaseResponse {
         this.responseStatus = responseStatus;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public Message getResponseMessage() {
+        return responseMessage;
     }
 
-    public void setErrorMessage(final String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setResponseMessage(final Message responseMessage) {
+        this.responseMessage = responseMessage;
     }
 }

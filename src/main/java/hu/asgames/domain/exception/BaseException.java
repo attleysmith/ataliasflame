@@ -12,12 +12,12 @@ public class BaseException extends RuntimeException {
     private final Message errorMessage;
 
     public BaseException(final Message errorMessage) {
-        super(errorMessage.getFullMessage());
+        super(errorMessage.fullMessage());
         this.errorMessage = errorMessage;
     }
 
     public BaseException(final Message errorMessage, final Throwable cause) {
-        super(errorMessage.getFullMessage(), cause);
+        super(errorMessage.fullMessage(), cause);
         this.errorMessage = errorMessage;
     }
 

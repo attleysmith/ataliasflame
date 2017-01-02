@@ -1,5 +1,7 @@
 package hu.asgames.ws.impl;
 
+import hu.asgames.domain.exception.BaseException;
+import hu.asgames.messages.MessageUtil;
 import hu.asgames.service.api.UserService;
 import hu.asgames.ws.api.UserWebService;
 import hu.asgames.ws.api.domain.BaseRequest;
@@ -13,11 +15,14 @@ import hu.asgames.ws.api.domain.user.LoginRequest;
 import hu.asgames.ws.api.domain.user.ModifyUserRequest;
 import hu.asgames.ws.api.domain.user.UserVo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +33,8 @@ import java.util.stream.Collectors;
  */
 @RestController
 public class UserWebServiceImpl implements UserWebService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserWebServiceImpl.class);
 
     @Autowired
     private UserService userService;
@@ -81,10 +88,18 @@ public class UserWebServiceImpl implements UserWebService {
                 callServiceWithBaseResponse(response, methodName, args);
             }
             response.setResponseStatus(ResponseStatus.OK);
-        } catch (Exception e) {
-            // TODO: BaseException usage
-            response.setErrorMessage(e.getMessage());
-            response.setResponseStatus(ResponseStatus.ERROR);
+        } catch (InvocationTargetException exception) {
+            // TODO: using interceptor or something...
+            LOGGER.error(exception.getMessage(), exception);
+            Throwable targetException = exception.getTargetException();
+            if (targetException instanceof BaseException) {
+                setBaseException(response, (BaseException)targetException);
+            } else {
+                setGeneralException(response, targetException);
+            }
+        } catch (Exception exception) {
+            LOGGER.error(exception.getMessage(), exception);
+            setGeneralException(response, exception);
         }
         response.setResponseTime(LocalDateTime.now());
         return response;
@@ -104,5 +119,15 @@ public class UserWebServiceImpl implements UserWebService {
     private Class<?>[] getParamTypes(Object... params) {
         List<Class<?>> paramTypes = Arrays.stream(params).map(Object::getClass).collect(Collectors.toList());
         return paramTypes.toArray(new Class<?>[paramTypes.size()]);
+    }
+
+    private void setBaseException(BaseResponse response, BaseException exception) {
+        response.setResponseStatus(ResponseStatus.ERROR);
+        response.setResponseMessage(exception.getErrorMessage());
+    }
+
+    private void setGeneralException(BaseResponse response, Throwable exception) {
+        response.setResponseStatus(ResponseStatus.ERROR);
+        response.setResponseMessage(MessageUtil.generalException(exception.getClass().getSimpleName() + " - " + exception.getMessage()));
     }
 }
