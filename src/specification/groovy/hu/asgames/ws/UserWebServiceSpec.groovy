@@ -69,13 +69,9 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     and: "this user has a non-confirmed registration."
     assert user.registrationState == RegistrationState.NEW.name()
     when: "we send a confirmation with the registration code"
-    UserVo confirmedUser = userService.registration(user.registrationCode)
-    then: "we get refreshed user data belonging to the registration"
-    confirmedUser.username == user.username
-    confirmedUser.displayName == user.displayName
-    confirmedUser.email == user.email
-    confirmedUser.registrationCode == user.registrationCode
-    and: "the registration is finalized"
+    userService.registration(user.id, user.registrationCode)
+    then: "the registration is finalized"
+    UserVo confirmedUser = userService.getUser(user.id)
     confirmedUser.registrationState == RegistrationState.CONFIRMED.name()
     and: "the user gets to NORMAL status."
     confirmedUser.userState == UserState.NORMAL.name()
@@ -87,7 +83,7 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     and: "this user has an already confirmed registration."
     assert user.registrationState == RegistrationState.CONFIRMED.name()
     when: "we send a confirmation with the registration code"
-    UserVo confirmedUser = userService.registration(user.registrationCode)
+    userService.registration(user.id, user.registrationCode)
     then: "we get an error."
     AssertionError error = thrown(AssertionError)
     hasErrorResponse(error)

@@ -17,16 +17,15 @@ public interface UserService {
 
     Long createUser(CreateUserRequest request);
 
-    UserVo getUser(Long id);
+    UserVo getUser(Long userId);
 
-    void modifyUser(Long id, ModifyUserRequest request);
+    void modifyUser(Long userId, ModifyUserRequest request);
 
-    void deleteUser(Long id);
+    void deleteUser(Long userId);
 
-    void changePassword(Long id, ChangePasswordRequest request);
+    void changePassword(Long userId, ChangePasswordRequest request);
 
     Long login(LoginRequest request);
 
-    // TODO: this should be connected to user by id
-    UserVo registration(String registrationCode);
+    void registration(Long userId, String registrationCode);
 }

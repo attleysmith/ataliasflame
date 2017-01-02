@@ -1,7 +1,6 @@
 package hu.asgames.service.api
 
 import hu.asgames.ReplaceSlf4jLogger
-import hu.asgames.dao.RegistrationDao
 import hu.asgames.dao.UserDao
 import hu.asgames.domain.entities.Registration
 import hu.asgames.domain.entities.User
@@ -29,6 +28,7 @@ class UserServiceTest extends Specification {
   private static final String PASSWORD = "PASSWORD"
   private static final String ENCODED_PASSWORD = "ENCODED_PASSWORD"
   private static final String REGISTRATION_CODE = "REGISTRATION_CODE"
+  private static final String WRONG_REGISTRATION_CODE = "WRONG_REGISTRATION_CODE"
   private static final String NEW_PASSWORD = "NEW_PASSWORD"
   private static final String ENCODED_NEW_PASSWORD = "ENCODED_NEW_PASSWORD"
 
@@ -36,7 +36,6 @@ class UserServiceTest extends Specification {
   private AuthenticationService authenticationService = Mock()
   private CodeGeneratorService codeGeneratorService = Mock()
   private UserDao userDao = Mock()
-  private RegistrationDao registrationDao = Mock()
   private Logger logger = Mock()
 
   @Rule
@@ -46,7 +45,6 @@ class UserServiceTest extends Specification {
     userService.authenticationService = authenticationService
     userService.codeGeneratorService = codeGeneratorService
     userService.userDao = userDao
-    userService.registrationDao = registrationDao
   }
 
   def "Getting user list queries all users from database and convert them into value objects as result"() {
@@ -223,7 +221,7 @@ class UserServiceTest extends Specification {
   def "User deletion by a not existing user identifier results in an error"() {
     given: "an error message about not existing user what we expect to be thrown."
     Message expectedErrorMessage = new MessageBuilder(MessageUtil.USER_NOT_EXIST).arg("userId", ID as String).build()
-    when: "we delete the user by its identifier"
+    when: "we delete the user by a not existing identifier"
     userService.deleteUser(ID)
     then: "the user in database is queried (and the query returns an empty result)"
     1 * userDao.findOne(ID) >> null
@@ -274,7 +272,7 @@ class UserServiceTest extends Specification {
       return it
     }
     and: "there is an error message about user authentication what we expect to be thrown."
-    Message expectedErrorMessage = new MessageBuilder(MessageUtil.USER_AUTH_FAILED_WHILE_CHANGING_PASSWORD).arg("username", user.username).build()
+    Message expectedErrorMessage = new MessageBuilder(MessageUtil.USER_AUTH_FAILED).arg("username", user.username).build()
     when: "we pass the request to the password changing service"
     userService.changePassword(user.id, request)
     then: "the user in database is queried"
@@ -394,20 +392,18 @@ class UserServiceTest extends Specification {
     assert user.registration.state == RegistrationState.NEW
     assert user.registration.confirmationDate == null
     when: "we confirm registration using the registration code"
-    UserVo userVo = userService.registration(user.registration.registrationCode)
-    then: "the registration in database is queried"
-    1 * registrationDao.findByRegistrationCode(user.registration.registrationCode) >> user.registration
+    userService.registration(user.id, user.registration.registrationCode)
+    then: "the user in database is queried"
+    1 * userDao.findOne(user.id) >> user
     and: "an info message is logged about the confirmation of the registration"
     1 * logger.info("Registration confirmed - {}", user.registration.registrationCode)
-    and: "the user with its registration is saved into the database with correct states and a filled confirmation date"
+    and: "the user with its registration is saved into the database with correct states and a filled confirmation date."
     1 * userDao.save({ User savedUser ->
       savedUser.id == user.id
       savedUser.state == UserState.NORMAL &&
       savedUser.registration.state == RegistrationState.CONFIRMED &&
       savedUser.registration.confirmationDate != null
     })
-    and: "returned user data is about persistent user."
-    checkUserProps(userVo, user)
   }
 
   def "Confirming a registration not in a NEW state results in an error"() {
@@ -419,9 +415,9 @@ class UserServiceTest extends Specification {
     Message expectedErrorMessage = new MessageBuilder(MessageUtil.CONFIRM_REGISTRATION_WITH_WRONG_STATE).
             args([correctRegistrationState: RegistrationState.NEW.name(), registrationState: user.registration.state.name()]).build()
     when: "we confirm registration using the registration code"
-    userService.registration(user.registration.registrationCode)
-    then: "the registration in database is queried"
-    1 * registrationDao.findByRegistrationCode(user.registration.registrationCode) >> user.registration
+    userService.registration(user.id, user.registration.registrationCode)
+    then: "the user in database is queried"
+    1 * userDao.findOne(user.id) >> user
     and: "the expected error message is logged about wrong registration state"
     1 * logger.error(expectedErrorMessage.fullMessage())
     and: "an exception is thrown with the expected error message"
@@ -435,13 +431,35 @@ class UserServiceTest extends Specification {
     notNewRegistrationState << [RegistrationState.CONFIRMED, RegistrationState.EXPIRED]
   }
 
+  def "Confirming registration of a not existing user results in an error"() {
+    given: "an error message about not existing user what we expect to be thrown."
+    Message expectedErrorMessage = new MessageBuilder(MessageUtil.USER_NOT_EXIST).arg("userId", ID as String).build()
+    when: "we confirm registration using a not existing user identifier"
+    userService.registration(ID, REGISTRATION_CODE)
+    then: "the user in database is queried (and the query returns an empty result)"
+    1 * userDao.findOne(ID) >> null
+    and: "the expected error message is logged about the user existence"
+    1 * logger.error(expectedErrorMessage.fullMessage())
+    and: "an exception is thrown with the expected error message"
+    BaseException exception = thrown(BaseException)
+    checkException(exception, expectedErrorMessage)
+    and: "info message is never logged about anything"
+    0 * logger.info(_ as String, _ as String)
+    and: "saving user is never called."
+    0 * userDao.save(_ as User)
+  }
+
   def "Confirming a not existing registration results in an error"() {
-    given: "an error message about missing registration what we expect to be thrown."
-    Message expectedErrorMessage = new MessageBuilder(MessageUtil.REGISTRATION_NOT_EXIST).arg("registrationCode", REGISTRATION_CODE).build()
-    when: "we confirm registration using a not existing registration code"
-    userService.registration(REGISTRATION_CODE)
-    then: "the registration in database is queried (and the query returns an empty result)"
-    1 * registrationDao.findByRegistrationCode(REGISTRATION_CODE) >> null
+    given: "a user (in database)"
+    User user = createUser(ID)
+    and: "it doesn't have any registration"
+    user.registration = null
+    and: "there is an error message about missing registration what we expect to be thrown."
+    Message expectedErrorMessage = new MessageBuilder(MessageUtil.REGISTRATION_NOT_EXIST).arg("userId", user.id as String).build()
+    when: "we confirm registration using registration code"
+    userService.registration(user.id, REGISTRATION_CODE)
+    then: "the user in database is queried"
+    1 * userDao.findOne(user.id) >> user
     and: "the expected error message is logged about missing registration"
     1 * logger.error(expectedErrorMessage.fullMessage())
     and: "an exception is thrown with the expected error message"
@@ -451,6 +469,55 @@ class UserServiceTest extends Specification {
     0 * logger.info(_ as String, _ as String)
     and: "saving user is never called."
     0 * userDao.save(_ as User)
+  }
+
+  def "Confirming a registration with a wrong registration code results in an error"() {
+    given: "a user (in database)"
+    User user = createUser(ID)
+    and: "it has a new registration."
+    assert user.registration.state == RegistrationState.NEW
+    assert user.registration.confirmationDate == null
+    and: "there is an error message about wrong registration code what we expect to be thrown."
+    Message expectedErrorMessage = new MessageBuilder(MessageUtil.REGISTRATION_CODE_NOT_MATCH).
+            args([userId: user.id as String, registrationCode: WRONG_REGISTRATION_CODE]).build()
+    when: "we confirm registration using the wrong registration code"
+    userService.registration(user.id, WRONG_REGISTRATION_CODE)
+    then: "the user in database is queried"
+    1 * userDao.findOne(user.id) >> user
+    and: "the expected error message is logged about wrong registration code"
+    1 * logger.error(expectedErrorMessage.fullMessage())
+    and: "an exception is thrown with the expected error message"
+    BaseException exception = thrown(BaseException)
+    checkException(exception, expectedErrorMessage)
+    and: "info message is never logged about anything"
+    0 * logger.info(_ as String, _ as String)
+    and: "saving user is never called."
+    0 * userDao.save(_ as User)
+  }
+
+  def "Confirming a registration of a not TEMPORARY user results in an error"() {
+    given: "a user (in database)"
+    User user = createUser(ID)
+    and: "its state is not TEMPORARY"
+    user.state = notTemporaryUserState
+    and: "there is an error message about wrong user state what we expect to be thrown."
+    Message expectedErrorMessage = new MessageBuilder(MessageUtil.CONFIRM_REGISTRATION_WITH_WRONG_USER_STATE).
+            args([correctUserState: UserState.TEMPORARY.name(), userState: user.state.name()]).build()
+    when: "we confirm registration using the registration code"
+    userService.registration(user.id, user.registration.registrationCode)
+    then: "the user in database is queried"
+    1 * userDao.findOne(user.id) >> user
+    and: "the expected error message is logged about wrong user state"
+    1 * logger.error(expectedErrorMessage.fullMessage())
+    and: "an exception is thrown with the expected error message"
+    BaseException exception = thrown(BaseException)
+    checkException(exception, expectedErrorMessage)
+    and: "info message is never logged about anything"
+    0 * logger.info(_ as String, _ as String)
+    and: "saving user is never called"
+    0 * userDao.save(_ as User)
+    where: "we check all not TEMPORARY user state."
+    notTemporaryUserState << [UserState.NORMAL, UserState.BANNED, UserState.DORMANT, UserState.DELETED]
   }
 
   private User createUser(Long userId) {

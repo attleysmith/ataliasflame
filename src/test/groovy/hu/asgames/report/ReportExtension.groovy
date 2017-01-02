@@ -86,7 +86,7 @@ class ReportExtension extends AbstractAnnotationDrivenExtension<Report> {
         try {
           new ErrorReporter(writer).reportError(errorInfo.error)
         } catch (Exception e) {
-          writer.println('!!!Error handler failure for error type!!! ( ' + error.class + ' )')
+          writer.println('!!!Error reporter failure for error type!!! ( ' + error.class + ' )')
           writer.println(' - ' + error.message)
         }
       }

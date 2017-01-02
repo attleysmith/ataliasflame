@@ -177,22 +177,18 @@ class UserWebServiceTest extends Specification {
     response.responseBody == ID
   }
 
-  def "Confirming registration via webservice returns the user provided by service call"() {
-    given: "a user"
-    UserVo user = createUser(ID)
-    and: "a base webservice request for confirming a registration."
+  def "Confirming registration calls proper service method"() {
+    given: "a base webservice request for confirming a registration."
     BaseRequest request = createRequest()
     when: "we pass request to confirm registration"
-    GenericResponse<UserVo> response = userWebService.registration(user.registrationCode, request)
+    BaseResponse response = userWebService.registration(ID, REGISTRATION_CODE, request)
     then: "the proper service method is called"
-    1 * userService.registration(user.registrationCode) >> user
+    1 * userService.registration(ID, REGISTRATION_CODE)
     and: "the response has an OK status with a valid timestamp"
     response.responseStatus == ResponseStatus.OK
     response.responseTime != null
-    and: "no message is attached to the response"
+    and: "no message is attached to the response."
     response.responseMessage == null
-    and: "the response body contains the user returned from the service call."
-    response.responseBody == user
   }
 
   def "Custom error message properly wrapped into exception returns with webservice response"() {
