@@ -27,5 +27,5 @@ public interface UserService {
 
     Long login(LoginRequest request);
 
-    void registration(Long userId, String registrationCode);
+    void confirmRegistration(Long userId, String registrationCode);
 }

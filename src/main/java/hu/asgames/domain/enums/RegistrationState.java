@@ -6,7 +6,7 @@ package hu.asgames.domain.enums;
 public enum RegistrationState {
 
     /**
-     * Newly created registration wating for confirmation
+     * Newly created registration waiting for confirmation
      */
     NEW,
 

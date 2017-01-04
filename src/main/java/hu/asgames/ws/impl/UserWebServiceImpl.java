@@ -76,7 +76,7 @@ public class UserWebServiceImpl implements UserWebService {
 
     @Override
     public BaseResponse registration(@PathVariable final Long id, @PathVariable final String registrationCode, @RequestBody final BaseRequest request) {
-        return doResponse(new BaseResponse(), "registration", id, registrationCode);
+        return doResponse(new BaseResponse(), "confirmRegistration", id, registrationCode);
     }
 
     @SuppressWarnings("unchecked")

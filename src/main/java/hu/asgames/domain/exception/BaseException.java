@@ -9,6 +9,7 @@ public class BaseException extends RuntimeException {
 
     private static final long serialVersionUID = 4417395822932619382L;
 
+    // TODO: message list for validation errors
     private final Message errorMessage;
 
     public BaseException(final Message errorMessage) {
