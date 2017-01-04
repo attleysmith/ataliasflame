@@ -49,7 +49,7 @@ public class User extends IdentifiedEntityBase {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Character> characterList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<LoginHistory> loginHistoryList = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)

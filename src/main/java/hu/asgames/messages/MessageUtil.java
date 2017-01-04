@@ -33,6 +33,7 @@ public final class MessageUtil extends MessageUtilBase {
     public static final PseudoMessage USER_MODIFIED = info("user.modified", "User modified - ${username}");
     public static final PseudoMessage USER_DELETED = info("user.deleted", "User deleted - ${username}");
     public static final PseudoMessage USER_PASSWORD_CHANGED = info("user.password.changed", "User password changed - ${username}");
+    public static final PseudoMessage USER_LOGIN = info("user.login", "User login - ${username}");
     public static final PseudoMessage USER_REGISTRATION_CONFIRMED = info("user.registration.confirmed", "User registration confirmed - ${username}");
     public static final PseudoMessage USER_REGISTRATION_EXPIRED = info("user.registration.expired", "User registration expired - ${username}");
     public static final PseudoMessage SCHEDULED_REGISTRATION_EXPIRY =

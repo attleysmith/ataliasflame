@@ -1,7 +1,9 @@
 package hu.asgames.service.api
 
 import hu.asgames.ReplaceSlf4jLogger
+import hu.asgames.dao.LoginHistoryDao
 import hu.asgames.dao.UserDao
+import hu.asgames.domain.entities.LoginHistory
 import hu.asgames.domain.entities.Registration
 import hu.asgames.domain.entities.User
 import hu.asgames.domain.enums.RegistrationState
@@ -35,6 +37,7 @@ class UserServiceTest extends Specification {
   private final UserService userService = new UserServiceImpl()
   private AuthenticationService authenticationService = Mock()
   private CodeGeneratorService codeGeneratorService = Mock()
+  private LoginHistoryDao loginHistoryDao = Mock()
   private UserDao userDao = Mock()
   private Logger logger = Mock()
 
@@ -44,6 +47,7 @@ class UserServiceTest extends Specification {
   void setup() {
     userService.authenticationService = authenticationService
     userService.codeGeneratorService = codeGeneratorService
+    userService.loginHistoryDao = loginHistoryDao
     userService.userDao = userDao
   }
 
@@ -328,21 +332,27 @@ class UserServiceTest extends Specification {
     0 * userDao.save(_ as User)
   }
 
-  def "Successful login request returns the user identifier"() {
+  def "Successful login request returns the user identifier while saves login history"() {
     given: "a user (in database)"
     User user = createUser(ID)
-    and: "a login request."
+    and: "a login request"
     LoginRequest request = new LoginRequest().with {
-      username = USERNAME
+      username = user.username
       password = PASSWORD
       return it
     }
+    and: "there is an info message about user login what we expect to be logged."
+    Message expectedInfoMessage = new MessageBuilder(MessageUtil.USER_LOGIN).arg("username", request.username).build()
     when: "we pass the request to the login service"
     Long userId = userService.login(request)
     then: "the user in database is queried"
     1 * userDao.findByUsername(request.username) >> user
     and: "the given password is checked"
     1 * authenticationService.checkPassword(request.password, user.password) >> true
+    and: "a history record about login is saved"
+    1 * loginHistoryDao.save({ LoginHistory history -> history.user.id == ID && history.loginDate != null })
+    and: "the expected info message is logged"
+    1 * logger.info(expectedInfoMessage.fullMessage())
     and: "the user identifier is returned."
     userId == ID
   }

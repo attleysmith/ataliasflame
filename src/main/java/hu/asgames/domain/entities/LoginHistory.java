@@ -23,6 +23,17 @@ public class LoginHistory extends IdentifiedEntityBase {
     @Column(name = "login_date", nullable = false)
     private LocalDateTime loginDate;
 
+    // Constructors
+
+    public LoginHistory() {
+        // "Why, JPA? Why?" :)
+    }
+
+    public LoginHistory(final User user, final LocalDateTime loginDate) {
+        this.user = user;
+        this.loginDate = loginDate;
+    }
+
     // Getters and setters
 
     public User getUser() {

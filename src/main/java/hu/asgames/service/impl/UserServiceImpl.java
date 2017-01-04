@@ -1,6 +1,8 @@
 package hu.asgames.service.impl;
 
+import hu.asgames.dao.LoginHistoryDao;
 import hu.asgames.dao.UserDao;
+import hu.asgames.domain.entities.LoginHistory;
 import hu.asgames.domain.entities.Registration;
 import hu.asgames.domain.entities.User;
 import hu.asgames.domain.enums.RegistrationState;
@@ -40,6 +42,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private CodeGeneratorService codeGeneratorService;
+
+    @Autowired
+    private LoginHistoryDao loginHistoryDao;
 
     @Autowired
     private UserDao userDao;
@@ -130,11 +135,19 @@ public class UserServiceImpl implements UserService {
     public Long login(final LoginRequest request) {
         User user = userDao.findByUsername(request.getUsername());
         if (user != null && authenticationService.checkPassword(request.getPassword(), user.getPassword())) {
+            saveLoginHistory(user);
             return user.getId();
         } else {
             handleError(new MessageBuilder(MessageUtil.USER_AUTH_FAILED).arg("username", request.getUsername()).build());
             return null;
         }
+    }
+
+    private void saveLoginHistory(User user) {
+        LoginHistory loginHistory = new LoginHistory(user, LocalDateTime.now());
+        loginHistoryDao.save(loginHistory);
+
+        logInfo(new MessageBuilder(MessageUtil.USER_LOGIN).arg("username", user.getUsername()).build());
     }
 
     @Override
