@@ -1,3 +1,7 @@
+##################################
+# Spring-boot related properties #
+##################################
+
 spring:
   # PROFILES
 #  profiles:
@@ -277,3 +281,19 @@ logging:
 #    file: # Appender pattern for output to the file. Only supported with the default logback setup.
 #    level: # Appender pattern for log level (default %5p). Only supported with the default logback setup.
 #  register-shutdown-hook: false # Register a shutdown hook for the logging system when it is initialized.
+
+
+
+
+######################################
+# Spring-boot independent properties #
+######################################
+
+registration:
+  expiry:
+    # Days after a registration will be expired
+    days: 30
+#    days: -1
+    # Scheduled time interval of registration expiry process
+    cron: "0 0 0 * * ?"
+#    cron: "0 0/1 * * * ?"

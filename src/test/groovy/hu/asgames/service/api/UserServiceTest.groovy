@@ -63,7 +63,7 @@ class UserServiceTest extends Specification {
   }
 
   def "User creation saves given data and a new registration, and returns the user identifier"() {
-    given: "a user creation request."
+    given: "a user creation request"
     CreateUserRequest request = new CreateUserRequest().with {
       displayName = DISPLAY_NAME
       username = USERNAME
@@ -71,6 +71,8 @@ class UserServiceTest extends Specification {
       password = PASSWORD
       return it
     }
+    and: "an info message about user creation what we expect to be logged."
+    Message expectedInfoMessage = new MessageBuilder(MessageUtil.USER_CREATED).arg("username", request.username).build()
     when: "we pass the request to the user creation service"
     Long userId = userService.createUser(request)
     then: "given password is encoded"
@@ -78,7 +80,7 @@ class UserServiceTest extends Specification {
     and: "a registration code is generated"
     1 * codeGeneratorService.generateRegistrationCode() >> REGISTRATION_CODE
     and: "an info message is logged about the user creation"
-    1 * logger.info("User created - {}", request.username)
+    1 * logger.info(expectedInfoMessage.fullMessage())
     and: "the user is saved in the database with correct properties"
     1 * userDao.save({ User user ->
       user.id = ID // giving an identifier to the user while saving
@@ -131,6 +133,8 @@ class UserServiceTest extends Specification {
       email = EMAIL
       return it
     }
+    and: "an info message about user modification what we expect to be logged"
+    Message expectedInfoMessage = new MessageBuilder(MessageUtil.USER_MODIFIED).arg("username", request.username).build()
     and: "the modified properties are not the same as original properties."
     assert user.displayName != request.displayName
     assert user.username != request.username
@@ -140,7 +144,7 @@ class UserServiceTest extends Specification {
     then: "the user in database is queried"
     1 * userDao.findOne(user.id) >> user
     and: "an info message is logged about the user modification"
-    1 * logger.info("User modified - {}", request.username)
+    1 * logger.info(expectedInfoMessage.fullMessage())
     and: "the user is saved into the database with the modified properties (but others remain unchanged)."
     1 * userDao.save({ User savedUser ->
       savedUser.id == user.id &&
@@ -181,6 +185,8 @@ class UserServiceTest extends Specification {
   def "User deletion changes the state of user to DELETED"() {
     given: "a user (in database)"
     User user = createUser(ID)
+    and: "an info message about user deletion what we expect to be logged"
+    Message expectedInfoMessage = new MessageBuilder(MessageUtil.USER_DELETED).arg("username", user.username).build()
     and: "the user is not deleted yet."
     assert user.state != UserState.DELETED
     when: "we delete the user by its identifier"
@@ -188,7 +194,7 @@ class UserServiceTest extends Specification {
     then: "the user in database is queried"
     1 * userDao.findOne(user.id) >> user
     and: "an info message is logged about the user deletion"
-    1 * logger.info("User deleted - {}", user.username)
+    1 * logger.info(expectedInfoMessage.fullMessage())
     and: "the user is saved into the database with a deleted state."
     1 * userDao.save({ User savedUser ->
       savedUser.id == user.id &&
@@ -239,12 +245,14 @@ class UserServiceTest extends Specification {
   def "Changing password checks old password and saves the encoded new one as requested"() {
     given: "a user (in database)"
     User user = createUser(ID)
-    and: "a password changing request."
+    and: "a password changing request"
     ChangePasswordRequest request = new ChangePasswordRequest().with {
       oldPassword = user.password
       newPassword = NEW_PASSWORD
       return it
     }
+    and: "an info message about password change what we expect to be logged."
+    Message expectedInfoMessage = new MessageBuilder(MessageUtil.USER_PASSWORD_CHANGED).arg("username", user.username).build()
     when: "we pass the request to the password changing service"
     userService.changePassword(user.id, request)
     then: "the user in database is queried"
@@ -254,7 +262,7 @@ class UserServiceTest extends Specification {
     and: "the new password is encoded"
     1 * authenticationService.encodePassword(request.newPassword) >> ENCODED_NEW_PASSWORD
     and: "an info message is logged about the change of the password"
-    1 * logger.info("User password changed - {}", user.username)
+    1 * logger.info(expectedInfoMessage.fullMessage())
     and: "the user is saved into the database with the new encoded password."
     1 * userDao.save({ User savedUser ->
       savedUser.id == user.id &&
@@ -388,15 +396,17 @@ class UserServiceTest extends Specification {
   def "Confirming a registration sets states correctly and fills confirmation date while returning user data"() {
     given: "a user (in database)"
     User user = createUser(ID)
-    and: "it has a new registration."
+    and: "an info message about confirmation what we expect to be logged"
+    Message expectedInfoMessage = new MessageBuilder(MessageUtil.USER_REGISTRATION_CONFIRMED).arg("username", user.username).build()
+    and: "the user has a new registration."
     assert user.registration.state == RegistrationState.NEW
     assert user.registration.confirmationDate == null
     when: "we confirm registration using the registration code"
-    userService.registration(user.id, user.registration.registrationCode)
+    userService.confirmRegistration(user.id, user.registration.registrationCode)
     then: "the user in database is queried"
     1 * userDao.findOne(user.id) >> user
     and: "an info message is logged about the confirmation of the registration"
-    1 * logger.info("Registration confirmed - {}", user.registration.registrationCode)
+    1 * logger.info(expectedInfoMessage.fullMessage())
     and: "the user with its registration is saved into the database with correct states and a filled confirmation date."
     1 * userDao.save({ User savedUser ->
       savedUser.id == user.id
@@ -413,9 +423,9 @@ class UserServiceTest extends Specification {
     user.registration.state = notNewRegistrationState
     and: "there is an error message about wrong registration state what we expect to be thrown."
     Message expectedErrorMessage = new MessageBuilder(MessageUtil.CONFIRM_REGISTRATION_WITH_WRONG_STATE).
-            args([correctRegistrationState: RegistrationState.NEW.name(), registrationState: user.registration.state.name()]).build()
+            args([correctRegistrationState: RegistrationState.NEW.name(), userId: user.id as String, registrationState: user.registration.state.name()]).build()
     when: "we confirm registration using the registration code"
-    userService.registration(user.id, user.registration.registrationCode)
+    userService.confirmRegistration(user.id, user.registration.registrationCode)
     then: "the user in database is queried"
     1 * userDao.findOne(user.id) >> user
     and: "the expected error message is logged about wrong registration state"
@@ -435,7 +445,7 @@ class UserServiceTest extends Specification {
     given: "an error message about not existing user what we expect to be thrown."
     Message expectedErrorMessage = new MessageBuilder(MessageUtil.USER_NOT_EXIST).arg("userId", ID as String).build()
     when: "we confirm registration using a not existing user identifier"
-    userService.registration(ID, REGISTRATION_CODE)
+    userService.confirmRegistration(ID, REGISTRATION_CODE)
     then: "the user in database is queried (and the query returns an empty result)"
     1 * userDao.findOne(ID) >> null
     and: "the expected error message is logged about the user existence"
@@ -457,7 +467,7 @@ class UserServiceTest extends Specification {
     and: "there is an error message about missing registration what we expect to be thrown."
     Message expectedErrorMessage = new MessageBuilder(MessageUtil.REGISTRATION_NOT_EXIST).arg("userId", user.id as String).build()
     when: "we confirm registration using registration code"
-    userService.registration(user.id, REGISTRATION_CODE)
+    userService.confirmRegistration(user.id, REGISTRATION_CODE)
     then: "the user in database is queried"
     1 * userDao.findOne(user.id) >> user
     and: "the expected error message is logged about missing registration"
@@ -481,7 +491,7 @@ class UserServiceTest extends Specification {
     Message expectedErrorMessage = new MessageBuilder(MessageUtil.REGISTRATION_CODE_NOT_MATCH).
             args([userId: user.id as String, registrationCode: WRONG_REGISTRATION_CODE]).build()
     when: "we confirm registration using the wrong registration code"
-    userService.registration(user.id, WRONG_REGISTRATION_CODE)
+    userService.confirmRegistration(user.id, WRONG_REGISTRATION_CODE)
     then: "the user in database is queried"
     1 * userDao.findOne(user.id) >> user
     and: "the expected error message is logged about wrong registration code"
@@ -502,9 +512,9 @@ class UserServiceTest extends Specification {
     user.state = notTemporaryUserState
     and: "there is an error message about wrong user state what we expect to be thrown."
     Message expectedErrorMessage = new MessageBuilder(MessageUtil.CONFIRM_REGISTRATION_WITH_WRONG_USER_STATE).
-            args([correctUserState: UserState.TEMPORARY.name(), userState: user.state.name()]).build()
+            args([correctUserState: UserState.TEMPORARY.name(), userId: user.id as String, userState: user.state.name()]).build()
     when: "we confirm registration using the registration code"
-    userService.registration(user.id, user.registration.registrationCode)
+    userService.confirmRegistration(user.id, user.registration.registrationCode)
     then: "the user in database is queried"
     1 * userDao.findOne(user.id) >> user
     and: "the expected error message is logged about wrong user state"

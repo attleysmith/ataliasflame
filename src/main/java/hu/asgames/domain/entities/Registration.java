@@ -2,7 +2,6 @@ package hu.asgames.domain.entities;
 
 import hu.asgames.domain.enums.RegistrationState;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -35,7 +34,7 @@ public class Registration extends IdentifiedEntityBase {
     private LocalDateTime confirmationDate;
 
     @Column(name = "expiration_date")
-    private LocalDate expirationDate;
+    private LocalDateTime expirationDate;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "state", nullable = false)
@@ -75,11 +74,11 @@ public class Registration extends IdentifiedEntityBase {
         this.confirmationDate = confirmationDate;
     }
 
-    public LocalDate getExpirationDate() {
+    public LocalDateTime getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
+    public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
     }
 

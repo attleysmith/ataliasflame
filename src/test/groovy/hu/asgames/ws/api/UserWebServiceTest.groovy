@@ -183,7 +183,7 @@ class UserWebServiceTest extends Specification {
     when: "we pass request to confirm registration"
     BaseResponse response = userWebService.registration(ID, REGISTRATION_CODE, request)
     then: "the proper service method is called"
-    1 * userService.registration(ID, REGISTRATION_CODE)
+    1 * userService.confirmRegistration(ID, REGISTRATION_CODE)
     and: "the response has an OK status with a valid timestamp"
     response.responseStatus == ResponseStatus.OK
     response.responseTime != null

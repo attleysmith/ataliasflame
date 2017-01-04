@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
         userDao.save(user); // cascade saving with registration
 
-        LOGGER.info("User created - {}", user.getUsername());
+        logInfo(new MessageBuilder(MessageUtil.USER_CREATED).arg("username", user.getUsername()).build());
 
         return user.getId();
     }
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(request.getEmail());
         userDao.save(user);
 
-        LOGGER.info("User modified - {}", user.getUsername());
+        logInfo(new MessageBuilder(MessageUtil.USER_MODIFIED).arg("username", user.getUsername()).build());
     }
 
     @Override
@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
         user.setState(UserState.DELETED);
         userDao.save(user);
 
-        LOGGER.info("User deleted - {}", user.getUsername());
+        logInfo(new MessageBuilder(MessageUtil.USER_DELETED).arg("username", user.getUsername()).build());
     }
 
     @Override
@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(authenticationService.encodePassword(request.getNewPassword()));
             userDao.save(user);
 
-            LOGGER.info("User password changed - {}", user.getUsername());
+            logInfo(new MessageBuilder(MessageUtil.USER_PASSWORD_CHANGED).arg("username", user.getUsername()).build());
         } else {
             // TODO: string-object map as args with type conversion
             handleError(new MessageBuilder(MessageUtil.USER_AUTH_FAILED).arg("username", user.getUsername()).build());
@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registration(final Long userId, final String registrationCode) {
+    public void confirmRegistration(final Long userId, final String registrationCode) {
         User user = userDao.findOne(userId);
         userExist(userId, user);
 
@@ -150,10 +150,10 @@ public class UserServiceImpl implements UserService {
                     .build());
         } else if (registration.getState() != RegistrationState.NEW) {
             handleError(new MessageBuilder(MessageUtil.CONFIRM_REGISTRATION_WITH_WRONG_STATE).arg("correctRegistrationState", RegistrationState.NEW.name())
-                    .arg("registrationState", registration.getState().name()).build());
+                    .arg("userId", userId.toString()).arg("registrationState", registration.getState().name()).build());
         } else if (user.getState() != UserState.TEMPORARY) {
             handleError(new MessageBuilder(MessageUtil.CONFIRM_REGISTRATION_WITH_WRONG_USER_STATE).arg("correctUserState", UserState.TEMPORARY.name())
-                    .arg("userState", user.getState().name()).build());
+                    .arg("userId", userId.toString()).arg("userState", user.getState().name()).build());
         } else {
             registration.setConfirmationDate(LocalDateTime.now());
             registration.setState(RegistrationState.CONFIRMED);
@@ -161,7 +161,7 @@ public class UserServiceImpl implements UserService {
             user.setState(UserState.NORMAL);
             userDao.save(user); // cascade saving with registration
 
-            LOGGER.info("Registration confirmed - {}", registrationCode);
+            logInfo(new MessageBuilder(MessageUtil.USER_REGISTRATION_CONFIRMED).arg("username", user.getUsername()).build());
         }
     }
 
@@ -196,5 +196,9 @@ public class UserServiceImpl implements UserService {
     private void handleError(Message message) {
         LOGGER.error(message.fullMessage());
         throw new BaseException(message);
+    }
+
+    private void logInfo(Message message) {
+        LOGGER.info(message.fullMessage());
     }
 }
