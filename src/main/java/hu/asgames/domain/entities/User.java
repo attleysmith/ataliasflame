@@ -2,7 +2,6 @@ package hu.asgames.domain.entities;
 
 import hu.asgames.domain.enums.UserState;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -47,20 +46,20 @@ public class User extends IdentifiedEntityBase {
     private Registration registration;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Character> characterList = new ArrayList<>();
+    private List<Character> characterList;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<LoginHistory> loginHistoryList = new ArrayList<>();
+    private List<LoginHistory> loginHistoryList;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role_map", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<UserRole> userRoleList = new ArrayList<>();
+    private List<UserRole> userRoleList;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_permission_map", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName = "id"))
-    private List<Permission> permissionList = new ArrayList<>();
+    private List<Permission> permissionList;
 
     // Object methods
 

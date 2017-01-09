@@ -7,7 +7,7 @@ import hu.asgames.domain.entities.Registration;
 import hu.asgames.domain.entities.User;
 import hu.asgames.domain.enums.RegistrationState;
 import hu.asgames.domain.enums.UserState;
-import hu.asgames.domain.exception.BaseException;
+import hu.asgames.domain.exceptions.BaseException;
 import hu.asgames.messages.MessageBuilder;
 import hu.asgames.messages.MessageUtil;
 import hu.asgames.service.api.AuthenticationService;
@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -49,11 +50,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @Transactional
     @Override
     public List<UserVo> getUserList() {
         return entitiesToVos(userDao.findAll());
     }
 
+    @Transactional
     @Override
     public Long createUser(final CreateUserRequest request) {
         User user = new User();
@@ -79,6 +82,7 @@ public class UserServiceImpl implements UserService {
         return user.getId();
     }
 
+    @Transactional
     @Override
     public UserVo getUser(final Long userId) {
         UserVo user = entityToVo(userDao.findOne(userId));
@@ -87,6 +91,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Transactional
     @Override
     public void modifyUser(final Long userId, final ModifyUserRequest request) {
         User user = userDao.findOne(userId);
@@ -100,6 +105,7 @@ public class UserServiceImpl implements UserService {
         logInfo(new MessageBuilder(MessageUtil.USER_MODIFIED).arg("username", user.getUsername()).build());
     }
 
+    @Transactional
     @Override
     public void deleteUser(final Long userId) {
         User user = userDao.findOne(userId);
@@ -115,6 +121,7 @@ public class UserServiceImpl implements UserService {
         logInfo(new MessageBuilder(MessageUtil.USER_DELETED).arg("username", user.getUsername()).build());
     }
 
+    @Transactional
     @Override
     public void changePassword(final Long userId, final ChangePasswordRequest request) {
         User user = userDao.findOne(userId);
@@ -131,6 +138,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Transactional
     @Override
     public Long login(final LoginRequest request) {
         User user = userDao.findByUsername(request.getUsername());
@@ -150,6 +158,7 @@ public class UserServiceImpl implements UserService {
         logInfo(new MessageBuilder(MessageUtil.USER_LOGIN).arg("username", user.getUsername()).build());
     }
 
+    @Transactional
     @Override
     public void confirmRegistration(final Long userId, final String registrationCode) {
         User user = userDao.findOne(userId);

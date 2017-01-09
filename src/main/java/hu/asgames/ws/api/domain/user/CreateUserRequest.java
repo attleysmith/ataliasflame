@@ -6,12 +6,11 @@ package hu.asgames.ws.api.domain.user;
 public class CreateUserRequest {
 
     private String displayName;
-
     private String username;
-
     private String password;
-
     private String email;
+
+    // Getters and setters
 
     public String getDisplayName() {
         return displayName;

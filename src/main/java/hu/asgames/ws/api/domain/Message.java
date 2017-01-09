@@ -8,11 +8,8 @@ import java.util.Map;
 public class Message {
 
     private MessageType type;
-
     private String messageCode;
-
     private String message;
-
     private Map<String, String> args;
 
     // Constructors

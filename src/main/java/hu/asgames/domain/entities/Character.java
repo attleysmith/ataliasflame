@@ -4,6 +4,7 @@ import hu.asgames.domain.enums.CharacterState;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -87,17 +89,13 @@ public class Character extends IdentifiedEntityBase {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "character_attribute_map", joinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "attribute_id", referencedColumnName = "id"))
-    private List<Attribute> attributeList;
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CharacterAttributeCounterMap> attributeList;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "character_skill_map", joinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"))
-    private List<Skill> skillList;
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CharacterSkillCounterMap> skillList;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "character_special_ability_map", joinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "special_ability_id", referencedColumnName = "id"))
     private List<SpecialAbility> specialAbilityList;
@@ -108,7 +106,7 @@ public class Character extends IdentifiedEntityBase {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -116,7 +114,7 @@ public class Character extends IdentifiedEntityBase {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(final Gender gender) {
         this.gender = gender;
     }
 
@@ -124,7 +122,7 @@ public class Character extends IdentifiedEntityBase {
         return race;
     }
 
-    public void setRace(Race race) {
+    public void setRace(final Race race) {
         this.race = race;
     }
 
@@ -132,7 +130,7 @@ public class Character extends IdentifiedEntityBase {
         return caste;
     }
 
-    public void setCaste(Caste caste) {
+    public void setCaste(final Caste caste) {
         this.caste = caste;
     }
 
@@ -140,7 +138,7 @@ public class Character extends IdentifiedEntityBase {
         return protectiveGod;
     }
 
-    public void setProtectiveGod(God protectiveGod) {
+    public void setProtectiveGod(final God protectiveGod) {
         this.protectiveGod = protectiveGod;
     }
 
@@ -148,7 +146,7 @@ public class Character extends IdentifiedEntityBase {
         return level;
     }
 
-    public void setLevel(Level level) {
+    public void setLevel(final Level level) {
         this.level = level;
     }
 
@@ -156,7 +154,7 @@ public class Character extends IdentifiedEntityBase {
         return experience;
     }
 
-    public void setExperience(long experience) {
+    public void setExperience(final long experience) {
         this.experience = experience;
     }
 
@@ -164,7 +162,7 @@ public class Character extends IdentifiedEntityBase {
         return state;
     }
 
-    public void setState(CharacterState state) {
+    public void setState(final CharacterState state) {
         this.state = state;
     }
 
@@ -172,7 +170,7 @@ public class Character extends IdentifiedEntityBase {
         return attack;
     }
 
-    public void setAttack(int attack) {
+    public void setAttack(final int attack) {
         this.attack = attack;
     }
 
@@ -180,7 +178,7 @@ public class Character extends IdentifiedEntityBase {
         return defense;
     }
 
-    public void setDefense(int defense) {
+    public void setDefense(final int defense) {
         this.defense = defense;
     }
 
@@ -188,7 +186,7 @@ public class Character extends IdentifiedEntityBase {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         this.health = health;
     }
 
@@ -196,7 +194,7 @@ public class Character extends IdentifiedEntityBase {
         return actualHealth;
     }
 
-    public void setActualHealth(int actualHealth) {
+    public void setActualHealth(final int actualHealth) {
         this.actualHealth = actualHealth;
     }
 
@@ -204,7 +202,7 @@ public class Character extends IdentifiedEntityBase {
         return magic;
     }
 
-    public void setMagic(int magic) {
+    public void setMagic(final int magic) {
         this.magic = magic;
     }
 
@@ -212,7 +210,7 @@ public class Character extends IdentifiedEntityBase {
         return actualMagic;
     }
 
-    public void setActualMagic(int actualMagic) {
+    public void setActualMagic(final int actualMagic) {
         this.actualMagic = actualMagic;
     }
 
@@ -220,7 +218,7 @@ public class Character extends IdentifiedEntityBase {
         return attributePoints;
     }
 
-    public void setAttributePoints(int attributePoints) {
+    public void setAttributePoints(final int attributePoints) {
         this.attributePoints = attributePoints;
     }
 
@@ -228,7 +226,7 @@ public class Character extends IdentifiedEntityBase {
         return skillPoints;
     }
 
-    public void setSkillPoints(int skillPoints) {
+    public void setSkillPoints(final int skillPoints) {
         this.skillPoints = skillPoints;
     }
 
@@ -236,7 +234,7 @@ public class Character extends IdentifiedEntityBase {
         return wounds;
     }
 
-    public void setWounds(int wounds) {
+    public void setWounds(final int wounds) {
         this.wounds = wounds;
     }
 
@@ -244,7 +242,7 @@ public class Character extends IdentifiedEntityBase {
         return targetCaste;
     }
 
-    public void setTargetCaste(Caste targetCaste) {
+    public void setTargetCaste(final Caste targetCaste) {
         this.targetCaste = targetCaste;
     }
 
@@ -252,23 +250,23 @@ public class Character extends IdentifiedEntityBase {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
-    public List<Attribute> getAttributeList() {
+    public List<CharacterAttributeCounterMap> getAttributeList() {
         return attributeList;
     }
 
-    public void setAttributeList(List<Attribute> attributeList) {
+    public void setAttributeList(final List<CharacterAttributeCounterMap> attributeList) {
         this.attributeList = attributeList;
     }
 
-    public List<Skill> getSkillList() {
+    public List<CharacterSkillCounterMap> getSkillList() {
         return skillList;
     }
 
-    public void setSkillList(List<Skill> skillList) {
+    public void setSkillList(final List<CharacterSkillCounterMap> skillList) {
         this.skillList = skillList;
     }
 
@@ -276,7 +274,7 @@ public class Character extends IdentifiedEntityBase {
         return specialAbilityList;
     }
 
-    public void setSpecialAbilityList(List<SpecialAbility> specialAbilityList) {
+    public void setSpecialAbilityList(final List<SpecialAbility> specialAbilityList) {
         this.specialAbilityList = specialAbilityList;
     }
 }

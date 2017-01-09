@@ -8,16 +8,13 @@ import hu.asgames.ws.api.domain.IdentifiedVoBase;
 public class UserVo extends IdentifiedVoBase {
 
     private String displayName;
-
     private String username;
-
     private String email;
-
     private String userState;
-
     private String registrationState;
-
     private String registrationCode;
+
+    // Getters and setters
 
     public String getDisplayName() {
         return displayName;

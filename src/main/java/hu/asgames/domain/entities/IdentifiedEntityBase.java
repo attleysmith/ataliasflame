@@ -11,7 +11,7 @@ import javax.persistence.SequenceGenerator;
  * @author AMiklo on 2016.09.11.
  */
 @MappedSuperclass
-abstract class IdentifiedEntityBase {
+public abstract class IdentifiedEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "base_id_generator")

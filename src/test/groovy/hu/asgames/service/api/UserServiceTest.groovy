@@ -8,7 +8,7 @@ import hu.asgames.domain.entities.Registration
 import hu.asgames.domain.entities.User
 import hu.asgames.domain.enums.RegistrationState
 import hu.asgames.domain.enums.UserState
-import hu.asgames.domain.exception.BaseException
+import hu.asgames.domain.exceptions.BaseException
 import hu.asgames.messages.MessageBuilder
 import hu.asgames.messages.MessageUtil
 import hu.asgames.service.impl.UserServiceImpl

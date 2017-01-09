@@ -1,4 +1,4 @@
-package hu.asgames.domain.exception;
+package hu.asgames.domain.exceptions;
 
 import hu.asgames.ws.api.domain.Message;
 

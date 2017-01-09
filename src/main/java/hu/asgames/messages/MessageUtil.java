@@ -20,6 +20,8 @@ public final class MessageUtil extends MessageUtilBase {
             "Registration code doesn't match with user's registration! User ID: ${userId}; Registration code: ${registrationCode}");
     public static final PseudoMessage REGISTRATION_NOT_EXIST = error("registration.not.exist", "User doesn't have any registration! User ID: ${userId}");
 
+    public static final PseudoMessage CHARACTER_NOT_EXIST = error("character.not.exist", "Character doesn't exist! Character ID: ${characterId}");
+
     // WARNING messages
     public static final PseudoMessage EXPIRE_REGISTRATION_WITH_UNEXPECTED_USER_STATE = warn("expire.registration.with.unexpected.user.state",
             "Only a ${correctUserState} user's registration should be expired! User ID: ${userId}; User state: ${userState}");
@@ -38,4 +40,6 @@ public final class MessageUtil extends MessageUtilBase {
     public static final PseudoMessage USER_REGISTRATION_EXPIRED = info("user.registration.expired", "User registration expired - ${username}");
     public static final PseudoMessage SCHEDULED_REGISTRATION_EXPIRY =
             info("scheduled.registration.expiry", "Expiring registrations started - date: ${dateExpired}");
+
+    public static final PseudoMessage CHARACTER_CREATED = info("character.created", "Character created - User ID: ${userId}; Character ID: ${characterId}");
 }

@@ -27,10 +27,10 @@ public class Caste extends IdentifiedEntityBase {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "caste_next_caste_map", joinColumns = @JoinColumn(name = "caste_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "next_caste_id", referencedColumnName = "id"))
-    private List<Caste> nestCasteList;
+    private List<Caste> nextCasteList;
 
     @ManyToMany(mappedBy = "enabledCasteList", fetch = FetchType.LAZY)
     private List<Gender> enabledGenderList;
@@ -69,12 +69,12 @@ public class Caste extends IdentifiedEntityBase {
         this.description = description;
     }
 
-    public List<Caste> getNestCasteList() {
-        return nestCasteList;
+    public List<Caste> getNextCasteList() {
+        return nextCasteList;
     }
 
-    public void setNestCasteList(final List<Caste> nestCasteList) {
-        this.nestCasteList = nestCasteList;
+    public void setNextCasteList(final List<Caste> nextCasteList) {
+        this.nextCasteList = nextCasteList;
     }
 
     public List<Gender> getEnabledGenderList() {
