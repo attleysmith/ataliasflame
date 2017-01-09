@@ -8,9 +8,7 @@ import java.time.LocalDateTime;
 public class BaseResponse {
 
     private LocalDateTime responseTime;
-
     private ResponseStatus responseStatus;
-
     private Message responseMessage;
 
     // Getters and setters

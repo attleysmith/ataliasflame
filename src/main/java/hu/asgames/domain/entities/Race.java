@@ -1,6 +1,5 @@
 package hu.asgames.domain.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -43,7 +42,7 @@ public class Race extends IdentifiedEntityBase {
     private List<God> enabledGodList;
 
     @OneToMany(mappedBy = "race", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<RaceAttributeMultiplierMap> attributeMultiplierMapList = new ArrayList<>();
+    private List<RaceAttributeMultiplierMap> attributeMultiplierMapList;
 
     // Getters and setters
 

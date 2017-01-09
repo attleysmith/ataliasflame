@@ -6,8 +6,9 @@ package hu.asgames.ws.api.domain.user;
 public class ChangePasswordRequest {
 
     private String oldPassword;
-
     private String newPassword;
+
+    // Getters and setters
 
     public String getOldPassword() {
         return oldPassword;

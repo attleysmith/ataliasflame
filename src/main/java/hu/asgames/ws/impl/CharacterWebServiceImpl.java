@@ -2,18 +2,15 @@ package hu.asgames.ws.impl;
 
 import hu.asgames.domain.exceptions.BaseException;
 import hu.asgames.messages.MessageUtil;
-import hu.asgames.service.api.UserService;
-import hu.asgames.ws.api.UserWebService;
+import hu.asgames.service.api.CharacterService;
+import hu.asgames.ws.api.CharacterWebService;
 import hu.asgames.ws.api.domain.BaseRequest;
 import hu.asgames.ws.api.domain.BaseResponse;
 import hu.asgames.ws.api.domain.GenericRequest;
 import hu.asgames.ws.api.domain.GenericResponse;
 import hu.asgames.ws.api.domain.ResponseStatus;
-import hu.asgames.ws.api.domain.user.ChangePasswordRequest;
-import hu.asgames.ws.api.domain.user.CreateUserRequest;
-import hu.asgames.ws.api.domain.user.LoginRequest;
-import hu.asgames.ws.api.domain.user.ModifyUserRequest;
-import hu.asgames.ws.api.domain.user.UserVo;
+import hu.asgames.ws.api.domain.character.CharacterVo;
+import hu.asgames.ws.api.domain.character.CreateCharacterRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,54 +26,29 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author AMiklo on 2016.10.15.
+ * @author AMiklo on 2017.01.04.
  */
 @RestController
-public class UserWebServiceImpl implements UserWebService {
+public class CharacterWebServiceImpl implements CharacterWebService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserWebServiceImpl.class);
 
     @Autowired
-    private UserService userService;
+    private CharacterService characterService;
 
     @Override
-    public GenericResponse<List<UserVo>> getUserList(@RequestBody final BaseRequest request) {
-        return doResponse(new GenericResponse<List<UserVo>>(), "getUserList");
+    public GenericResponse<List<CharacterVo>> getCharacterList(@RequestBody final BaseRequest request) {
+        return doResponse(new GenericResponse<List<CharacterVo>>(), "getCharacterList");
     }
 
     @Override
-    public GenericResponse<Long> createUser(@RequestBody final GenericRequest<CreateUserRequest> request) {
-        return doResponse(new GenericResponse<Long>(), "createUser", request.getRequestBody());
+    public GenericResponse<Long> createCharacter(@RequestBody final GenericRequest<CreateCharacterRequest> request) {
+        return doResponse(new GenericResponse<Long>(), "createCharacter", request.getRequestBody());
     }
 
     @Override
-    public GenericResponse<UserVo> getUser(@PathVariable final Long id, @RequestBody final BaseRequest request) {
-        return doResponse(new GenericResponse<UserVo>(), "getUser", id);
-    }
-
-    @Override
-    public BaseResponse modifyUser(@PathVariable final Long id, @RequestBody final GenericRequest<ModifyUserRequest> request) {
-        return doResponse(new BaseResponse(), "modifyUser", id, request.getRequestBody());
-    }
-
-    @Override
-    public BaseResponse deleteUser(@PathVariable final Long id, @RequestBody final BaseRequest request) {
-        return doResponse(new BaseResponse(), "deleteUser", id);
-    }
-
-    @Override
-    public BaseResponse changePassword(@PathVariable final Long id, @RequestBody final GenericRequest<ChangePasswordRequest> request) {
-        return doResponse(new BaseResponse(), "changePassword", id, request.getRequestBody());
-    }
-
-    @Override
-    public GenericResponse<Long> login(@RequestBody final GenericRequest<LoginRequest> request) {
-        return doResponse(new GenericResponse<Long>(), "login", request.getRequestBody());
-    }
-
-    @Override
-    public BaseResponse registration(@PathVariable final Long id, @PathVariable final String registrationCode, @RequestBody final BaseRequest request) {
-        return doResponse(new BaseResponse(), "confirmRegistration", id, registrationCode);
+    public GenericResponse<CharacterVo> getCharacter(@PathVariable final Long id, @RequestBody final BaseRequest request) {
+        return doResponse(new GenericResponse<CharacterVo>(), "getCharacter", id);
     }
 
     @SuppressWarnings("unchecked")
@@ -107,13 +79,13 @@ public class UserWebServiceImpl implements UserWebService {
 
     @SuppressWarnings("unchecked")
     private <T> void callServiceWithGenericResponse(GenericResponse<T> response, String methodName, Object... args) throws ReflectiveOperationException {
-        T responseBody = (T)userService.getClass().getMethod(methodName, getParamTypes(args)).invoke(userService, args);
+        T responseBody = (T)characterService.getClass().getMethod(methodName, getParamTypes(args)).invoke(characterService, args);
         response.setResponseBody(responseBody);
     }
 
     @SuppressWarnings("unchecked")
     private <T> void callServiceWithBaseResponse(BaseResponse response, String methodName, Object... args) throws ReflectiveOperationException {
-        userService.getClass().getMethod(methodName, getParamTypes(args)).invoke(userService, args);
+        characterService.getClass().getMethod(methodName, getParamTypes(args)).invoke(characterService, args);
     }
 
     private Class<?>[] getParamTypes(Object... params) {

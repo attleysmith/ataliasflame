@@ -6,8 +6,9 @@ package hu.asgames.ws.api.domain.user;
 public class LoginRequest {
 
     private String username;
-
     private String password;
+
+    // Getters and setters
 
     public String getUsername() {
         return username;

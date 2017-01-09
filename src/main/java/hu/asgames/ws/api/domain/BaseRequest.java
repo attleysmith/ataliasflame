@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 public class BaseRequest {
 
     private LocalDateTime requestTime;
-
     private String clientCode;
 
     // Getters and setters
