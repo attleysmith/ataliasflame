@@ -1,6 +1,6 @@
 Password encoding and checking are synchronized:
  Setup a password to use
- and there is a misspelled one.
+ and there is also a misspelled one.
  When we encode the correct password to store
  then checking the correct one succeeds
  and checking the wrong one fails.
