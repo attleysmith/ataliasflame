@@ -15,7 +15,7 @@ class AuthenticationServiceTest extends Specification {
   def "Password encoding and checking are synchronized"() {
     given: "a password to use"
     String correctPassword = 'verysecretpassword'
-    and: "there is a misspelled one."
+    and: "there is also a misspelled one."
     String wrongPassword = 'verzsecretpassword'
     when: "we encode the correct password to store"
     String encodedPassword = authenticationService.encodePassword(correctPassword)
