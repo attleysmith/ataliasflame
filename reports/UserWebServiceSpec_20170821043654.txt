@@ -4,7 +4,7 @@ User creation succeeds:
  then we can get it by id
  and it has a TEMPORARY status
  and a valid registration
- and given data are stored.
+ and given data is stored.
 SUCCESS
 
 User list contains created user:
@@ -53,7 +53,7 @@ Login fails with incorrect credentials[1] - Login with wrong password:
  then we get an error.
  where we take different login combinations.
    [loginPassword: sting]
-   [loginUsername: 988556b6-da1b-4e02-87dc-aa31e99b45e5]
+   [loginUsername: 481579f2-99f8-4954-807d-b639019827ed]
    [loginSucceed: false]
 SUCCESS
 

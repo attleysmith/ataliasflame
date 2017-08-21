@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
+        <version>1.5.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -82,7 +82,8 @@
         <dependency>
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
-            <!--<version>1.1-groovy-2.4-rc-3</version>-->
+            <!-- spring-boot comes with 1.0-groovy-2.4 but there is a nice (and used) feature in 1.1 -->
+            <version>1.1-groovy-2.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>

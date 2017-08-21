@@ -73,11 +73,11 @@ class UserRegistrationExpiryJobTest extends Specification {
     }
     where: "we try out some number of expired registrations."
     userCount | registrationList
-    1         | createRegistrationList(1)   //createRegistrationList(userCount)
-    2         | createRegistrationList(2)   //createRegistrationList(userCount)
-    5         | createRegistrationList(5)   //createRegistrationList(userCount)
-    17        | createRegistrationList(17)  //createRegistrationList(userCount)
-    // TODO: next spock version hopefully will support syntax in comments (1.0-groovy-2.4: not yet; 1.1-groovy-2.4-rc-3: yes!)
+    1         | createRegistrationList(userCount)
+    2         | createRegistrationList(userCount)
+    5         | createRegistrationList(userCount)
+    17        | createRegistrationList(userCount)
+    // NOTE: 1.1-groovy-2.4 spock version supports using variables from where in other where definitions, but 1.0-groovy-2.4 which comes with spring-boot, not yet
   }
 
   def "Registration expiry checks invalid state but results only in warnings without breaking expiration process"() {
