@@ -47,7 +47,7 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     and: "a valid registration"
     savedUser.registrationState == RegistrationState.NEW.name()
     !savedUser.registrationCode.isEmpty()
-    and: "given data are stored."
+    and: "given data is stored."
     savedUser.displayName == ORIGINAL_DISPLAY_NAME
     savedUser.username == ORIGINAL_USERNAME
     savedUser.email == ORIGINAL_EMAIL

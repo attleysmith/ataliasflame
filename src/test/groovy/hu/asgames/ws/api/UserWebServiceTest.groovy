@@ -230,7 +230,7 @@ class UserWebServiceTest extends Specification {
   def "Unexpected exception returns with webservice response as general exception"() {
     given: "a base webservice request for user deletion."
     BaseRequest request = createRequest()
-    when: "we pass request to delete the user"
+    when: "we pass bad request to delete the user"
     BaseResponse response = userWebService.deleteUser(null, request)
     then: "the desired service method is never called"
     0 * userService.deleteUser(_ as Long)
