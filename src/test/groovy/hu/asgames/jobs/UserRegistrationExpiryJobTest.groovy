@@ -90,13 +90,13 @@ class UserRegistrationExpiryJobTest extends Specification {
     and: "there is a warning message about confirmation date"
     Message expectedWarningMessageAboutConfirmationDate =
             new MessageBuilder(MessageUtil.EXPIRE_REGISTRATION_WITH_NOT_EMPTY_CONFIRMATION_DATE).arg("userId", registration.user.id as String)
-                    .arg("confirmationDate", registration.confirmationDate.toString()).build()
+                    .arg("confirmationDate", registration.confirmationDate as String).build()
     and: "this registration has a mistakenly filled expiration date"
     registration.expirationDate = LocalDateTime.now()
     and: "there is a warning message about expiration date"
     Message expectedWarningMessageAboutExpirationDate =
             new MessageBuilder(MessageUtil.EXPIRE_REGISTRATION_WITH_NOT_EMPTY_EXPIRATION_DATE).arg("userId", registration.user.id as String)
-                    .arg("expirationDate", registration.expirationDate.toString()).build()
+                    .arg("expirationDate", registration.expirationDate as String).build()
     and: "this registration has a mistakenly not TEMPORARY user"
     registration.user.state = notTemporaryUserState
     and: "there is a warning message about user state."
