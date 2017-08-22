@@ -13,17 +13,17 @@ class MessageUtilBaseTest extends Specification {
   private static final String RAW_MESSAGE = 'Dummy raw message.'
 
   @Unroll
-  def "Calling method provides a pseudo message with proper type"() {
+  def "Calling method '#calledMethod' provides a pseudo message with #expectedType type"() {
     given: "a message util which extends MessageUtilBase."
     assert MessageUtilBase.isAssignableFrom(DummyMessageUtil.class)
     when: "we call a method on this util passing a message code and a raw message"
     PseudoMessage pseudoMessage = DummyMessageUtil."${calledMethod}"(MESSAGE_CODE, RAW_MESSAGE)
     then: "we get a pseudo message with a proper type"
     pseudoMessage.type == expectedType
-    and: "the passed data is set on it"
+    and: "the passed data is set on it."
     pseudoMessage.messageCode == MESSAGE_CODE
     pseudoMessage.rawMessage == RAW_MESSAGE
-    where: "we check error, info and warn methods."
+    where:
     calledMethod | expectedType
     "error"      | MessageType.ERROR
     "info"       | MessageType.INFO

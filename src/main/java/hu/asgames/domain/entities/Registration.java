@@ -89,4 +89,19 @@ public class Registration extends IdentifiedEntityBase {
     public void setState(RegistrationState state) {
         this.state = state;
     }
+
+    // General methods
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Registration{");
+        sb.append("user.id=").append(user.getId());
+        sb.append(", registrationCode='").append(registrationCode).append('\'');
+        sb.append(", registrationDate=").append(registrationDate);
+        sb.append(", confirmationDate=").append(confirmationDate);
+        sb.append(", expirationDate=").append(expirationDate);
+        sb.append(", state=").append(state);
+        sb.append('}');
+        return sb.toString();
+    }
 }

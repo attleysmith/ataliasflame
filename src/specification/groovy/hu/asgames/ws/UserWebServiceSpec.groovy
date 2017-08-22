@@ -94,7 +94,7 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     UserVo user = userService.getUser(USER_ID)
     and: "her correct login data."
     LoginRequest loginData = new LoginRequest().with {
-      username = ORIGINAL_USERNAME
+      username = user.username
       password = ORIGINAL_PASSWORD
       return it
     }
@@ -121,10 +121,10 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     hasErrorResponse(error)
 
     where: "we take different login combinations."
-    loginPassword     | loginUsername     | loginSucceed | testCase
-    ORIGINAL_PASSWORD | WRONG_USERNAME    | false        | "Login with wrong username"
-    WRONG_PASSWORD    | ORIGINAL_USERNAME | false        | "Login with wrong password"
-    WRONG_PASSWORD    | WRONG_USERNAME    | false        | "Login with wrong username and password"
+    loginPassword     | loginUsername     || testCase
+    ORIGINAL_PASSWORD | WRONG_USERNAME    || "Login with wrong username"
+    WRONG_PASSWORD    | ORIGINAL_USERNAME || "Login with wrong password"
+    WRONG_PASSWORD    | WRONG_USERNAME    || "Login with wrong username and password"
   }
 
   def "User modification succeeds"() {
@@ -140,10 +140,11 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     when: "we save modifications"
     userService.modifyUser(user.id, modification)
     then: "the changes are executed."
-    UserVo modifiedUser = userService.getUser(user.id)
-    modifiedUser.displayName == MODIFIED_DISPLAY_NAME
-    modifiedUser.username == MODIFIED_USERNAME
-    modifiedUser.email == MODIFIED_EMAIL
+    with(userService.getUser(user.id)) {
+      displayName == MODIFIED_DISPLAY_NAME
+      username == MODIFIED_USERNAME
+      email == MODIFIED_EMAIL
+    }
   }
 
   def "Change password works with proper credentials"() {
@@ -157,9 +158,9 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     }
     when: "we send request"
     userService.changePassword(user.id, request)
-    then: "password is changed."
+    then: "password is changed (proven by successful login with new data)."
     LoginRequest loginData = new LoginRequest().with {
-      username = MODIFIED_USERNAME // Note we use the modified username because of the user modification.
+      username = MODIFIED_USERNAME // Note we use the modified username because of the former user modification.
       password = MODIFIED_PASSWORD
       return it
     }
@@ -188,7 +189,8 @@ class UserWebServiceSpec extends WebServiceSpecFixtures {
     when: "we delete this user"
     userService.deleteUser(user.id)
     then: "the deletion is performed."
-    UserVo deletedUser = userService.getUser(user.id)
-    deletedUser.userState == UserState.DELETED.name()
+    with(userService.getUser(user.id)) {
+      userState == UserState.DELETED.name()
+    }
   }
 }
